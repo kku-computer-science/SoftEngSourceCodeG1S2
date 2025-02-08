@@ -9,6 +9,7 @@
 
 2. **Install Dev Container**: (Select only mysql)
     ```bash
+    cp .env.example .env
     php artisan sail:install --devcontainer
     ```
 
