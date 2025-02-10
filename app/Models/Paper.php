@@ -35,15 +35,18 @@ class Paper extends Model
     protected $casts = [
         'keyword' => 'array',
     ];
+    // เชื่อมกับ User (นักวิจัย)
     public function teacher()
     {
         return $this->belongsToMany(User::class,'user_papers')->withPivot('author_type');
     }
-
+    // เชื่อมกับ Source (แหล่งตีพิมพ์)
     public function source()
     {
         return $this->belongsToMany(Source_data::class,'source_papers');
     }
+
+    // เชื่อมกับ Author
     public function author()
     {
         return $this->belongsToMany(Author::class,'author_of_papers')->withPivot('author_type');

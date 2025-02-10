@@ -40,11 +40,17 @@
 @section('content')
 
 <div class="container cardprofile mt-5">
+
+    <!-- Card Researcher -->
+
     <div class="card">
         <div class="row g-0">
             <div class="col-md-2">
                 <img class="card-image" src="{{$res->picture}}" alt="">
             </div>
+
+            <!-- Detail Researcher -->
+
             <div class="col-md-6">
                 <div class="card-body">
                     <h6 class="card-text"><b>{{$res->position_th}} {{$res->fname_th}} {{$res->lname_th}}</b></h6>
@@ -56,7 +62,7 @@
                         <h6 class="card-text1"><b>{{$res->academic_ranks_en}}</b></h6>
                         <!-- <h6 class="card-text1">Department of {{$res->program->program_name_en}}</h6> -->
                         <!-- <h6 class="card-text1">College of Computing</h6>
-                    <h6 class="card-text1">Khon Kaen University</h6> -->
+                        <h6 class="card-text1">Khon Kaen University</h6> -->
                         <h6 class="card-text1">E-mail: {{$res->email}}</h6>
                         <h6 class="card-title">{{ trans('message.education') }}</h6>
                         @foreach( $res->education as $edu)
@@ -67,13 +73,15 @@
                             {{ trans('message.expertise') }}
                         </button> -->
                         <!-- <h6 class="card-title">Metrics overview</h6>
-                    <h6 class="card-text2" id="citation">Citation count</h6>
-                    <h6 class="card-text2" id="doc_count">Document count</h6>
-                    <h6 class="card-text2" id="cite_count">Cited By count</h6>
-                    <h6 class="card-text2" id="h-index">H-index </h6> -->
+                        <h6 class="card-text2" id="citation">Citation count</h6>
+                        <h6 class="card-text2" id="doc_count">Document count</h6>
+                        <h6 class="card-text2" id="cite_count">Cited By count</h6>
+                        <h6 class="card-text2" id="h-index">H-index </h6> -->
 
                 </div>
             </div>
+
+            <!-- Bar Chart -->
 
             <div class="col-md-4">
                 <h6 class="title-pub">{{ trans('message.publications2') }}</h6>
@@ -89,11 +97,11 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="count" id='wos_sum'>
+                            <div class="count" id='orcid_sum'>
                             </div>
                         </div>
                         <div class="col">
-                            <div class="count" id='tci_sum'>
+                            <div class="count" id='scholar_sum'>
                             </div>
                         </div>
 
@@ -104,7 +112,6 @@
                     </div>
                 </div>
             </div>
-
 
 
         </div>
@@ -129,6 +136,8 @@
     </div> -->
     <br>
 
+    <!-- Tab of Papers -->
+
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Summary</button>
@@ -136,11 +145,17 @@
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="scopus-tab" data-bs-toggle="tab" data-bs-target="#scopus" type="button" role="tab" aria-controls="scopus" aria-selected="false">SCOPUS</button>
         </li>
-        <li class="nav-item" role="presentation">
+        <!-- <li class="nav-item" role="presentation">
             <button class="nav-link" id="wos-tab" data-bs-toggle="tab" data-bs-target="#wos" type="button" role="tab" aria-controls="wos" aria-selected="false">Web of Science</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="tci-tab" data-bs-toggle="tab" data-bs-target="#tci" type="button" role="tab" aria-controls="tci" aria-selected="false">TCI</button>
+        </li> -->
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="orcid-tab" data-bs-toggle="tab" data-bs-target="#orcid" type="button" role="tab" aria-controls="orcid" aria-selected="false">ORCID</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="scholar-tab" data-bs-toggle="tab" data-bs-target="#scholar" type="button" role="tab" aria-controls="scholar" aria-selected="false">Google Scholar</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="book-tab" data-bs-toggle="tab" data-bs-target="#book" type="button" role="tab" aria-controls="book" aria-selected="false">หนังสือ</button>
@@ -152,6 +167,7 @@
     <br>
     <div class="tab-content" id="myTabContent">
 
+        <!-- Table Summary -->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div class="tab-content" style="padding-bottom: 20px;">
                 <a class="btn btn-success" href="{{ route('excel', ['id' => $res->id]) }}" target="_blank">Export To Excel</a>
@@ -215,6 +231,8 @@
             </table>
 
         </div>
+
+        <!-- Table Scopus -->
         <div class="tab-pane fade" id="scopus" role="tabpanel" aria-labelledby="scopus-tab">
 
             <table id="example2" class="table table-striped" style="width:100%">
@@ -266,7 +284,9 @@
 
 
         </div>
-        <div class="tab-pane fade" id="wos" role="tabpanel" aria-labelledby="wos-tab">
+
+        <!-- **** Table wos -->
+        <!-- <div class="tab-pane fade" id="wos" role="tabpanel" aria-labelledby="wos-tab">
 
             <table id="example3" class="table table-striped" style="width:100%">
                 <thead>
@@ -284,12 +304,13 @@
                 </thead>
 
                 <tbody>
-                    @foreach ($papers_wos as $n => $paper)
+            
                     <tr>
                         <td> {{$n+1}}</td>
                         <td>{{ $paper->paper_yearpub }}</td>
-                        <!-- <td style="width:90%;">{{$paper->paper_name}}</td> -->
+                        
                         <td style="width:90%;">{!! html_entity_decode(preg_replace('<inf>', 'sub', $paper->paper_name)) !!}</td>
+            
                         <td>
                             @foreach ($paper->author as $author)
                             <span>
@@ -311,15 +332,16 @@
 
 
                     </tr>
-                    @endforeach
+                  
                 </tbody>
 
             </table>
 
 
-        </div>
+        </div> -->
 
-        <div class="tab-pane fade" id="tci" role="tabpanel" aria-labelledby="tci-tab">
+        <!-- ****Table tci -->
+        <!-- <div class="tab-pane fade" id="tci" role="tabpanel" aria-labelledby="tci-tab">
             <table id="example4" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
@@ -336,7 +358,109 @@
                 </thead>
 
                 <tbody>
-                    @foreach ($papers_tci as $n => $paper)
+                    
+                    <tr>
+                        <td> {{$n+1}}</td>
+                        <td>{{ $paper->paper_yearpub }}</td>
+                        
+                        <td style="width:90%;">{!! html_entity_decode(preg_replace('<inf>', 'sub', $paper->paper_name)) !!}</td>
+                        <td>
+                            @foreach ($paper->author as $author)
+                            <span>
+                                <a>{{$author -> author_fname}} {{$author -> author_lname}}</a>
+                            </span>
+                            @endforeach
+                            @foreach ($paper->teacher as $author)
+                            <span>
+                                <a href="{{ route('detail',Crypt::encrypt($author->id))}}">
+                                    <teacher>{{$author -> fname_en}} {{$author -> lname_en}}</teacher></a>
+                            </span>
+                            @endforeach
+                        </td>
+                        <td>{{$paper->paper_type}}</td>
+                        <td style="width:100%;">{{$paper->paper_page}}</td>
+                        <td>{{$paper->paper_sourcetitle}}</td>
+                        <td>{{$paper->paper_citation}}</td>
+                        <td>{{$paper->paper_doi}}</td>
+
+
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div> -->
+
+        <!-- **** Table ORCID -->
+        <div class="tab-pane fade" id="orcid" role="tabpanel" aria-labelledby="orcid-tab">
+            <table id="example3" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Year</th>
+                        <th style="width:90%;">Paper Name</th>
+                        <th>Author</th>
+                        <th>Document Type</th>
+                        <th style="width:100%;">Page</th>
+                        <th>Journals/Transactions</th>
+                        <th>Ciations</th>
+                        <th>Doi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach ($papers_orcid as $n => $paper)
+                    <tr>
+                        <td> {{$n+1}}</td>
+                        <td>{{ $paper->paper_yearpub }}</td>
+                        <!-- <td style="width:90%;">{{$paper->paper_name}}</td> -->
+                        <td style="width:90%;">{!! html_entity_decode(preg_replace('<inf>', 'sub', $paper->paper_name)) !!}</td>
+                       <!-- ผู้เขียน -->
+                        <td>
+                            @foreach ($paper->author as $author)
+                            <span>
+                                <a>{{$author -> author_fname}} {{$author -> author_lname}}</a>
+                            </span>
+                            @endforeach
+                            @foreach ($paper->teacher as $author)
+                            <span>
+                                <a href="{{ route('detail',Crypt::encrypt($author->id))}}">
+                                    <teacher>{{$author -> fname_en}} {{$author -> lname_en}}</teacher></a>
+                            </span>
+                            @endforeach
+                        </td>
+                        <td>{{$paper->paper_type}}</td>
+                        <td style="width:100%;">{{$paper->paper_page}}</td>
+                        <td>{{$paper->paper_sourcetitle}}</td>
+                        <td>{{$paper->paper_citation}}</td>
+                        <td>{{$paper->paper_doi}}</td>
+
+
+                    </tr>
+                    @endforeach
+                </tbody>
+
+            </table>
+        </div>
+
+        <!-- ****Table GoogleScholar -->
+        <div class="tab-pane fade" id="scholar" role="tabpanel" aria-labelledby="scholar-tab">
+            <table id="example4" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Year</th>
+                        <th style="width:90%;">Paper Name</th>
+                        <th>Author</th>
+                        <th>Document Type</th>
+                        <th style="width:100%;">Page</th>
+                        <th>Journals/Transactions</th>
+                        <th>Ciations</th>
+                        <th>Doi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach ($papers_scholar as $n => $paper)
                     <tr>
                         <td> {{$n+1}}</td>
                         <td>{{ $paper->paper_yearpub }}</td>
@@ -367,6 +491,8 @@
                 </tbody>
             </table>
         </div>
+        
+        <!-- Table Book -->
         <div class="tab-pane fade" id="book" role="tabpanel" aria-labelledby="book-tab">
             <table id="example5" class="table table-striped" style="width:100%">
                 <thead>
@@ -409,6 +535,7 @@
             </table>
         </div>
 
+        <!-- Table Patent -->
         <div class="tab-pane fade" id="patent" role="tabpanel" aria-labelledby="patent-tab">
             <table id="example6" class="table table-striped" style="width:100%">
                 <thead>
@@ -455,6 +582,7 @@
 
     </div>
 </div>
+
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.js"></script> -->
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
@@ -463,39 +591,54 @@
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
+<!-- สร้าง datatable -->
 <script>
+    
     $(document).ready(function() {
 
+        // summary
         var table1 = $('#example1').DataTable({
-            responsive: true,
+            responsive: true, 
         });
 
+        // scopus
         var table2 = $('#example2').DataTable({
             responsive: true,
         });
+        // ORCID
         var table3 = $('#example3').DataTable({
             responsive: true,
         });
+        // Google Scholar
         var table4 = $('#example4').DataTable({
             responsive: true,
         });
+        // Book
         var table5 = $('#example5').DataTable({
             responsive: true,
         });
+        // Patent
         var table6 = $('#example6').DataTable({
             responsive: true,
         });
 
 
+        // switch tab
         $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function(event) {
             var tabID = $(event.target).attr('data-bs-target');
             if (tabID === '#scopus') {
                 table2.columns.adjust().draw()
             }
-            if (tabID === '#wos') {
+            // if (tabID === '#wos') {
+            //     table3.columns.adjust().draw()
+            // }
+            // if (tabID === '#tci') {
+            //     table4.columns.adjust().draw()
+            // }
+            if (tabID === '#orcid') {
                 table3.columns.adjust().draw()
             }
-            if (tabID === '#tci') {
+            if (tabID === '#scholar') {
                 table4.columns.adjust().draw()
             }
             if (tabID === '#book') {
@@ -510,11 +653,15 @@
     });
 </script>
 
+<!-- bar chart 
+ 
+-->
+ 
 <script>
     var year = <?php echo $year; ?>;
-    var paper_tci = <?php echo $paper_tci; ?>;
     var paper_scopus = <?php echo $paper_scopus; ?>;
-    var paper_wos = <?php echo $paper_wos; ?>;
+    var paper_orcid = <?php echo $paper_orcid; ?>;
+    var paper_scholar = <?php echo $paper_scholar; ?>;
     var areaChartData = {
 
         labels: year,
@@ -531,7 +678,7 @@
                 data: paper_scopus
             },
             {
-                label: 'TCI',
+                label: 'ORCID',
                 backgroundColor: '#3994D6',
                 borderColor: 'rgba(210, 214, 222, 1)',
                 pointRadius: false,
@@ -539,10 +686,10 @@
                 pointStrokeColor: '#c1c7d1',
                 pointHighlightFill: '#fff',
                 pointHighlightStroke: '#3994D6',
-                data: paper_tci
+                data: paper_orcid
             },
             {
-                label: 'WOS',
+                label: 'SCHOLAR',
                 backgroundColor: '#FCC29A',
                 borderColor: 'rgba(0, 0, 255, 1)',
                 pointRadius: false,
@@ -550,7 +697,7 @@
                 pointStrokeColor: '#c1c7d1',
                 pointHighlightFill: '#fff',
                 pointHighlightStroke: '#FCC29A',
-                data: paper_wos
+                data: paper_scholar
             },
         ]
     }
@@ -588,9 +735,11 @@
     })
 </script>
 
+<!-- ดึงข้อมูล Scopus -->
 <script type="text/javascript">
     function myDisplayer(some) {
 
+        // ดึง id ในหน้าเว็บ
         document.getElementById("citation").innerHTML = "Citation count : " + some['h-index'];
         document.getElementById("doc_count").innerHTML = "Document count : " + some['coredata']['citation-count'];
         document.getElementById("cite_count").innerHTML = "Cited By count : " + some['coredata']['cited-by-count'];
@@ -598,16 +747,22 @@
 
     }
     async function myFunction() {
+        // ดึงข้อมูล researcher 
         var res = <?php echo $res; ?>;
         //var fname = res.fname_en;
         //var fname = res.fname_en.substr(0, 1); 
         //console.log(fname);
         //const response = await fetch('https://api.elsevier.com/content/search/scopus?query=AUTHOR-NAME('+ res.lname_en +','+fname+')%20&apikey=6ab3c2a01c29f0e36b00c8fa1d013f83&httpAccept=application%2Fjson');
+        
+        // ค้นหานักวิจัยใน Scopus ด้วยชื่อ-นามสกุล
         const response = await fetch('https://api.elsevier.com/content/search/author?query=authlast(' + res.lname_en +
             ')%20and%20authfirst(' + res.fname_en +
             ')%20&apiKey=6ab3c2a01c29f0e36b00c8fa1d013f83&httpAccept=application%2Fjson');
         //var a = got["search-results"];
+
+        // แปลงข้อมูล JSON
         const got = await response.json();
+        // ดึง Author ID
         aid = got["search-results"]["entry"][0]['dc:identifier'];
         aid = aid.split(":");
         aid = aid[1];
@@ -620,6 +775,8 @@
         return auth
 
     }
+
+    // เรียกใช้ฟังก์ชัน
     myFunction().then(
         function(value) {
             myDisplayer(value);
@@ -629,28 +786,28 @@
         }
     );
 </script>
-</div>
+
 <script>
-    var paper_tci_s = <?php echo $paper_tci_s; ?>;
     var paper_scopus_s = <?php echo $paper_scopus_s; ?>;
-    var paper_wos_s = <?php echo $paper_wos_s; ?>;
+    var paper_orcid_s = <?php echo $paper_orcid_s; ?>;
+    var paper_scholar_s = <?php echo $paper_scholar_s; ?>;
     var paper_book_s = <?php echo $paper_book_s; ?>;
     var paper_patent_s = <?php echo $paper_patent_s; ?>;
     //console.log(paper_book_s);
-    let sumtci = 0;
     let sumsco = 0;
-    let sumwos = 0;
+    let sumorcid = 0;
+    let sumscholar = 0;
     let sumbook = 0;
     let sumpatent = 0;
     (function($) {
         for (let i = 0; i < paper_scopus_s.length; i++) {
             sumsco += paper_scopus_s[i];
         }
-        for (let i = 0; i < paper_tci_s.length; i++) {
-            sumtci += paper_tci_s[i];
+        for (let i = 0; i < paper_orcid_s.length; i++) {
+            sumorcid += paper_orcid_s[i];
         }
-        for (let i = 0; i < paper_wos_s.length; i++) {
-            sumwos += paper_wos_s[i];
+        for (let i = 0; i < paper_scholar_s.length; i++) {
+            sumscholar += paper_scholar_s[i];
         }
         for (let i = 0; i < paper_book_s.length; i++) {
             sumbook += paper_book_s[i];
@@ -658,7 +815,7 @@
         for (let i = 0; i < paper_patent_s.length; i++) {
             sumpatent += paper_patent_s[i];
         }
-        let sum = sumsco + sumtci + sumwos + sumbook + sumpatent;
+        let sum = sumsco + sumorcid + sumscholar + sumbook + sumpatent;
 
         //$("#scopus").append('data-to="100"');
         document.getElementById("all").innerHTML += `   
@@ -669,13 +826,13 @@
                 <h2 class="timer count-title count-number" data-to="${sumsco}" data-speed="1500"></h2>
                 <p class="count-text">SCOPUS</p>`
 
-        document.getElementById("wos_sum").innerHTML += `    
-                <h2 class="timer count-title count-number" data-to="${sumwos}" data-speed="1500"></h2>
-                <p class="count-text ">WOS</p>`
+        document.getElementById("orcid_sum").innerHTML += `   
+                <h2 class="timer count-title count-number" data-to="${sumorcid}" data-speed="1500"></h2>
+                <p class="count-text">ORCID</p>`
 
-        document.getElementById("tci_sum").innerHTML += `  
-                <h2 class="timer count-title count-number" data-to="${sumtci}" data-speed="1500"></h2>
-                <p class="count-text ">TCI</p>`
+        document.getElementById("scholar_sum").innerHTML += `   
+                <h2 class="timer count-title count-number" data-to="${sumscholar}" data-speed="1500"></h2>
+                <p class="count-text">SCHOLAR</p>`
 
 
         //document.getElementById("scopus").appendChild('data-to="100"');
@@ -777,6 +934,7 @@
         }
     });
 </script>
+
 <!-- <script>
     // get the p element
     $(document).ready(function() {
