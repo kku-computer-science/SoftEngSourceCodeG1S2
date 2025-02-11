@@ -35,7 +35,8 @@ class User extends Authenticatable
         'picture',
         'status',
         'program_id',
-        'username'
+        'username',
+        'orcid_id'
         
     ];
 
@@ -83,6 +84,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Paper::class,'user_papers')->withPivot('author_type');
         
+    }
+
+    public function source(){
+        return $this->belongsToMany(Source_data::class,'source_users')->withPivot('search_id');
     }
 
     public function academicworks()

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Http\Utility\UserUtility;
 
 class OrcidCallController extends Controller
 {
@@ -20,7 +21,9 @@ class OrcidCallController extends Controller
         $id = Crypt::decrypt($id);  
         $user = User::find($id);
         
-        $orcidId = $user->orcid_id;
+        $source = Source_data::firstOrCreate(['source_name' => 'ORCID']);
+        // $orcidId = UserUtility::getUserSearchKey($id, $source_id);
+        $orcidId = UserUtility::getUserSearchKey($id, $source->id);
         if (!$orcidId) {
             return response()->json(['error' => 'No ORCID ID found for this user'], 404);
         }
@@ -46,6 +49,13 @@ class OrcidCallController extends Controller
                 
                 $title = $workDetails['title']['title']['value'] ?? 'Untitled';
                 $doi = null;
+                $url = $workDetails['url']['value'] ?? null;
+                $journalTitle = $workDetails['journal-title']['value'] ?? null;
+                $publicationYear = $workDetails['publication-date']['year']['value'] ?? null;
+                $aggregationType = $workDetails['type'] ?? null;
+                $publicationVolume = null;
+                $issueIdentifier = null;
+                $pageRange = null;
                 
                 if (isset($workDetails['external-ids']['external-id'])) {
                     foreach ($workDetails['external-ids']['external-id'] as $externalId) {
@@ -58,12 +68,21 @@ class OrcidCallController extends Controller
                 
                 $paper = Paper::updateOrCreate(
                     ['paper_name' => $title],
-                    ['paper_doi' => $doi]
+                    [
+                        'paper_doi' => $doi,
+                        'paper_url' => $url,
+                        'paper_sourcetitle' => $journalTitle,
+                        'paper_volume' => $publicationVolume,
+                        'paper_issue' => $issueIdentifier,
+                        'paper_page' => $pageRange,
+                        'paper_yearpub' => $publicationYear,
+                        'paper_type' => $aggregationType,
+                    ]
                 );
                 
                 $paper->teacher()->syncWithoutDetaching([$id]);
                 
-                $source = Source_data::firstOrCreate(['source_name' => 'ORCID']);
+                
                 $paper->source()->syncWithoutDetaching([$source->id]);
                 
                 if (isset($workDetails['contributors']['contributor'])) {
