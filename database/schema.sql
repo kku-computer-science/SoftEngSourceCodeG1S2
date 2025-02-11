@@ -524,6 +524,26 @@ CREATE TABLE `source_papers` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `source_users`
+--
+
+DROP TABLE IF EXISTS `source_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `source_users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `source_data_id` bigint unsigned NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `search_id` varchar(511) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `source_users_source_data_id_foreign` (`source_data_id`),
+  KEY `source_users_user_id_foreign` (`user_id`),
+  CONSTRAINT `source_users_source_data_id_foreign` FOREIGN KEY (`source_data_id`) REFERENCES `source_data` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `source_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `user_of_academicworks`
 --
 
@@ -650,4 +670,4 @@ CREATE TABLE `work_of_research_projects` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-10  7:05:36
+-- Dump completed on 2025-02-11 11:39:41

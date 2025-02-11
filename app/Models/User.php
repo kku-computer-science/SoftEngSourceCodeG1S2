@@ -85,6 +85,10 @@ class User extends Authenticatable
         
     }
 
+    public function source(){
+        return $this->belongsToMany(Source_data::class,'source_users')->withPivot('search_id');
+    }
+
     public function academicworks()
     {
         return $this->belongsToMany(Academicwork::class,'user_of_academicworks')->withPivot('author_type');
