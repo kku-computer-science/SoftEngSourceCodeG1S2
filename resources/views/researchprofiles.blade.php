@@ -169,6 +169,7 @@
 
         <!-- Table Summary -->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <!-- excel -->
             <div class="tab-content" style="padding-bottom: 20px;">
                 <a class="btn btn-success" href="{{ route('excel', ['id' => $res->id]) }}" target="_blank">Export To Excel</a>
             </div>

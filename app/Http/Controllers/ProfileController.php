@@ -26,7 +26,7 @@ class ProfileController extends Controller
         })
         ->whereHas('source', function($query) {
             // กรองออกเฉพาะ WOS (source_data_id = 2) และ TCI (source_data_id = 3)
-            $query->whereNotIn('source_data_id', [2, 3]);
+            $query->whereNotIn('source_data_id', [2,3]);
         })
         ->orderBy('paper_yearpub', 'desc')
         ->get();
@@ -79,7 +79,6 @@ class ProfileController extends Controller
         })->where('ac_type', '=', 'book')->get();
 
        
-
         $patent = Academicwork::with('user','author')->whereHas('user', function($query) use($id) {
             $query->where('users.id', '=', $id);
         })->where('ac_type', '!=', 'book')->get();
