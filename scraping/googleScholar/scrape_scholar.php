@@ -119,7 +119,7 @@ function scrape_paper_details($paper_url) {
 
 // ✅ รายชื่อนักวิจัยที่ต้องการเพิ่มข้อมูล
 $new_researchers = [
-    "vnTKGAcAAAAJ"  // นักวิจัยใหม่
+    "EdGy9eEAAAAJ"  // นักวิจัยใหม่
     
 ];
 

@@ -4742,5 +4742,657 @@
                 "description": "The main functions of the Wildlife Sanctuary are to conserve forest ecology and to maintain a rich habitat wildlife species. Remotely sensed data provides the updated information on the change and dynamics of the Sanctuary. The objective of this study is to periodically monitor the forest change and to identify the plant community in the sanctuary. Aerial photo acquired in 1976, Landsat data in 1998 and 2005 were used to produce the land use patterns and its changes. The field investigation was conducted to verify the interpretation and to the inventory the plant community and sub community of forest types including its profile diagram. In addition the GIS database of land use pattern was established for the years 1976, 1998 and 2005. Further analysis was digitally performed to create the change detection maps. The results obtained indicate a significant change of forest acreage between 1976-1998 and 1998-2005. The forest types and the plant community were identified within intensive plot observation."
             }
         ]
+    },
+    {
+        "name": "Pakarat Musikawan",
+        "affiliation": "Department of Computer Science, College of Computing, Khon Kaen University, Khon Kaen, 40002",
+        "h_index": 8,
+        "i10_index": 7,
+        "scholar_profile_url": "https:\/\/scholar.google.com\/citations?hl=en&user=dxQuB2QAAAAJ&view_op=list_works&sortby=pubdate",
+        "papers": [
+            {
+                "title": "Enhanced Multigrained Scanning-Based Deep Stacking Network for Intrusion Detection in IoMT Networks",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:_kc_bZDykSQC",
+                "citations": 0,
+                "year": "2024",
+                "authors": "Pakarat Musikawan, Yanika Kongsorot, Phet Aimtongkham, Chakchai So-In",
+                "journal": "IEEE Access",
+                "publication_date": "2024\/10\/14",
+                "doi": null,
+                "description": "In light of the flourishing proliferation of internet services, the popularity of the Internet of Things (IoT) has swiftly grown in the medical and healthcare fields, and this has been accompanied by a simultaneous escalation in the sophistication of intrusion attacks. Drawing inspiration from the accomplishments of deep learning in cyber threat detection, we propose a multigrained scanning-based deep stacking network (MGDSN) to defend against sophisticated cyberattacks on Internet of Medical Things (IoMT) networks. To address the obscured characteristics of intricate cyberattacks, the MGDSN incorporates four components. First, the feature augmentation process leverages an improved multigrained scanning technique to enhance discriminative information. Second, a deep stacking network (DSN) with a weighting mechanism is employed to generate a set of predictive results for making the final decision. Third, a …"
+            },
+            {
+                "title": "A Novel Congestion Control Scheme Using Fuzzy Logic Systems to Enhance the Path Selection Criteria in Routing Protocols for Low-Power and Lossy Networks on the Internet of Things",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:YOwf2qJgpHMC",
+                "citations": 0,
+                "year": "2024",
+                "authors": "Phet Aimtongkham, Pakarat Musikawan, Yanika Kongsorot, Chakchai So-In",
+                "journal": "SN Computer Science",
+                "publication_date": "2024\/5\/31",
+                "doi": null,
+                "description": "In routing protocols for low-power and lossy (RPL)-based Internet of Things (IoT) networks, congestion control is essential for ensuring efficient and dependable communications with energy awareness. As the number of devices and the amount of data traffic increase, congestion typically occurs, resulting in degraded network performance, i.e., increased packet losses and delays with decreased energy efficiency. Many parameters relating to congestion behaviors have been considered and dynamically changed, as have the possible transmission paths either within a single destination-oriented directed acyclic graph (DoDAG) or across different DoDAGs. Thus, this research investigates congestion mitigation methods for RPL-IoT networks based on a fuzzy logic system (FLS) by proposing a novel FLS scheme to determine the selection criteria for conducting path management in three FLS components: (1) inside …"
+            },
+            {
+                "title": "An Intrusion Detection and Identification System for Internet of Things Networks Using a Hybrid Ensemble Deep Learning Framework",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:Zph67rFs4hoC",
+                "citations": 5,
+                "year": "2023",
+                "authors": "Yanika Kongsorot, Pakarat Musikawan, Phet Aimtongkham, Ilsun You, Abderrahim Benslimane, Chakchai So-In",
+                "journal": "IEEE Transactions on Sustainable Computing",
+                "publication_date": "2023\/8\/9",
+                "doi": null,
+                "description": "Owing to the exponential proliferation of internet services and the sophistication of intrusions, traditional intrusion detection algorithms are unable to handle complex invasions due to their limited representation capabilities and the unbalanced nature of Internet of Things (IoT)-related data in terms of both telemetry and network traffic. Drawing inspiration from deep learning achievements in feature extraction and representation learning, in this study, we propose an accurate hybrid ensemble deep learning framework (HEDLF) to protect against obfuscated cyber-attacks on IoT networks. To address complex features and alleviate the imbalance problem, the proposed HEDLF includes three key components: 1) a hierarchical feature representation technique based on deep learning, which aims to extract specific information by supervising the loss of gradient information; 2) a balanced rotated feature extractor that …"
+            },
+            {
+                "title": "A two-phase ensemble-based method for predicting learners’ grade in MOOCs",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:KlAtU1dfN6UC",
+                "citations": 8,
+                "year": "2023",
+                "authors": "Warunya Wunnasri, Pakarat Musikawan, Chakchai So-In",
+                "journal": "Applied Sciences",
+                "publication_date": "2023\/1\/23",
+                "doi": null,
+                "description": "MOOCs are online learning environments which many students use, but the success rate of online learning is low. Machine learning can be used to predict learning success based on how people learn in MOOCs. Predicting the learning performance can promote learning through various methods, such as identifying low-performance students or by grouping students together. Recent machine learning has enabled the development of predictive models, and the ensemble method can assist in reducing the variance and bias errors associated with single-machine learning. This study uses a two-phase classification model with an ensemble technique to predict the learners’ grades. In the first phase, binary classification is used, and the non-majority class is then sent to the second phase, which is multi-class classification. The new features are computed based on the distance from the class’s center. The distance between the data and the center of an overlapping cluster is calculated using silhouette score-based feature selection. Lastly, Bayesian optimization boosts the performance by fine tuning the optimal parameter set. Using data from the HMPC- and the CNPC datasets, the experiment results demonstrate that the proposed design, the two-phase ensemble-based method, outperforms the state-of-the-art machine learning algorithms."
+            },
+            {
+                "title": "An enhanced deep learning neural network for the detection and identification of android malware",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:kNdYIx-mwKoC",
+                "citations": 46,
+                "year": "2022",
+                "authors": "Pakarat Musikawan, Yanika Kongsorot, Ilsun You, Chakchai So-In",
+                "journal": "IEEE Internet of Things Journal",
+                "publication_date": "2022\/7\/29",
+                "doi": null,
+                "description": "Android-based mobile devices have attracted a large number of users because they are easy to use and possess a wide range of capabilities. Because of its popularity, Android has become one of the most important platforms for attackers to launch their nefarious schemes. Due to the rising sophistication of Android malware obfuscation and detection avoidance tactics, many traditional malware detection approaches have become impractical due to their limited representation capabilities. Inspired by the success of deep learning in representation learning, this article presents an effective improved deep neural network to safeguard Android devices from malicious apps called AMDI-Droid. The presented approach contains three enhancements: 1) from the ensemble classifier perspective, we propose a new architecture based on a deep neural network, where the predictive outputs obtained from all hidden layers are …"
+            },
+            {
+                "title": "An enhanced fuzzy-based clustering protocol with an improved shuffled frog leaping algorithm for WSNs",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:5nxA0vEk-isC",
+                "citations": 9,
+                "year": "2022",
+                "authors": "Yanika Kongsorot, Pakarat Musikawan, Paisarn Muneesawang, Chakchai So-In",
+                "journal": "Expert Systems with Applications",
+                "publication_date": "2022\/7\/15",
+                "doi": null,
+                "description": "Wireless sensor networks (WSNs), an important technology for the Internet of Things (IoT), consist of the communications among small sensor nodes in a large-scale network. Due to the limited battery capacity of each small node, a clustering-based approach is used to conserve energy among the nodes and increase the network lifetime. The tasks of a clustering-based protocol are related mainly to the selection of the most appropriate cluster head nodes (CHs) and next-hop nodes (NHs) based on many influencing factors that require an optimal decision criterion, which can be addressed using a fuzzy inference system (FIS). Although FISs can provide satisfying decisions for selecting CHs and NHs for clustering protocols, FIS components such as fuzzy input variables, fuzzy rules, and fuzzy membership functions continue to be defined manually in most methods. Thus, these parameters must be tuned appropriately …"
+            },
+            {
+                "title": "An enhanced obstacle-aware deployment scheme with an opposition-based competitive swarm optimizer for mobile WSNs",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:Se3iqnhoufwC",
+                "citations": 23,
+                "year": "2022",
+                "authors": "Pakarat Musikawan, Yanika Kongsorot, Paisarn Muneesawang, Chakchai So-In",
+                "journal": "Expert Systems with Applications",
+                "publication_date": "2022\/3\/1",
+                "doi": null,
+                "description": "The network coverage problem for an area with a randomly deployed wireless sensor network (WSN) in the presence of obstacles can be alleviated through mobile sensor nodes. However, the requirement for the dissipated energy in mobility and sensing has increased. Therefore, energy efficient coverage is a significant issue and has been near-optimally solved by heuristic techniques. Focusing on this issue, this paper introduces an improved competitive swarm optimizer to maximize the coverage area and minimize the network energy simultaneously. The proposed method incorporates the virtual force algorithm (VFA) and the Voronoi diagram (VD) to improve the network performance during the optimization process. The VFA is combined with a boundary mechanism to control the locations of sensors, while the VD is utilized to extract the network information for the decoding process. The superior performance of …"
+            },
+            {
+                "title": "Tomato Maturity Classification: A Transfer Learning Approach",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:UebtZRa9Y70C",
+                "citations": 0,
+                "year": "2021",
+                "authors": "Chinapat Sakunrasrisuay, Pakarat Musikawan, Anh-Nhat Nguyen, Yanika Kongsorot, Phet Aimtongkham, Chakchai So-In",
+                "journal": null,
+                "publication_date": "2021\/11\/18",
+                "doi": null,
+                "description": "In recent years, tomato cultivation has dramatically increased, and the competition in the market is high. The market price is determined through tomato maturity classification. The tomatoes' maturity is generally assessed through a visual inspection of the color, texture, size, shape, and defects. However, the quality of human sorting may be poor, and the cost of external quality control and labor is high. Transfer learning (TL) is an efficient tool involving the reuse of a pre-trained deep network on a new problem involving image classification applications. In this study, we investigated the performance of current TL models: InceptionResnet V2; ResNet152V2; MobileNetV2; and AlexNet on tomato image classification. The experiment results showed that the ResNet152V2 yielded the highest testing accuracy at 99.46%, with the lowest training loss among the comparative TL models."
+            },
+            {
+                "title": "Wind power forecasting using a heterogeneous ensemble of decomposition-based nnrw techniques",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:LkGwnXOMwfcC",
+                "citations": 2,
+                "year": "2020",
+                "authors": "Pakarat Musikawan, Khamron Sunat, Yanika Kongsorot",
+                "journal": "ECTI Transactions on Computer and Information Technology (ECTI-CIT)",
+                "publication_date": "2020\/4\/14",
+                "doi": null,
+                "description": "Accurate and reliable wind power forecasting plays a vital role in the operation and management of power systems. Hence, it has become necessary to research and develop a high-accuracy wind power forecasting model. However, owing to highly nonlinear and nonstationary patterns of wind power time-series, creating a wind forecasting model capable of predicting such series accurately is both complicated and challenging. Aiming at this challenge, this paper introduces a new decomposition-based hybrid model based on multiple decomposition techniques, neural network with random weights (NNRW), and a linear combiner. In our approach, the original timeseries is decomposed into a collection of sub-series by different decomposition techniques. Each sub-series is modeled and predicted separately using NNRW. The predicted signals of each decomposition model are then reconstructed independently. Finally, all of the reconstructed results are integrated by the combiner using a linear combination method. The predictive performance of the proposed method was compared with other state-of-the-art techniques in over 12 wind power time-series. The experimental results show that the predictive performance of the proposed method remarkably outperforms the other competitors, proving the developed model to be effective, efficient, and practical."
+            },
+            {
+                "title": "An incremental kernel extreme learning machine for multi-label learning with emerging new labels",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:_FxGoFyzp5QC",
+                "citations": 13,
+                "year": "2020",
+                "authors": "Yanika Kongsorot, Punyaphol Horata, Pakarat Musikawan",
+                "journal": "IEEE Access",
+                "publication_date": "2020\/3\/5",
+                "doi": null,
+                "description": "Multi-label learning with emerging new labels is a practical problem that occurs in data streams and has become an important new research issue in the area of machine learning. However, existing models for dealing with this problem require high learning computational times, and there still exists a lack of research. Based on these issues, this paper presents an incremental kernel extreme learning machine for multi-label learning with emerging new labels, consisting of two parts: a novelty detector; and a multi-label classifier. The detector with free-user-setting threshold parameters was developed to identify instances with new labels. A new incremental multi-label classifier and its improved version were developed to predict a label set for each instance, which can add output units incrementally and update themselves in unlabeled instances. Comprehensive evaluations of the proposed method were carried out on …"
+            },
+            {
+                "title": "Kernel extreme learning machine based on fuzzy set theory for multi-label classification",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:Tyk-4Ss8FVUC",
+                "citations": 31,
+                "year": "2019",
+                "authors": "Yanika Kongsorot, Punyaphol Horata, Pakarat Musikawan, Khamron Sunat",
+                "journal": "International Journal of Machine Learning and Cybernetics",
+                "publication_date": "2019\/5\/1",
+                "doi": null,
+                "description": "               Multi-label classification is a special kind of classification problem, where a single instance can be labeled to more than one class. Extreme learning machine (ELM) with kernel is an efficient method for solving both regression and multi-class classification problems. However, ELM with kernel has a limitation when it comes to multi-label classification tasks. To solve this problem, this paper proposes an enhanced ELM with kernel based on a fuzzy set theory for multi-label classification problems. The relationship between an instance and its corresponding class can be defined as the fuzzy membership. This fuzzy membership is used in output weights computation to weigh the training sample towards the corresponding classes. The experimental results demonstrate that the proposed method outperforms the ELM family of algorithms for multi-label problems, as well as the state-of-the-art multi-label …"
+            },
+            {
+                "title": "Parallelized metaheuristic-ensemble of heterogeneous feedforward neural networks for regression problems",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:WF5omc3nYNoC",
+                "citations": 18,
+                "year": "2019",
+                "authors": "Pakarat Musikawan, Khamron Sunat, Yanika Kongsorot, Punyaphol Horata, Sirapat Chiewchanwattana",
+                "journal": "IEEE Access",
+                "publication_date": "2019\/2\/21",
+                "doi": null,
+                "description": "A feedforward neural network ensemble trained through metaheuristic algorithms has been proposed by researchers to produce a group of optimal neural networks. This method, however, has proven to be very time-consuming during the optimization process. To overcome this limitation, we propose a metaheuristic-based learning algorithm for building an ensemble system, resulting in shorter training time. In our proposed method, a master-slave based metaheuristic algorithm is employed in the optimization process to produce a group of heterogeneous feedforward neural networks, in which the global search operations are executed on the master, and the tasks of objective evaluation are distributed to the slaves (workers). To reduce evaluation costs, the entire training dataset is randomly divided equally into several disjoint subsets. Each subset is randomly paired with another subset of the remainder and …"
+            },
+            {
+                "title": "A fast convolutional denoising autoencoder based extreme learning machine",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:YsMSGLbcyi4C",
+                "citations": 2,
+                "year": "2017",
+                "authors": "Janebhop Sawaengchob, Punyaphol Horata, Pakarat Musikawan, Yanika Kongsorot",
+                "journal": null,
+                "publication_date": "2017\/11\/15",
+                "doi": null,
+                "description": "The convolutional autoencoder (CAE) was proposed on convolutional neural network (CNN) and denoising autoencoder (DAE). CAE can address the corrupted input samples and high dimensional problem. However, CAE has a shortcoming involving a large training timescale because the parameters of network are commonly tuned by gradient descent (GD) learning method. In order to alleviate this problem, this paper proposed a fast convolutional denoising autoencoder based extreme learning machine (ELM), called fast convolutional denoising autoencoder (FCDA). In FCDA, the random convolutional hidden nodes are used to reduce the dimension of input data. After that, the proposed denoising ELM autoencoder is used to reconstruct the cleaned data. The experimental results indicate that the proposed method not only speeds up the traditional CAE, but it also outperforms the CAE algorithm in terms of …"
+            },
+            {
+                "title": "Harmonic extreme learning machine for data clustering",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:UeHWp8X0CEIC",
+                "citations": 10,
+                "year": "2016",
+                "authors": "Sarunyoo Boriratrit, Sirapat Chiewchanwattana, Khamron Sunat, Pakarat Musikawan, Punyaphol Horata",
+                "journal": null,
+                "publication_date": "2016\/7\/13",
+                "doi": null,
+                "description": "Unsupervised Extreme Learning Machine (US-ELM) is the one type of neural network which modified from Extreme Learning Machine (ELM) for handle the clustering problem. Nevertheless, US-ELM has problem with nonfulfillment of solution due to K-Mean algorithm was used to cluster which made the accuracy of solution was unstable when training many times. In this paper, K-Harmonic mean algorithm was proposed to instead of K-Mean algorithm to improve the accuracy of solution and more stable gained called, Harmonic Extreme Learning Machine (Harm-ELM) likewise the experiment result compared with state-of-the-art show that Harm-ELM can overcome to 75% of all datasets that used to attempt."
+            },
+            {
+                "title": "Improved convex incremental extreme learning machine based on ridgelet and PSO algorithm",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:qjMakFHDy7sC",
+                "citations": 4,
+                "year": "2016",
+                "authors": "Pakarat Musikawan, Khamron Sunat, Sirapat Chiewchanwattana, Punyaphol Horata, Yanika Kongsorot",
+                "journal": null,
+                "publication_date": "2016\/7\/13",
+                "doi": null,
+                "description": "The most difficult problem with the extreme learning machine is the selection of the hidden nodes size. The proper number of hidden nodes is predefined through a trial and error approach. The convex incremental extreme learning machine (CI-ELM) has been proposed to tackle this problem. CI-ELM is an incremental constructive neural network with universal approximation abilities. However, we have found that some hidden nodes added into a hidden layer, may play a minor role in the network, which results in an increase in network complexity. In order to avoid this shortcoming, we propose here in an improved convex incremental extreme learning machine with optimal ridgelet hidden nodes (ICOR-ELM). The proposed method uses the ridgelet function as the activation function within the hidden layer. In each step of the learning process, the optimal hidden node parameters, which are optimized through particle …"
+            },
+            {
+                "title": "Improvement flower pollination extreme learning machine based on meta-learning",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:2osOgNQ5qMEC",
+                "citations": 6,
+                "year": "2016",
+                "authors": "Sarunyoo Boriratrit, Sirapat Chiewchanwattana, Khamron Sunat, Pakarat Musikawan, Punyaphol Horata",
+                "journal": null,
+                "publication_date": "2016\/7\/13",
+                "doi": null,
+                "description": "Extreme Learning Machine (ELM) model which learn very faster than other neural networks model but the solution was not suitable as expected since the randomness of the input weights and biases may cause to the nonfulfillment of solution. Flower Pollination Extreme Learning Machine (FP-ELM) model that it was merged by ELM and Flower Pollination Algorithm (FPA) to adjust the input weight and biases for improve performance of output weight when the input weight and biases were calculated. Nonetheless, FP-ELM may cause overfitting and more number of hidden nodes were used. In this paper, Meta Learning of Flower Pollination Extreme Learning Machine (Meta-FPELM) was proposed that compart the input weight, calculate to hidden nodes as FP-ELM and combine to the last output weight. In addition, the result of real word regression problems experiment of Meta-FPELM compared with state-of-the-art …"
+            },
+            {
+                "title": "Evolutionary circular extreme learning machine",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:8k81kl-MbHgC",
+                "citations": 7,
+                "year": "2013",
+                "authors": "Sarutte Atsawaraungsuk, Punyaphol Horata, Khamron Sunat, Sirapat Chiewchanwattana, Pakarat Musigawan",
+                "journal": null,
+                "publication_date": "2013\/9\/4",
+                "doi": null,
+                "description": "Circular Extreme Learning Machine (C-ELM) is an extension of Extreme Learning Machine. Its power is mapping both linear and circular separation boundaries. However, C-ELM uses the random determination of the input weights and hidden biases, which may lead to local optimal. This paper proposes a hybrid learning algorithms based on the C-ELM and the Differential Evolution (DE) to select appropriate weights and hidden biases. It called Evolutionary circular extreme learning machine (EC-ELM). From experimental results show EC-ELM can slightly improve C-ELM and also reduce the number of nodes network."
+            },
+            {
+                "title": "Evolutionary extreme learning machine based on optimized step-size random search firefly algorithm",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:3fE2CSJIrl8C",
+                "citations": 3,
+                "year": "2012",
+                "authors": "Pakarat Musigawan, Sirapat Chiewchanwattana, Khamron Sunat",
+                "journal": null,
+                "publication_date": "2012\/5",
+                "doi": null,
+                "description": null
+            },
+            {
+                "title": "Improved differential evolution via cuckoo search operator",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:MXK_kJrjxJIC",
+                "citations": 11,
+                "year": "2012",
+                "authors": "Pakarat Musigawan, Sirapat Chiewchanwattana, Khamron Sunat",
+                "journal": null,
+                "publication_date": "2012",
+                "doi": null,
+                "description": "               Differential Evolution (DE) is a very popular optimization algorithm for solving numerical optimization problems. It is simple yet powerful algorithm, which has shown effective performance in many optimization problems. In this paper, DECSO that uses the Abandon operator of Cuckoo search to improve the exploration ability of the original DE was proposed. The experimental studies on ten well-known benchmark functions have shown that the proposed approach has efficient search power and fast convergence."
+            },
+            {
+                "title": "Multidirectional Trust-Based Security Mechanisms for Sinkhole Attack Detection in the RPL Routing Protocol for Internet of Things",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=dxQuB2QAAAAJ&sortby=pubdate&citation_for_view=dxQuB2QAAAAJ:ULOm3_A8WrAC",
+                "citations": 2,
+                "year": "",
+                "authors": "Sopha Khoeurt, Chakchai So-In, Pakarat Musikawan, Phet Aimtongkham",
+                "journal": null,
+                "publication_date": null,
+                "doi": null,
+                "description": "The Internet of Things (IoT) has gained popularity in recent years by connecting physical objects to the Internet, enabling innovative applications. To facilitate communication in low-power and lossy networks (LLNs), the IPv6-based routing protocol for LLNs (RPL) is widely used. However, RPL’s lack of specified security models makes it vulnerable to security threats, particularly sinkhole attacks. Existing sinkhole attack detection techniques suffer from high detection delays and false positives. To overcome these limitations, in our research we propose a multidirectional trust-based detection approach for sinkhole attacks in the RPL routing protocol. Our model introduces a novel architecture that considers trust in parent, child, and neighbor directions, reducing detection delays. We enhance detection efficiency and reduce false positives by combining fuzzy logic systems (FLSs) and subjective logic (SL). Additionally, we introduce a new trust weight variable derived from Shannon's entropy method and multiattribute utility theory. We adaptively adjust the SL coefficient based on network conditions, replacing the constant coefficient value of SL theory. Our approach is compared to the most recent techniques, and we assess different indicators, such as falsepositive rate, false-negative rate, packet delivery ratio, throughput, average delay, and energy consumption. Our results demonstrate superior performance in all these metrics, highlighting the effectiveness of our approach."
+            }
+        ]
+    },
+    {
+        "name": "Yanika Kongsorot",
+        "affiliation": "College of Computing",
+        "h_index": 7,
+        "i10_index": 6,
+        "scholar_profile_url": "https:\/\/scholar.google.com\/citations?hl=en&user=zdBo3cwAAAAJ&view_op=list_works&sortby=pubdate",
+        "papers": [
+            {
+                "title": "Enhanced Multigrained Scanning-Based Deep Stacking Network for Intrusion Detection in IoMT Networks",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:LkGwnXOMwfcC",
+                "citations": 0,
+                "year": "2024",
+                "authors": "Pakarat Musikawan, Yanika Kongsorot, Phet Aimtongkham, Chakchai So-In",
+                "journal": "IEEE Access",
+                "publication_date": "2024\/10\/14",
+                "doi": null,
+                "description": "In light of the flourishing proliferation of internet services, the popularity of the Internet of Things (IoT) has swiftly grown in the medical and healthcare fields, and this has been accompanied by a simultaneous escalation in the sophistication of intrusion attacks. Drawing inspiration from the accomplishments of deep learning in cyber threat detection, we propose a multigrained scanning-based deep stacking network (MGDSN) to defend against sophisticated cyberattacks on Internet of Medical Things (IoMT) networks. To address the obscured characteristics of intricate cyberattacks, the MGDSN incorporates four components. First, the feature augmentation process leverages an improved multigrained scanning technique to enhance discriminative information. Second, a deep stacking network (DSN) with a weighting mechanism is employed to generate a set of predictive results for making the final decision. Third, a …"
+            },
+            {
+                "title": "FLSec-RPL: a fuzzy logic-based intrusion detection scheme for securing RPL-based IoT networks against DIO neighbor suppression attacks",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:_FxGoFyzp5QC",
+                "citations": 1,
+                "year": "2024",
+                "authors": "Chenset Kim, Chakchai So-In, Yanika Kongsorot, Phet Aimtongkham",
+                "journal": "Cybersecurity",
+                "publication_date": "2024\/9\/3",
+                "doi": null,
+                "description": "The Internet of Things (IoT) has gained popularity and is widely used in modern society. The growth in the sizes of IoT networks with more internet-connected devices has led to concerns regarding privacy and security. In particular, related to the routing protocol for low-power and lossy networks (RPL), which lacks robust security functions, many IoT devices in RPL networks are resource-constrained, with limited computing power, bandwidth, memory, and battery life. This causes them to face various vulnerabilities and potential attacks, such as DIO neighbor suppression attacks. This type of attack specifically targets neighboring nodes through DIO messages and poses a significant security threat to RPL-based IoT networks. Recent studies have proposed methods for detecting and mitigating this attack; however, they produce high false-positive and false-negative rates in detection tasks and cannot fully protect RPL …"
+            },
+            {
+                "title": "A Novel Congestion Control Scheme Using Fuzzy Logic Systems to Enhance the Path Selection Criteria in Routing Protocols for Low-Power and Lossy Networks on the Internet of Things",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:ufrVoPGSRksC",
+                "citations": 0,
+                "year": "2024",
+                "authors": "Phet Aimtongkham, Pakarat Musikawan, Yanika Kongsorot, Chakchai So-In",
+                "journal": "SN Computer Science",
+                "publication_date": "2024\/5\/31",
+                "doi": null,
+                "description": "In routing protocols for low-power and lossy (RPL)-based Internet of Things (IoT) networks, congestion control is essential for ensuring efficient and dependable communications with energy awareness. As the number of devices and the amount of data traffic increase, congestion typically occurs, resulting in degraded network performance, i.e., increased packet losses and delays with decreased energy efficiency. Many parameters relating to congestion behaviors have been considered and dynamically changed, as have the possible transmission paths either within a single destination-oriented directed acyclic graph (DoDAG) or across different DoDAGs. Thus, this research investigates congestion mitigation methods for RPL-IoT networks based on a fuzzy logic system (FLS) by proposing a novel FLS scheme to determine the selection criteria for conducting path management in three FLS components: (1) inside …"
+            },
+            {
+                "title": "An Intrusion Detection and Identification System for Internet of Things Networks Using a Hybrid Ensemble Deep Learning Framework",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:WF5omc3nYNoC",
+                "citations": 5,
+                "year": "2023",
+                "authors": "Yanika Kongsorot, Pakarat Musikawan, Phet Aimtongkham, Ilsun You, Abderrahim Benslimane, Chakchai So-In",
+                "journal": "IEEE Transactions on Sustainable Computing",
+                "publication_date": "2023\/8\/9",
+                "doi": null,
+                "description": "Owing to the exponential proliferation of internet services and the sophistication of intrusions, traditional intrusion detection algorithms are unable to handle complex invasions due to their limited representation capabilities and the unbalanced nature of Internet of Things (IoT)-related data in terms of both telemetry and network traffic. Drawing inspiration from deep learning achievements in feature extraction and representation learning, in this study, we propose an accurate hybrid ensemble deep learning framework (HEDLF) to protect against obfuscated cyber-attacks on IoT networks. To address complex features and alleviate the imbalance problem, the proposed HEDLF includes three key components: 1) a hierarchical feature representation technique based on deep learning, which aims to extract specific information by supervising the loss of gradient information; 2) a balanced rotated feature extractor that …"
+            },
+            {
+                "title": "An enhanced deep learning neural network for the detection and identification of android malware",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:eQOLeE2rZwMC",
+                "citations": 46,
+                "year": "2022",
+                "authors": "Pakarat Musikawan, Yanika Kongsorot, Ilsun You, Chakchai So-In",
+                "journal": "IEEE Internet of Things Journal",
+                "publication_date": "2022\/7\/29",
+                "doi": null,
+                "description": "Android-based mobile devices have attracted a large number of users because they are easy to use and possess a wide range of capabilities. Because of its popularity, Android has become one of the most important platforms for attackers to launch their nefarious schemes. Due to the rising sophistication of Android malware obfuscation and detection avoidance tactics, many traditional malware detection approaches have become impractical due to their limited representation capabilities. Inspired by the success of deep learning in representation learning, this article presents an effective improved deep neural network to safeguard Android devices from malicious apps called AMDI-Droid. The presented approach contains three enhancements: 1) from the ensemble classifier perspective, we propose a new architecture based on a deep neural network, where the predictive outputs obtained from all hidden layers are …"
+            },
+            {
+                "title": "An enhanced fuzzy-based clustering protocol with an improved shuffled frog leaping algorithm for WSNs",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:YsMSGLbcyi4C",
+                "citations": 9,
+                "year": "2022",
+                "authors": "Yanika Kongsorot, Pakarat Musikawan, Paisarn Muneesawang, Chakchai So-In",
+                "journal": "Expert Systems with Applications",
+                "publication_date": "2022\/7\/15",
+                "doi": null,
+                "description": "Wireless sensor networks (WSNs), an important technology for the Internet of Things (IoT), consist of the communications among small sensor nodes in a large-scale network. Due to the limited battery capacity of each small node, a clustering-based approach is used to conserve energy among the nodes and increase the network lifetime. The tasks of a clustering-based protocol are related mainly to the selection of the most appropriate cluster head nodes (CHs) and next-hop nodes (NHs) based on many influencing factors that require an optimal decision criterion, which can be addressed using a fuzzy inference system (FIS). Although FISs can provide satisfying decisions for selecting CHs and NHs for clustering protocols, FIS components such as fuzzy input variables, fuzzy rules, and fuzzy membership functions continue to be defined manually in most methods. Thus, these parameters must be tuned appropriately …"
+            },
+            {
+                "title": "An enhanced obstacle-aware deployment scheme with an opposition-based competitive swarm optimizer for mobile WSNs",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:Y0pCki6q_DkC",
+                "citations": 23,
+                "year": "2022",
+                "authors": "Pakarat Musikawan, Yanika Kongsorot, Paisarn Muneesawang, Chakchai So-In",
+                "journal": "Expert Systems with Applications",
+                "publication_date": "2022\/3\/1",
+                "doi": null,
+                "description": "The network coverage problem for an area with a randomly deployed wireless sensor network (WSN) in the presence of obstacles can be alleviated through mobile sensor nodes. However, the requirement for the dissipated energy in mobility and sensing has increased. Therefore, energy efficient coverage is a significant issue and has been near-optimally solved by heuristic techniques. Focusing on this issue, this paper introduces an improved competitive swarm optimizer to maximize the coverage area and minimize the network energy simultaneously. The proposed method incorporates the virtual force algorithm (VFA) and the Voronoi diagram (VD) to improve the network performance during the optimization process. The VFA is combined with a boundary mechanism to control the locations of sensors, while the VD is utilized to extract the network information for the decoding process. The superior performance of …"
+            },
+            {
+                "title": "Tomato Maturity Classification: A Transfer Learning Approach",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:W7OEmFMy1HYC",
+                "citations": 0,
+                "year": "2021",
+                "authors": "Chinapat Sakunrasrisuay, Pakarat Musikawan, Anh-Nhat Nguyen, Yanika Kongsorot, Phet Aimtongkham, Chakchai So-In",
+                "journal": null,
+                "publication_date": "2021\/11\/18",
+                "doi": null,
+                "description": "In recent years, tomato cultivation has dramatically increased, and the competition in the market is high. The market price is determined through tomato maturity classification. The tomatoes' maturity is generally assessed through a visual inspection of the color, texture, size, shape, and defects. However, the quality of human sorting may be poor, and the cost of external quality control and labor is high. Transfer learning (TL) is an efficient tool involving the reuse of a pre-trained deep network on a new problem involving image classification applications. In this study, we investigated the performance of current TL models: InceptionResnet V2; ResNet152V2; MobileNetV2; and AlexNet on tomato image classification. The experiment results showed that the ResNet152V2 yielded the highest testing accuracy at 99.46%, with the lowest training loss among the comparative TL models."
+            },
+            {
+                "title": "Wind power forecasting using a heterogeneous ensemble of decomposition-based nnrw techniques",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:Tyk-4Ss8FVUC",
+                "citations": 2,
+                "year": "2020",
+                "authors": "Pakarat Musikawan, Khamron Sunat, Yanika Kongsorot",
+                "journal": "ECTI Transactions on Computer and Information Technology (ECTI-CIT)",
+                "publication_date": "2020\/4\/14",
+                "doi": null,
+                "description": "Accurate and reliable wind power forecasting plays a vital role in the operation and management of power systems. Hence, it has become necessary to research and develop a high-accuracy wind power forecasting model. However, owing to highly nonlinear and nonstationary patterns of wind power time-series, creating a wind forecasting model capable of predicting such series accurately is both complicated and challenging. Aiming at this challenge, this paper introduces a new decomposition-based hybrid model based on multiple decomposition techniques, neural network with random weights (NNRW), and a linear combiner. In our approach, the original timeseries is decomposed into a collection of sub-series by different decomposition techniques. Each sub-series is modeled and predicted separately using NNRW. The predicted signals of each decomposition model are then reconstructed independently. Finally, all of the reconstructed results are integrated by the combiner using a linear combination method. The predictive performance of the proposed method was compared with other state-of-the-art techniques in over 12 wind power time-series. The experimental results show that the predictive performance of the proposed method remarkably outperforms the other competitors, proving the developed model to be effective, efficient, and practical."
+            },
+            {
+                "title": "An incremental kernel extreme learning machine for multi-label learning with emerging new labels",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:zYLM7Y9cAGgC",
+                "citations": 13,
+                "year": "2020",
+                "authors": "Yanika Kongsorot, Punyaphol Horata, Pakarat Musikawan",
+                "journal": "IEEE Access",
+                "publication_date": "2020\/3\/5",
+                "doi": null,
+                "description": "Multi-label learning with emerging new labels is a practical problem that occurs in data streams and has become an important new research issue in the area of machine learning. However, existing models for dealing with this problem require high learning computational times, and there still exists a lack of research. Based on these issues, this paper presents an incremental kernel extreme learning machine for multi-label learning with emerging new labels, consisting of two parts: a novelty detector; and a multi-label classifier. The detector with free-user-setting threshold parameters was developed to identify instances with new labels. A new incremental multi-label classifier and its improved version were developed to predict a label set for each instance, which can add output units incrementally and update themselves in unlabeled instances. Comprehensive evaluations of the proposed method were carried out on …"
+            },
+            {
+                "title": "Kernel extreme learning machine based on fuzzy set theory for multi-label classification",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:IjCSPb-OGe4C",
+                "citations": 31,
+                "year": "2019",
+                "authors": "Yanika Kongsorot, Punyaphol Horata, Pakarat Musikawan, Khamron Sunat",
+                "journal": "International Journal of Machine Learning and Cybernetics",
+                "publication_date": "2019\/5\/1",
+                "doi": null,
+                "description": "               Multi-label classification is a special kind of classification problem, where a single instance can be labeled to more than one class. Extreme learning machine (ELM) with kernel is an efficient method for solving both regression and multi-class classification problems. However, ELM with kernel has a limitation when it comes to multi-label classification tasks. To solve this problem, this paper proposes an enhanced ELM with kernel based on a fuzzy set theory for multi-label classification problems. The relationship between an instance and its corresponding class can be defined as the fuzzy membership. This fuzzy membership is used in output weights computation to weigh the training sample towards the corresponding classes. The experimental results demonstrate that the proposed method outperforms the ELM family of algorithms for multi-label problems, as well as the state-of-the-art multi-label …"
+            },
+            {
+                "title": "Parallelized metaheuristic-ensemble of heterogeneous feedforward neural networks for regression problems",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:u5HHmVD_uO8C",
+                "citations": 18,
+                "year": "2019",
+                "authors": "Pakarat Musikawan, Khamron Sunat, Yanika Kongsorot, Punyaphol Horata, Sirapat Chiewchanwattana",
+                "journal": "IEEE Access",
+                "publication_date": "2019\/2\/21",
+                "doi": null,
+                "description": "A feedforward neural network ensemble trained through metaheuristic algorithms has been proposed by researchers to produce a group of optimal neural networks. This method, however, has proven to be very time-consuming during the optimization process. To overcome this limitation, we propose a metaheuristic-based learning algorithm for building an ensemble system, resulting in shorter training time. In our proposed method, a master-slave based metaheuristic algorithm is employed in the optimization process to produce a group of heterogeneous feedforward neural networks, in which the global search operations are executed on the master, and the tasks of objective evaluation are distributed to the slaves (workers). To reduce evaluation costs, the entire training dataset is randomly divided equally into several disjoint subsets. Each subset is randomly paired with another subset of the remainder and …"
+            },
+            {
+                "title": "A fast convolutional denoising autoencoder based extreme learning machine",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:2osOgNQ5qMEC",
+                "citations": 2,
+                "year": "2017",
+                "authors": "Janebhop Sawaengchob, Punyaphol Horata, Pakarat Musikawan, Yanika Kongsorot",
+                "journal": null,
+                "publication_date": "2017\/11\/15",
+                "doi": null,
+                "description": "The convolutional autoencoder (CAE) was proposed on convolutional neural network (CNN) and denoising autoencoder (DAE). CAE can address the corrupted input samples and high dimensional problem. However, CAE has a shortcoming involving a large training timescale because the parameters of network are commonly tuned by gradient descent (GD) learning method. In order to alleviate this problem, this paper proposed a fast convolutional denoising autoencoder based extreme learning machine (ELM), called fast convolutional denoising autoencoder (FCDA). In FCDA, the random convolutional hidden nodes are used to reduce the dimension of input data. After that, the proposed denoising ELM autoencoder is used to reconstruct the cleaned data. The experimental results indicate that the proposed method not only speeds up the traditional CAE, but it also outperforms the CAE algorithm in terms of …"
+            },
+            {
+                "title": "Improved convex incremental extreme learning machine based on ridgelet and PSO algorithm",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:9yKSN-GCB0IC",
+                "citations": 4,
+                "year": "2016",
+                "authors": "Pakarat Musikawan, Khamron Sunat, Sirapat Chiewchanwattana, Punyaphol Horata, Yanika Kongsorot",
+                "journal": null,
+                "publication_date": "2016\/7\/13",
+                "doi": null,
+                "description": "The most difficult problem with the extreme learning machine is the selection of the hidden nodes size. The proper number of hidden nodes is predefined through a trial and error approach. The convex incremental extreme learning machine (CI-ELM) has been proposed to tackle this problem. CI-ELM is an incremental constructive neural network with universal approximation abilities. However, we have found that some hidden nodes added into a hidden layer, may play a minor role in the network, which results in an increase in network complexity. In order to avoid this shortcoming, we propose here in an improved convex incremental extreme learning machine with optimal ridgelet hidden nodes (ICOR-ELM). The proposed method uses the ridgelet function as the activation function within the hidden layer. In each step of the learning process, the optimal hidden node parameters, which are optimized through particle …"
+            },
+            {
+                "title": "Applying regularization least squares canonical correlation analysis in extreme learning machine for multi-label classification problems",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:UeHWp8X0CEIC",
+                "citations": 4,
+                "year": "2015",
+                "authors": "Yanika Kongsorot, Punyaphol Horata, Khamron Sunat",
+                "journal": null,
+                "publication_date": "2015",
+                "doi": null,
+                "description": "             Multi-label classification is a type of classification where each instance is associated with a set of labels. Many methods such as BP-MLL, rank-SVM, and MLRBF have been proposed for multi-label classification but their learning abilities are too slow. Extreme Learning Machine (ELM) is a well known algorithm for SLFNs that can learn faster than the traditional gradient-base neural networks and it also provides better generalization performance. However, the classification performance of ELM involving multi-label classification may not be good enough despite its advantage in fast training. Therefore, this paper proposes two multi-label classification approaches in ELM. The first approach uses the 1-norm regularized Least-square for Canonical Correlation Analysis (1-norm LSCCA) to obtain the projection vectors, which in turn uses the vectors to provide the new information. Then, ELM is then used to learn …"
+            },
+            {
+                "title": "Multi-label classification with extreme learning machine",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=zdBo3cwAAAAJ&sortby=pubdate&citation_for_view=zdBo3cwAAAAJ:d1gkVwhDpl0C",
+                "citations": 26,
+                "year": "2014",
+                "authors": "Yanika Kongsorot, Punyaphol Horata",
+                "journal": null,
+                "publication_date": "2014\/1\/30",
+                "doi": null,
+                "description": "Extreme learning machine (ELM) is a well-known algorithm for single layer feedforward neural networks (SLFNs) and their learning speed is faster than traditional gradient-based neural networks. However, many of the tasks that ELM focuses on are single-label, where an instance of the input set is associated with one label. This paper proposes a new method for training ELM that will be capable of multi-label classification using the Canonical Correlation Analysis (CCA). The new method is named CCA-ELM. There are 4 steps in the training process: the first step is to compute any correlations between the input features and the set of labels using CCA, the second step maps the input space and label space to the new space, the third step uses ELM to classify and the last step is to map to the original input space. The experimental results show that CCA-ELM can improve ELM for classification on multi-label learning …"
+            }
+        ]
+    },
+    {
+        "name": "Thanaphon Tangchoopong",
+        "affiliation": "College of Computing, Khon Kaen University",
+        "h_index": 1,
+        "i10_index": 0,
+        "scholar_profile_url": "https:\/\/scholar.google.com\/citations?hl=en&user=xF4E8-gAAAAJ&view_op=list_works&sortby=pubdate",
+        "papers": [
+            {
+                "title": "Thai Silk Patterns Classification with Deep Neural Network",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=xF4E8-gAAAAJ&sortby=pubdate&citation_for_view=xF4E8-gAAAAJ:d1gkVwhDpl0C",
+                "citations": 0,
+                "year": "2023",
+                "authors": "T. Ingo, N., Phatichaikiart, B., Tongleamnak, S., & Tangchoopong",
+                "journal": "Journal of Applied Informatics and Technology",
+                "publication_date": "2023",
+                "doi": null,
+                "description": null
+            },
+            {
+                "title": "Thai Food Recognition and Nutritious Calculation on Line Chatbot With Deep Learning",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=xF4E8-gAAAAJ&sortby=pubdate&citation_for_view=xF4E8-gAAAAJ:u-x6o8ySG0sC",
+                "citations": 0,
+                "year": "2022",
+                "authors": "Thanaphon Tangchoopong, Supapong Shakulkhu, Jutamars Phuyawong",
+                "journal": "Rattanakosin Journal of Science and Technology",
+                "publication_date": "2022",
+                "doi": null,
+                "description": null
+            },
+            {
+                "title": "An empirical study of the performance of active self-assembly",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=xF4E8-gAAAAJ&sortby=pubdate&citation_for_view=xF4E8-gAAAAJ:u5HHmVD_uO8C",
+                "citations": 3,
+                "year": "2009",
+                "authors": "Thanaphon Tangchoopong, Aristides AG Requicha",
+                "journal": null,
+                "publication_date": "2009\/10\/10",
+                "doi": null,
+                "description": "Several approaches have been proposed recently for building shapes with swarms of self-assembling robots. However, there is a dearth of information about the performance of each approach, and how to compare them. This paper considers the active self-assembly scheme introduced by Arbuckle and Requicha, and investigates its performance through extensive simulations. The difficulties encountered in the evaluation of self-assembly schemes are discussed. Empirical simulation data are presented that show that the time for completion of the boundary of a polygon by the active self-assembly scheme is approximately linear in the size of the polygon, for the range of parameters investigated."
+            }
+        ]
+    },
+    {
+        "name": "Pobporn Danvirutai",
+        "affiliation": "College of Computing, Khon Kaen University",
+        "h_index": 6,
+        "i10_index": 3,
+        "scholar_profile_url": "https:\/\/scholar.google.com\/citations?hl=en&user=EdGy9eEAAAAJ&view_op=list_works&sortby=pubdate",
+        "papers": [
+            {
+                "title": "On the same origin of quantum physics and general relativity from Riemannian geometry and Planck scale formalism",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:zYLM7Y9cAGgC",
+                "citations": 7,
+                "year": "2025",
+                "authors": "Chavis Srichan, Pobporn Danvirutai, Adrian David Cheok, Jun Cai, Ying Yan",
+                "journal": "Astroparticle Physics",
+                "publication_date": "2025\/1\/1",
+                "doi": null,
+                "description": "It has been a long time to reconcile quantum physics and general relativity. To date, no globally accepted theory has been proposed to explain all physical observations. In this work, we reformulated the Riemannian geometry in terms of curvature and energy tensors using the Planck scale formalism. The proposed equation can be transformed into Dirac equations in electrodynamic and chromodynamic fields with a reduction in the background curvature. We redefined the mass and charge of leptons in terms of the interactions between the energy of the field and the curvature of the spacetime. The obtained equation is covariant in space–time and invariant with respect to any Planck scale. Therefore, the constants of the universe can be reduced to only two quantities: Planck length and Planck time. We proved that the Einstein field equation from general relativity is actually a relativistic quantum mechanical equation …"
+            },
+            {
+                "title": "Non-Invasive Sensors Integration for NCDs with AIoT Based Telemedicine System",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:WF5omc3nYNoC",
+                "citations": 0,
+                "year": "2024",
+                "authors": "Chavis Srichan, Pobporn Danvirutai, Noppakun Boonsim, Ariya Namvong, Chayada Surawanitkun, Chanachai Ritsongmuang, Apirat Siritaratiwat, Sirirat Anutrakulchai",
+                "journal": "Sensors",
+                "publication_date": "2024\/7\/9",
+                "doi": null,
+                "description": "Thailand’s hospitals face overcrowding, particularly with non-communicable disease (NCD) patients, due to a doctor shortage and an aging population. Most literature showed implementation merely on web or mobile application to teleconsult with physicians. Instead, in this work, we developed and implemented a telemedicine health kiosk system embedded with non-invasive biosensors and time-series predictors to improve NCD indicators over an eight-month period. Two cohorts were randomly selected: a control group with usual care and a telemedicine-using group. The telemedicine-using group showed significant improvements in average fasting blood glucose (148 to 130 mg\/dL) and systolic blood pressure (152 to 138 mmHg). Data mining with the Apriori algorithm revealed correlations between diseases, occupations, and environmental factors, informing public health policies. Communication between kiosks and servers used LoRa, 5G, and IEEE802.11, which are selected based on the distance and signal availability. The results support telemedicine kiosks as effective for NCD management, significantly improving key NCD indicators, average blood glucose, and blood pressure."
+            },
+            {
+                "title": "Empowering an Acute Kidney Injury 3D Graphene-Based Sensor Using Extreme Learning Machine",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:eQOLeE2rZwMC",
+                "citations": 2,
+                "year": "2024",
+                "authors": "Netnapa Sittihakote, Pobporn Danvirutai, Sirirat Anutrakulchai, Adisorn Tuantranont, Chavis Srichan",
+                "journal": "ACS omega",
+                "publication_date": "2024\/5\/1",
+                "doi": null,
+                "description": "This study reports on the application of an extreme learning machine (ELM) in near-real-time kidney monitoring via urine neutrophil gelatinase-associated lipocalin (NGAL) detection with a 3D graphene electrode. This integration marks the first instance of combining a graphene-based electrode with machine learning to enhance the NGAL detection accuracy, building on our group’s 2020 research. The methodology involves two key components: a graphene electrode functionalized with a lipocalin-2 antibody for NGAL detection and the ELM application for improved prediction accuracy by using urine analysis data. The results show a significant 15% increase in the area under the curve (AUC) for NGAL determination, with error reduction from ±6 to 0.54 ng\/mL within a linear range of 2.7–140 ng\/mL. The ELM also lowered the detection limit from 14.8 to 0.89 ng\/mL and increased accuracy, precision, sensitivity …"
+            },
+            {
+                "title": "Anomalous Current Steps in 3D Graphene Electrochemical Systems at Room Temperature",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:YsMSGLbcyi4C",
+                "citations": 0,
+                "year": "2024",
+                "authors": "Chavis Srichan, Pobporn Danvirutai, Adisorn Tuantranont",
+                "journal": "ACS omega",
+                "publication_date": "2024\/4\/17",
+                "doi": null,
+                "description": "In this work, we report a new phenomenon in electrochemical systems whereby uniform current steps of 1 mA per 0.5 × 0.5 × 0.1 cm3 (width × width × depth) of electrode volume occurred during the electrodeposition of gold and silver nanoparticles onto 3D microporous graphene on nickel layers (GF\/Ni) at room temperature. The effect was exhibited only at specific applied electrical potentials. The experiments (magnetic interference, temperature dependence, and surface area dependence) were repeated, and the results were reproducible. Finally, we proposed classical electrochemical theory using the Butler–Volmer equation and quantum theory using the Landauer formalism to describe this new effect. Both theories could be used to explain the experimental results: temperature dependence, surface area dependence, blocking effects, and external magnetic field dependence. In addition, the stepwise current …"
+            },
+            {
+                "title": "Revision: On the same origin of quantum physics and general relativity",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:_FxGoFyzp5QC",
+                "citations": 6,
+                "year": "2024",
+                "authors": "C Srichan, P Danvirutai, AD Cheok",
+                "journal": "Preprint available at http:\/\/dx. doi. org\/10.13140\/RG",
+                "publication_date": "2024",
+                "doi": null,
+                "description": null
+            },
+            {
+                "title": "New Feynman Path Integral: Towards its Application to Black Holes and Traversable Worm Hole (ER= EPR)",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:ufrVoPGSRksC",
+                "citations": 6,
+                "year": "2024",
+                "authors": "Chavis Srichan, Pobporn Danvirutai, Michele Nardelli, Adrian David Cheok",
+                "journal": "Preprint available at http:\/\/dx. doi. org\/10.13140\/RG",
+                "publication_date": "2024",
+                "doi": null,
+                "description": "In this article, we propose a new Feynman’s path integral approach and extend this formalism into curved spacetime and consider its possible implications for black hole physics. While still a work in progress, this model suggests that black holes, rather than representing the final stages of gravitational collapse, might contribute to the formation of new universes. We carefully examine both Schwarzschild and Kerr metric of rotating and non-rotating black holes. We derived that rotating black hole will create a traversable worm hole without exotic particles and non-rotating back hole will create another universe by interpretation of path integral finally. We proposed the way how to create the wormhole between two interstellar space using qubits. This proved ER= EPR."
+            },
+            {
+                "title": "Nanoflowers on Microporous Graphene Electrodes as a Highly Sensitive and Low-Cost As (III) Electrochemical Sensor for Water Quality Monitoring",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:UeHWp8X0CEIC",
+                "citations": 1,
+                "year": "2023",
+                "authors": "Mahatthanah Kosuvun, Pobporn Danvirutai, Daranee Hormdee, Arnut Chaosakul, Visanu Tanboonchuy, Apirat Siritaratiwat, Sirirat Anutrakulchai, Amod Sharma, Adisorn Tuantranont, Chavis Srichan",
+                "journal": "Sensors",
+                "publication_date": "2023\/3\/14",
+                "doi": null,
+                "description": "In this work, we report a low-cost and highly sensitive electrochemical sensor for detecting As(III) in water. The sensor uses a 3D microporous graphene electrode with nanoflowers, which enriches the reactive surface area and thus enhances its sensitivity. The detection range achieved was 1–50 ppb, meeting the US-EPA cutoff criteria of 10 ppb. The sensor works by trapping As(III) ions using the interlayer dipole between Ni and graphene, reducing As(III), and transferring electrons to the nanoflowers. The nanoflowers then exchange charges with the graphene layer, producing a measurable current. Interference by other ions, such as Pb(II) and Cd(II), was found to be negligible. The proposed method has potential for use as a portable field sensor for monitoring water quality to control hazardous As(III) in human life."
+            },
+            {
+                "title": "Ischemic Stroke Post-treatment Prediction using Machine Learning to develop Web Application for Healthcare Centers in Thailand",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:IjCSPb-OGe4C",
+                "citations": 2,
+                "year": "2023",
+                "authors": "Kulwarin Worraviseat, Pobporn Danvirutai, Sirirat Anutrakulchai, Narongrit Kasemsap, Chavis Srichan",
+                "journal": null,
+                "publication_date": "2023\/3\/8",
+                "doi": null,
+                "description": "Stroke attack is one of the most serious concerns in an emergency room. Expert diagnosis and accurate treatment are crucial for the improvement, death, or impairment of the patients. This work aims at using big data analytics for developing a system to provide the probability for each patient whether he would improve after medications. Records of N=1700 volunteers were gathered for non-linear classification training. Random Forest outperforms seven other methods compared in this study. The AI model was deployed as a web application for a rural hospital to assist medical personnel. This can be considered an important step towards AI-assisted emergency medications for stroke. Under the situation where the NIH Stroke Score was unavailable on time, the system could still provide the improvement probability via a web application based on the AI model trained in this work."
+            },
+            {
+                "title": "Acute Kidney Injury Detection using Real Human Urine NGAL Biomarker Sensor based on 3D Graphene",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:qjMakFHDy7sC",
+                "citations": 1,
+                "year": "2022",
+                "authors": "Netnapa Sittihakote, Sirirat Anutrakulchai, Adisorn Tuantranont, Pobporn Danvirutai, Chavis Srichan",
+                "journal": null,
+                "publication_date": "2022\/11\/10",
+                "doi": null,
+                "description": "Acute kidney injury (AKI) is not a specified symptom in the early stages. Frequency of AKI occurrence is highly correlated to Chronic Kidney Disease (CKD). Therefore, development of non-invasive, ultra-sensitive, and highly accurate sensing platform is crucial for early AKI diagnosis. Serum creatinine (SCr) level usually takes 24-72 hours to response to the incident of AKI. Meanwhile, urine Neutrophil Gelatinase-Associated Lipocalin (NGAL) takes only 2 hours to response after the AKI occurrence. In this work, we investigated the use of microporous graphene and dipole-dipole enhancement between graphene\/nickel layers to enhance electrode sensitivity for urine NGAL level determination. Selectivity was assured using enzymatic electrochemistry. Once NGAL level was measured, a doctor can diagnose AKI under additional information on patient’s conditions. The result is promising since the detection range was 0 …"
+            },
+            {
+                "title": "Quantum Hall-like effect in electrochemical systems due to extra-dimension embedded in 3D graphene at room temperature",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:2osOgNQ5qMEC",
+                "citations": 0,
+                "year": "2022",
+                "authors": "Chavis Srichan, Pobporn Danvirutai, Anurat Wisitsoraat, Adisorn Tuantranont",
+                "journal": null,
+                "publication_date": "2022\/9\/7",
+                "doi": null,
+                "description": "In this work, we report for the first time, the quantization effect occurred at room temperature in an electrochemical system. The setup where it occurred was electrodeposition of gold nanoparticles (AuNPs) and silver nanoparticles (AgNPs) onto three-dimensional microstructure graphene (GF) under certain applied potential. This is the first time that this quantum phenomenon occurs in solutions under electrochemical experiment. This effect might be described as quantum coherency in extra dimension embedded in three-dimensional microstructure of graphene foam which approximately hold radius around 100 µm. Possible explanation was proposed that the quantum effect occurs due to quantization in extra dimension when certain conditions were met. Our simplified quantum calculation could be used to fit with the experimental data. The quantization behaviors were observed in both silver and gold electrodeposition on GF. Primary theoretical description was explained in this article using Landauer formalism and Polyakov action from string theory. However, the concrete theoretical explanation could possibly be further elaborated or explained in a different way (Supplementary data contains the experimented videos)."
+            },
+            {
+                "title": "Non-invasively accuracy enhanced blood glucose sensor using shallow dense neural networks with NIR monitoring and medical features",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:9yKSN-GCB0IC",
+                "citations": 40,
+                "year": "2022",
+                "authors": "Chavis Srichan, Wachirun Srichan, Pobporn Danvirutai, Chanachai Ritsongmuang, Amod Sharma, Sirirat Anutrakulchai",
+                "journal": "Scientific Reports",
+                "publication_date": "2022\/2\/2",
+                "doi": null,
+                "description": "Non-invasive and accurate method for continuous blood glucose monitoring, the self-testing of blood glucose is in quest for better diagnosis, control and the management of diabetes mellitus (DM). Therefore, this study reports a multiple photonic band near-infrared (mbNIR) sensor augmented with personalized medical features (PMF) in Shallow Dense Neural Networks (SDNN) for the precise, inexpensive and pain free blood glucose determination. Datasets collected from 401 blood samples were randomized and trained with ten-fold validation. Additionally, a cohort of 234 individuals not included in the model training set were investigated to evaluate the performance of the model. The model achieved the accuracy of 97.8% along with 96.0% precision, 94.8% sensitivity and 98.7% specificity for DM classification based on a diagnosis threshold of 126 mg\/dL for diabetes in fasting blood glucose. For non-invasive …"
+            },
+            {
+                "title": "DEVELOPMENT OF GOLD NANOPARTICLES DECORATED 3D GRAPHENE FOAM AS AN ULTRA-SENSITIVE AND LABEL-FREE NEUTROPHIL GELATINASE ASSOCIATED LIPOCALIN ELECTROCHEMICAL SENSOR FOR ACUTE …",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:W7OEmFMy1HYC",
+                "citations": 0,
+                "year": "2021",
+                "authors": "Pobporn Danvirutai",
+                "journal": null,
+                "publication_date": "2021\/12",
+                "doi": null,
+                "description": "This dissertation reports an investigation of an ultra-sensitive and highly-specific electrochemical immunosensor development based on three-dimensional graphene\/nickel foam (GF) decorated with gold nanoparticles (AuNPs) for the detection of Neutrophil Gelatinase Associated Lipocalin (NGAL), a biomarker of Acute Kidney Injury (AKI). A low NGAL limit of detection (LOD) of 42 pg\/ml and a linear range (LR) of 0.05-210 ng\/ml were achieved. Though several electrode platforms have been proposed, either LOD or LR are limited for each method. Our platform can achieve low LOD while keeping broad LR of sensing. Specificity was tested for NGAL detection against uric acid and creatinine interference. The attained performances might be ascribed to large specific surface area of GF and AuNPs, improved electron transfer from analyte via graphene-nickel-gold electric dipole enhancement. The results demonstrated the proposed platform was potential for ultra-sensitive, highly specific, non-invasive and real-time electrochemical detection of NGAL. At the first stage, concentrated NGAL solution was purchased to test sensitivity and specificity and was reported in Danvirutai et al (2020). Finally, this platform has been tested with 5 genuine urine samples of NGAL sensing which form a trend of the sensor at the trace amount of urine NGAL. This platform presents a promising approach for non-invasive and near real-time renal state monitoring."
+            },
+            {
+                "title": "Ultra-sensitive and label-free neutrophil gelatinase-associated lipocalin electrochemical sensor using gold nanoparticles decorated 3D Graphene foam towards acute kidney injury …",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:d1gkVwhDpl0C",
+                "citations": 26,
+                "year": "2020",
+                "authors": "Pobporn Danvirutai, Mongkol Ekpanyapong, Adisorn Tuantranont, Erik Bohez, Sirirat Anutrakulchai, Anurat Wisitsoraat, Chavis Srichan",
+                "journal": "Sensing and Bio-Sensing Research",
+                "publication_date": "2020\/12\/1",
+                "doi": null,
+                "description": "In this work, an ultra-sensitive and highly-specific electrochemical immunosensor was developed based on three-dimensional graphene\/nickel foam (GF) decorated with gold nanoparticles (AuNPs) for the detection of Neutrophil Gelatinase-Associated Lipocalin (NGAL), a biomarker of Acute Kidney Injury (AKI). A low NGAL limit of detection (LOD) of 42 pg\/ml and a linear range (LR) of 0.05–210 ng\/ml were achieved. Though several electrode platforms have been proposed, either LOD or LR are limited for each method. Our platform can achieve low LOD while keeping broad LR of sensing. Self-Assembled-Monolayer (SAM) and 11-mercaptoundecanoic acid (11-MUA) were used to assist antibody binding on AuNPs. Electrochemical determination of NGAL were conducted using cyclic voltammetry and chronoamperometry on ferri\/ferrocyanide redox measurement. Specificity was tested for NGAL detection against …"
+            },
+            {
+                "title": "Highly-sensitive surface-enhanced Raman spectroscopy (SERS)-based chemical sensor using 3D graphene foam decorated with silver nanoparticles as SERS substrate",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:u5HHmVD_uO8C",
+                "citations": 114,
+                "year": "2016",
+                "authors": "Chavis Srichan, Mongkol Ekpanyapong, Mati Horprathum, Pitak Eiamchai, Noppadon Nuntawong, Ditsayut Phokharatkul, Pobporn Danvirutai, Erik Bohez, Anurat Wisitsoraat, Adisorn Tuantranont",
+                "journal": "Scientific reports",
+                "publication_date": "2016\/3\/29",
+                "doi": null,
+                "description": "In this work, a novel platform for surface-enhanced Raman spectroscopy (SERS)-based chemical sensors utilizing three-dimensional microporous graphene foam (GF) decorated with silver nanoparticles (AgNPs) is developed and applied for methylene blue (MB) detection. The results demonstrate that silver nanoparticles significantly enhance cascaded amplification of SERS effect on multilayer graphene foam (GF). The enhancement factor of AgNPs\/GF sensor is found to be four orders of magnitude larger than that of AgNPs\/Si substrate. In addition, the sensitivity of the sensor could be tuned by controlling the size of silver nanoparticles. The highest SERS enhancement factor of ∼5 × 104 is achieved at the optimal nanoparticle size of 50 nm. Moreover, the sensor is capable of detecting MB over broad concentration ranges from 1 nM to 100 μM. Therefore, AgNPs\/GF is a highly promising SERS substrate for …"
+            },
+            {
+                "title": "Synthesis of Gold Nanoparticles Decorating Graphene Foam and its Application to Electrochemical and SERS-Based Sensor",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:Tyk-4Ss8FVUC",
+                "citations": 0,
+                "year": "2015",
+                "authors": "Mohammad Ali Sultani, Rajab Ali Khavari",
+                "journal": null,
+                "publication_date": "2015\/5",
+                "doi": null,
+                "description": "In this study, Gold nanoparticles (GNPs) were synthesized by electrodeposition technique on the surface of Graphene Foam (GF) by fast scan voltammetry with using Gold (III) chloride trihydrate as the solvent. Then, the synthesized of gold nanoparticles were used in electrochemical sensor and surface-enhanced Raman Spectroscopy (SERS) for detection of sample analyt (200 𝝁𝒍 hydrogen peroxide) and (𝟏𝝁𝑴methylene blue) respectively. The results demonstrate that gold nanoparticles enhanced amplification ofelectrochemical and SERSeffect on graphene foam (GF). The sensitivity of the sensor and size of gold nanoparticles could be controlled by the deposition of time, concentration of reducing agent and applied potential. Therefore, GNPs and GNPs\/GF are highly promisingmaterial for electrochemical and SERS substrate for detection of chemical substance in low concentration respectively."
+            },
+            {
+                "title": "Chamfer Matching for Image Transformation Estimation in Capsule Endoscopic Videos",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:u-x6o8ySG0sC",
+                "citations": 0,
+                "year": "2013",
+                "authors": "Pobporn Danvirutai",
+                "journal": null,
+                "publication_date": "2013",
+                "doi": null,
+                "description": "Wireless capsule endoscopy (WCE) is an alternative non-invasive method for imaging the digestive tract. A pill-sized capsule is swallowed and allowed to travel through the digestive system while it captures video frames. The resulting video may contain about 50000 or more frames, therefore taking hours for the GI doctor to analyze. A three-dimensional reconstruction of those video frames could help doctors determine the structure and position of abnormalities easily. However, in order to realize a reliable 3D reconstruction, problems such as camera movement (sometimes abrupt or backward) and non-rigidity of the scene need to be addressed. Moreover, the low frame rate (3–18 fps with 2011 technology) can cause the camera to miss parts of the scene, resulting in incomplete 3D reconstructed views. Feature matching between frames is required to localize camera and determine depth in a 3D reconstruction …"
+            },
+            {
+                "title": "Deforestation & Reforestation Detection in NE-Thailand using MODIS NDVI Images Dataset",
+                "link": "https:\/\/scholar.google.com\/citations?view_op=view_citation&hl=en&user=EdGy9eEAAAAJ&sortby=pubdate&citation_for_view=EdGy9eEAAAAJ:Y0pCki6q_DkC",
+                "citations": 0,
+                "year": "2000",
+                "authors": "Waqar Shahid Qureshi, Pobporn Danvirutai",
+                "journal": null,
+                "publication_date": "2000",
+                "doi": null,
+                "description": "In this paper we have investigated the 250m resolution MODIS dataset to visualize and detect the forestation and deforestation in part of North-East Thailand. The monitoring was based on the MODIS NDVI Dataset over a period of 10 year [2000 to 2010]. Each NDVI Image set was first filtered using a quality mask, which was based on the quality information in the MODIS dataset, then an average image over the whole year was obtained, using 23 images for each year, thus a total of 10 average images were obtained and then to find a change overtime in the forestation and deforestation an algorithm was developed based on image subtraction over time."
+            }
+        ]
     }
 ]
