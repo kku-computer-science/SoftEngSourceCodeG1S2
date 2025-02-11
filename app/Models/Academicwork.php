@@ -21,6 +21,11 @@ class Academicwork extends Model
         return $this->belongsToMany(User::class,'user_of_academicworks')->withPivot('author_type');
     }
 
+    public function teacher()
+    {
+        return $this->belongsToMany(User::class,'user_of_academicworks')->withPivot('author_type');
+    }
+
     public function author()
     {
         return $this->belongsToMany(Author::class,'author_of_academicworks')->withPivot('author_type');

@@ -886,6 +886,7 @@ INSERT INTO `users` VALUES (1,'admin@gmail.com',NULL,'$2y$10$nrI/W9tolkEdeA8N21T
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
 --
 -- Table structure for table `work_of_research_groups`
 --
