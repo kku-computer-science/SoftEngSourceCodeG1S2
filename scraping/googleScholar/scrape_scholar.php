@@ -71,7 +71,7 @@ function scrape_scholar_profile($user_id) {
             "year" => $year
         ], $paper_details);
 
-        sleep(rand(3, 7)); // ✅ ป้องกันโดนบล็อก
+        sleep(rand(4, 7)); // ✅ ป้องกันโดนบล็อก
     }
 
     return [
@@ -119,7 +119,7 @@ function scrape_paper_details($paper_url) {
 
 // ✅ รายชื่อนักวิจัยที่ต้องการเพิ่มข้อมูล
 $new_researchers = [
-    "eZGNz8cAAAAJ",  // นักวิจัยใหม่
+    "vnTKGAcAAAAJ"  // นักวิจัยใหม่
     
 ];
 
@@ -131,7 +131,7 @@ foreach ($new_researchers as $user_id) {
         echo "❌ ไม่สามารถดึงข้อมูลจาก Google Scholar ได้: $user_id\n";
     }
 
-    sleep(rand(5, 10)); // ✅ ป้องกันโดนบล็อก
+    sleep(rand(7, 10)); // ✅ ป้องกันโดนบล็อก
 }
 
 // ✅ บันทึกข้อมูลเป็น JSON โดย **เพิ่ม** ข้อมูลใหม่เข้าไปในไฟล์เดิม
