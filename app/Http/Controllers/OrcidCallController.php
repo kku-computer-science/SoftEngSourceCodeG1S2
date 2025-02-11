@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Http\Utility\UserUtility;
 
 class OrcidCallController extends Controller
 {
@@ -20,7 +21,9 @@ class OrcidCallController extends Controller
         $id = Crypt::decrypt($id);  
         $user = User::find($id);
         
-        $orcidId = $user->orcid_id;
+        $source_id = Source_data::where('source_name', 'ORCID')->first()->id;
+        // $orcidId = UserUtility::getUserSearchKey($id, $source_id);
+        $orcidId = UserUtility::getUserSearchKey($id, $source_id);
         if (!$orcidId) {
             return response()->json(['error' => 'No ORCID ID found for this user'], 404);
         }
