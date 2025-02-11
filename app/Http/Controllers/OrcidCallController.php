@@ -49,6 +49,13 @@ class OrcidCallController extends Controller
                 
                 $title = $workDetails['title']['title']['value'] ?? 'Untitled';
                 $doi = null;
+                $url = $workDetails['url']['value'] ?? null;
+                $journalTitle = $workDetails['journal-title']['value'] ?? null;
+                $publicationYear = $workDetails['publication-date']['year']['value'] ?? null;
+                $aggregationType = $workDetails['type'] ?? null;
+                $publicationVolume = null;
+                $issueIdentifier = null;
+                $pageRange = null;
                 
                 if (isset($workDetails['external-ids']['external-id'])) {
                     foreach ($workDetails['external-ids']['external-id'] as $externalId) {
@@ -61,7 +68,16 @@ class OrcidCallController extends Controller
                 
                 $paper = Paper::updateOrCreate(
                     ['paper_name' => $title],
-                    ['paper_doi' => $doi]
+                    [
+                        'paper_doi' => $doi,
+                        'paper_url' => $url,
+                        'paper_sourcetitle' => $journalTitle,
+                        'paper_volume' => $publicationVolume,
+                        'paper_issue' => $issueIdentifier,
+                        'paper_page' => $pageRange,
+                        'paper_yearpub' => $publicationYear,
+                        'paper_type' => $aggregationType,
+                    ]
                 );
                 
                 $paper->teacher()->syncWithoutDetaching([$id]);
