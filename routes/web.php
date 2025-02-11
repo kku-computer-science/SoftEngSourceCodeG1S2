@@ -38,6 +38,9 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\TcicallController;
+// เพิ่ม OrcidCallController
+use App\Http\Controllers\OrcidCallController;
+
 
 use App\Http\Controllers\ScholarcallController;
 
@@ -170,3 +173,8 @@ Route::get('files/{file}', [FileUpload::class, 'download'])->name('download');*/
 //Route::post('programs', [DropdownController::class, 'getPrograms']);
 //Route::get('tests', [TestController::class, 'index'])->name('tests.index');
 //Route::get('users/create/{id}',[UserController::class, 'getCategory']);
+
+// เรียก API เพื่อดึงข้อมูลจาก ORCID และบันทึกลงฐานข้อมูล
+// Route::get('/callorcid/{id}', [OrcidCallController::class, 'create'])->name('callorcid');
+Route::get('/callorcid/{id}', [OrcidCallController::class, 'fetchWorks']);
+Route::get('/orcid-papers', [OrcidCallController::class, 'index'])->name('orcid-papers');
