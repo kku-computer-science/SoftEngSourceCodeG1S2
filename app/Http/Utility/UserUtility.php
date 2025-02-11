@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Http\Utility;
+
+use App\Models\User;
 
 class UserUtility
 {
