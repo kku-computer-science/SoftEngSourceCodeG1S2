@@ -38,6 +38,9 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\TcicallController;
+
+use App\Http\Controllers\ScholarcallController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,6 +77,10 @@ Route::middleware(['middleware' => 'PreventBackHistory'])->group(function () {
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //Route::get('/researchers',[ResearcherController::class,'index'])->name('researchers');
+
+
+Route::get('/fetch-scholar/{userId}', [ScholarcallController::class, 'fetchAndSave'])->name('fetchScholar');
+
 Route::get('researchers/{id}', [ResearcherController::class, 'request'])->name('researchers');
 Route::get('researchers/{id}/search', [ResearcherController::class, 'search'])->name('searchresearchers');
 Route::get('/researchproject', [App\Http\Controllers\ResearchProjController::class, 'index'])->name('researchproject');

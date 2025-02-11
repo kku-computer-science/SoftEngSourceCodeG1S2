@@ -1,48 +1,38 @@
 <?php
 
-class GoogleScholarScraper {
-    private $json_file = "scholar_data.json";
-    private $researchers = [];
+namespace App\Http\scraping\GoogleScholar;
+
+use DOMDocument;
+use DOMXPath;
+use Illuminate\Support\Facades\Storage;
+
+class ScraperGoogleScholar {
+    
 
     public function __construct() {
-        $this->loadExistingData();
+        
     }
 
-    // ✅ โหลดไฟล์ JSON ถ้ามี
-    private function loadExistingData() {
-        if (file_exists($this->json_file)) {
-            $json_data = file_get_contents($this->json_file);
-            $this->researchers = json_decode($json_data, true) ?? [];
-        }
-    }
-
-    // ✅ บันทึกข้อมูลลง JSON
-    private function saveData() {
-        file_put_contents($this->json_file, json_encode($this->researchers, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-        echo "✅ บันทึกข้อมูลเสร็จสิ้น: {$this->json_file}\n";
-    }
+    
 
     // ✅ ฟังก์ชันดึงข้อมูลนักวิจัยจาก Google Scholar
-    private function scrapeScholarProfile($user_scholar_id) {
-        $url = "https://scholar.google.com/citations?hl=en&user=" . $user_scholar_id . "&view_op=list_works&sortby=pubdate";
+    public static function scrapeScholarProfile($user_id) {
+        $url = "https://scholar.google.com/citations?hl=en&user=" . $user_id . "&view_op=list_works&sortby=pubdate";
 
-        echo "🔍 กำลังดึงข้อมูลนักวิจัย: $user_scholar_id ...\n";
+        echo "🔍 กำลังดึงข้อมูลนักวิจัย: $user_id ...\n";
 
-        // ✅ ใช้ cURL โหลด HTML
-        $html = $this->fetchHTML($url);
+        $html = ScraperGoogleScholar::fetchHTML($url);
         if (!$html) return null;
 
         $dom = new DOMDocument();
         @$dom->loadHTML($html);
         $xpath = new DOMXPath($dom);
 
-        // ✅ ดึงข้อมูลโปรไฟล์นักวิจัย
         $name = $xpath->query('//div[@id="gsc_prf_in"]')->item(0)?->nodeValue ?? "Unknown Name";
         $affiliation = $xpath->query('//div[@class="gsc_prf_il"]')->item(0)?->nodeValue ?? "Unknown Affiliation";
         $h_index = (int) ($xpath->query('//td[@class="gsc_rsb_std"]')->item(2)?->nodeValue ?? 0);
         $i10_index = (int) ($xpath->query('//td[@class="gsc_rsb_std"]')->item(4)?->nodeValue ?? 0);
 
-        // ✅ ดึงรายการผลงานวิจัย
         $papers = [];
         $paper_nodes = $xpath->query('//tr[@class="gsc_a_tr"]');
         foreach ($paper_nodes as $node) {
@@ -56,7 +46,7 @@ class GoogleScholarScraper {
             $yearNode = $xpath->query('.//td[@class="gsc_a_y"]/span', $node);
             $year = $yearNode->length > 0 ? $yearNode[0]->nodeValue : "Unknown";
 
-            $paper_details = $this->scrapePaperDetails($paper_link);
+            $paper_details = ScraperGoogleScholar::scrapePaperDetails($paper_link);
 
             $papers[] = array_merge([
                 "title" => $title,
@@ -65,7 +55,7 @@ class GoogleScholarScraper {
                 "year" => $year
             ], $paper_details);
 
-            sleep(rand(4, 7)); // ✅ ป้องกันโดนบล็อก
+            sleep(rand(4, 7));
         }
 
         return [
@@ -80,10 +70,10 @@ class GoogleScholarScraper {
     }
 
     // ✅ ดึงรายละเอียดของ Paper
-    private function scrapePaperDetails($paper_url) {
+    private static function scrapePaperDetails($paper_url) {
         if ($paper_url == "#") return [];
 
-        $html = $this->fetchHTML($paper_url);
+        $html = ScraperGoogleScholar::fetchHTML($paper_url);
         if (!$html) return [];
 
         $dom = new DOMDocument();
@@ -100,7 +90,7 @@ class GoogleScholarScraper {
     }
 
     // ✅ ฟังก์ชันโหลด HTML ด้วย cURL
-    private function fetchHTML($url) {
+    private static function fetchHTML($url) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
