@@ -21,9 +21,9 @@ class OrcidCallController extends Controller
         $id = Crypt::decrypt($id);  
         $user = User::find($id);
         
-        $source_id = Source_data::where('source_name', 'ORCID')->first()->id;
+        $source = Source_data::firstOrCreate(['source_name' => 'ORCID']);
         // $orcidId = UserUtility::getUserSearchKey($id, $source_id);
-        $orcidId = UserUtility::getUserSearchKey($id, $source_id);
+        $orcidId = UserUtility::getUserSearchKey($id, $source->id);
         if (!$orcidId) {
             return response()->json(['error' => 'No ORCID ID found for this user'], 404);
         }
@@ -82,7 +82,7 @@ class OrcidCallController extends Controller
                 
                 $paper->teacher()->syncWithoutDetaching([$id]);
                 
-                $source = Source_data::firstOrCreate(['source_name' => 'ORCID']);
+                
                 $paper->source()->syncWithoutDetaching([$source->id]);
                 
                 if (isset($workDetails['contributors']['contributor'])) {
