@@ -12,5 +12,8 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 
-git add -f storage/app/Orcid_to_DB/all_papers.json
-git commit -m "Force add JSON file"
+# Ignore ทุกอย่างใน storage ยกเว้น Orcid_to_DB/
+storage/*
+!storage/app/
+!storage/app/Orcid_to_DB/
+!storage/app/Orcid_to_DB/*
