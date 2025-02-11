@@ -11,3 +11,6 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+git add -f storage/app/Orcid_to_DB/all_papers.json
+git commit -m "Force add JSON file"
