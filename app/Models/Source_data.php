@@ -18,6 +18,6 @@ class Source_data extends Model
     }
 
     public function user(){
-        return $this->belongsToMany(User::class,'source_users');
+        return $this->belongsToMany(User::class,'source_users')->withPivot('search_id');
     }
 }
