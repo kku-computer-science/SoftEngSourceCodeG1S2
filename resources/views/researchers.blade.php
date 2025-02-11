@@ -14,7 +14,7 @@
                         <input type="text" class="form-control" name="textsearch" placeholder="Research interests">
                     </div>
                 </div>
-                <!-- <div class="col-12">
+                <div class="col-12">
                         <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
                         <select class="form-select" id="inlineFormSelectPref">
                             <option selected> Choose...</option>
@@ -22,7 +22,7 @@
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
-                    </div> -->
+                </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-outline-primary">Search</button>
                 </div>
