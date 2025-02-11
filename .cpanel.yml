@@ -19,7 +19,7 @@ deployment:
     - /bin/rm -r $DEPLOYPATH/dist
     - /bin/rm -r $DEPLOYPATH/fonts
     - /bin/rm -r $DEPLOYPATH/img
-    - /bin/rm -r $DEPLOYPATH/plugins
+P    - /bin/rm -r $DEPLOYPATH/plugins
     - /bin/rm -r $DEPLOYPATH/word-template
     - /bin/mv -f $SOURCEPATH/public/* $DEPLOYPATH
     - /bin/mv -f $SOURCEPATH/public/.htaccess $DEPLOYPATH
