@@ -38,13 +38,16 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\TcicallController;
+
 // เพิ่ม OrcidCallController
 use App\Http\Controllers\OrcidCallController;
+// เพิ่ม ScholarCallController
+use App\Http\Controllers\ScholarcallController;
+
 // เพิ่ม controller สำหรับการเรียก API จาก Scopus และ ORCID และ Scolar
 use App\Http\Controllers\CallPaperController;
 
 
-use App\Http\Controllers\ScholarcallController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,7 +87,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 //Route::get('/researchers',[ResearcherController::class,'index'])->name('researchers');
 
 
-Route::get('/fetch-scholar/{userId}', [ScholarcallController::class, 'fetchAndSave'])->name('fetchScholar');
+
 
 Route::get('researchers/{id}', [ResearcherController::class, 'request'])->name('researchers');
 Route::get('researchers/{id}/search', [ResearcherController::class, 'search'])->name('searchresearchers');
@@ -181,5 +184,13 @@ Route::get('files/{file}', [FileUpload::class, 'download'])->name('download');*/
 Route::get('/callorcid/{id}', [OrcidCallController::class, 'fetchWorks']);
 Route::get('/orcid-papers', [OrcidCallController::class, 'index'])->name('orcid-papers');
 
-// เพิ่มเส้นทางสำหรับการเรียก API จาก Scopus และ ORCID และ Scolar
+
+// เรียก API เพื่อดึงข้อมูลจาก Google Scholar และบันทึกลงฐานข้อมูล
+Route::get('/fetch-scholar/{userId}', [ScholarcallController::class, 'fetchAndSave'])->name('fetchScholar');
+
+
+// เพิ่มเส้นทางสำหรับการเรียก API จาก Scopus และ ORCID และ Scholar
 Route::get('/callpapers/{id}', [CallPaperController::class, 'callBoth'])->name('callpapers');
+
+// 📌 API สำหรับ Google Scholar แยกเฉพาะ
+// Route::get('/callscholar/{id}', [ScholarcallController::class, 'fetchAndSave'])->name('callScholar');
