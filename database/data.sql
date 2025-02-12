@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.41, for Linux (aarch64)
+-- MySQL dump 10.13  Distrib 8.0.41, for Linux (x86_64)
 --
 -- Host: mysql    Database: example_app
 -- ------------------------------------------------------
@@ -3887,6 +3887,7 @@ INSERT INTO `source_data` (`id`, `source_name`, `created_at`, `updated_at`) VALU
 INSERT INTO `source_data` (`id`, `source_name`, `created_at`, `updated_at`) VALUES (2,'Web Of Science','2022-01-31 03:06:42','2022-01-31 03:06:42');
 INSERT INTO `source_data` (`id`, `source_name`, `created_at`, `updated_at`) VALUES (3,'TCI','2022-01-31 03:06:42','2022-01-31 03:06:42');
 INSERT INTO `source_data` (`id`, `source_name`, `created_at`, `updated_at`) VALUES (4,'ORCID','2025-02-11 15:36:37','2025-02-11 15:36:37');
+INSERT INTO `source_data` (`id`, `source_name`, `created_at`, `updated_at`) VALUES (5,'Google Scholar','2025-02-11 23:06:48','2025-02-11 23:06:48');
 /*!40000 ALTER TABLE `source_data` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4549,6 +4550,60 @@ INSERT INTO `source_papers` (`id`, `source_data_id`, `paper_id`) VALUES (3914,1,
 INSERT INTO `source_papers` (`id`, `source_data_id`, `paper_id`) VALUES (3915,1,605);
 INSERT INTO `source_papers` (`id`, `source_data_id`, `paper_id`) VALUES (3916,1,606);
 /*!40000 ALTER TABLE `source_papers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `source_users`
+--
+
+LOCK TABLES `source_users` WRITE;
+/*!40000 ALTER TABLE `source_users` DISABLE KEYS */;
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (1,4,2,'0000-0003-1948-4183');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (2,4,3,'0000-0003-1026-191X');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (3,4,4,'0000-0002-1684-5409');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (4,4,6,'0000-0001-9245-7400');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (5,4,7,'0000-0002-4689-3006');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (6,4,8,'0000-0003-4473-2206');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (7,4,9,'0000-0002-2042-3284');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (8,4,10,'0000-0002-9063-0705');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (9,4,14,'0000-0002-3960-4181');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (10,4,16,'0000-0001-7579-2485');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (11,4,18,'0000-0002-3813-6910');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (12,4,20,'0000-0001-7233-6572');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (13,4,22,'0000-0003-3900-6453');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (14,4,24,'0000-0001-5289-1149');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (15,4,25,'0000-0001-8691-285X');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (16,4,26,'0000-0002-6403-6518');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (17,4,28,'0000-0001-9027-7836');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (18,4,29,'0009-0008-9197-4703');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (19,4,30,'0009-0002-6086-230X');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (20,4,31,'0000-0003-1766-6071');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (21,4,32,'0000-0001-8441-8962');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (22,4,33,'0000-0002-4358-7927');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (23,4,34,'0000-0002-7941-6150');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (24,4,45,'0000-0002-6766-9759');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (25,5,3,'X0qzPOIAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (26,5,6,'00JXDiUAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (27,5,7,'brgiVtgAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (28,5,8,'TkbVWiMAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (29,5,9,'eMdpRLEAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (30,5,10,'ghQ1lTAAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (33,5,13,'sAp1BWsAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (34,5,14,'FXajoHAAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (35,5,15,'E1k8_KEAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (36,5,16,'E01V5gUAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (37,5,20,'ksJyxM4AAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (38,5,22,'eZGNz8cAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (39,5,24,'HZNNCj4AAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (40,5,25,'zmQuQoIAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (41,5,26,'YT1Se0AAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (42,5,29,'xF4E8-gAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (43,5,32,'-ZwgaUsAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (44,5,23,'bzF_BIkAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (45,5,32,'-ZwgaUsAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (46,5,33,'bzF_BIkAAAAJ');
+INSERT INTO `source_users` (`id`, `source_data_id`, `user_id`, `search_id`) VALUES (47,5,46,'fn94QPIAAAAJ');
+/*!40000 ALTER TABLE `source_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -5733,4 +5788,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-11 12:05:55
+-- Dump completed on 2025-02-12  4:36:42

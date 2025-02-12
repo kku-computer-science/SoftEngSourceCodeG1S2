@@ -199,6 +199,8 @@ class HomeController extends Controller
                 ->where(DB::raw('(paper_yearpub)'), $value)->count();
         }
 
+       
+
         foreach ($year as $key => $value) {
             $paper_scholar[] = Paper::whereHas('source', function ($query) {
                 return $query->where('source_data_id', '=', 5);
@@ -215,17 +217,17 @@ class HomeController extends Controller
         //$paper_tci_numall = $num['paper_tci'];
         $paper_scopus_numall = $num['paper_scopus'];
         //$paper_wos_numall = $num['paper_wos'];
-        //$paper_orcid_numall = $num['paper_orcid'];
+        $paper_orcid_numall = $num['paper_orcid'];
         //$paper_scholar_numall = $num['paper_scholar'];
         $academic_other_numall = $num['academic_other'];
 
         return view('home', compact('papers'))->with('year', json_encode($year, JSON_NUMERIC_CHECK))
             ->with('paper_scopus', json_encode($paper_scopus, JSON_NUMERIC_CHECK))
-            //->with('paper_orcid', json_encode($paper_orcid, JSON_NUMERIC_CHECK))
+            ->with('paper_orcid', json_encode($paper_orcid, JSON_NUMERIC_CHECK))
             //->with('paper_scholar', json_encode($paper_scholar, JSON_NUMERIC_CHECK))
             ->with('academic_other', json_encode($academic_other, JSON_NUMERIC_CHECK))
             ->with('paper_scopus_numall', json_encode($paper_scopus_numall, JSON_NUMERIC_CHECK))
-            //->with('paper_orcid_numall', json_encode($paper_orcid_numall, JSON_NUMERIC_CHECK))
+            ->with('paper_orcid_numall', json_encode($paper_orcid_numall, JSON_NUMERIC_CHECK))
             ->with('academic_other_numall', json_encode($academic_other_numall, JSON_NUMERIC_CHECK));
             
         
@@ -250,7 +252,7 @@ class HomeController extends Controller
 
         $academic_other[] = Academicwork::whereIn('ac_type', ['book', 'อนุสิทธิบัตร'])->count();
 
-        return compact('paper_scopus', 'academic_other');
+        return compact('paper_scopus', 'paper_orcid', 'academic_other');
     }
     public function bibtex($id)
     {
