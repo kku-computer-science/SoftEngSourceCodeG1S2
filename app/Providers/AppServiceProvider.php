@@ -14,11 +14,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (env("APP_ENV") === "production") {
-            $this->app->bind('path.public', function () {
-                return base_path() . '../public_html';
-            });
-        }
         //
     }
 
@@ -29,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if($this->app->environment('production')) {
+            \URL::forceScheme('https');
+        }
         Paginator::useBootstrap();
         view()->composer(
             'layouts.layout',
