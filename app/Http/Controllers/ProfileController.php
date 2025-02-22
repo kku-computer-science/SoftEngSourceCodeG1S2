@@ -20,9 +20,16 @@ class ProfileController extends Controller
         $res = User::where('id',$id)->first();
         $teachers = User::role('teacher')->get();
         
-        $papers = Paper::with('teacher','author','source')->whereHas('teacher', function($query) use($id) {
+        $papers = Paper::with('teacher','author','source')
+        ->whereHas('teacher', function($query) use($id) {
             $query->where('users.id', '=', $id);
-        })->orderBy('paper_yearpub', 'desc')-> get();
+        })
+        ->whereHas('source', function($query) {
+            // กรองออกเฉพาะ WOS (source_data_id = 2) และ TCI (source_data_id = 3)
+            $query->whereNotIn('source_data_id', [2,3]);
+        })
+        ->orderBy('paper_yearpub', 'desc')
+        ->get();
 
         $papers_scopus = Paper::with('teacher','author','source')->whereHas('teacher', function($query) use($id) {
             $query->where('users.id', '=', $id);
@@ -31,16 +38,28 @@ class ProfileController extends Controller
         })->get();
 //return $papers_scopus;
 
-        $papers_wos = Paper::with('teacher','author','source')->whereHas('teacher', function($query) use($id) {
-            $query->where('users.id', '=', $id);
-        })->whereHas('source', function($query) {
-            $query->where('source_data_id', '=', 2);
-        })->orderBy('paper_yearpub', 'desc')-> get();
+        // $papers_wos = Paper::with('teacher','author','source')->whereHas('teacher', function($query) use($id) {
+        //     $query->where('users.id', '=', $id);
+        // })->whereHas('source', function($query) {
+        //     $query->where('source_data_id', '=', 2);
+        // })->orderBy('paper_yearpub', 'desc')-> get();
         
-        $papers_tci = Paper::with('teacher','author')->whereHas('teacher', function($query) use($id) {
+        // $papers_tci = Paper::with('teacher','author')->whereHas('teacher', function($query) use($id) {
+        //     $query->where('users.id', '=', $id);
+        // })->whereHas('source', function($query) {
+        //     $query->where('source_data_id', '=', 3);
+        // })->orderBy('paper_yearpub', 'desc')-> get();
+
+        $papers_orcid = Paper::with('teacher','author','source')->whereHas('teacher', function($query) use($id) {
             $query->where('users.id', '=', $id);
         })->whereHas('source', function($query) {
-            $query->where('source_data_id', '=', 3);
+            $query->where('source_data_id', '=', 4);
+        })->orderBy('paper_yearpub', 'desc')-> get();
+
+        $papers_scholar = Paper::with('teacher','author','source')->whereHas('teacher', function($query) use($id) {
+            $query->where('users.id', '=', $id);
+        })->whereHas('source', function($query) {
+            $query->where('source_data_id', '=', 5);
         })->orderBy('paper_yearpub', 'desc')-> get();
 
         // $papers_tci = Paper::with('teacher','author')->whereHas('teacher', function($query) use($id) {
@@ -60,16 +79,17 @@ class ProfileController extends Controller
         })->where('ac_type', '=', 'book')->get();
 
        
-
         $patent = Academicwork::with('user','author')->whereHas('user', function($query) use($id) {
             $query->where('users.id', '=', $id);
         })->where('ac_type', '!=', 'book')->get();
         //return $res;
 
         $year = range(Carbon::now()->year-5, Carbon::now()->year);
-        $paper_tci = [];
+        // $paper_tci = [];
         $paper_scopus = [];
-        $paper_wos = [];
+        // $paper_wos = [];
+        $paper_orcid = [];
+        $paper_scholar = [];
         foreach ($year as $key => $value) { 
             $paper_scopus[] = Paper::with('teacher')->whereHas('source', function ($query) {
                 return $query->where('source_data_id', '=', 1);
@@ -79,30 +99,52 @@ class ProfileController extends Controller
             ->where(DB::raw('(paper_yearpub)'),$value)->count();
         }
 
+        // foreach ($year as $key => $value) { 
+        //     $paper_tci[] = Paper::whereHas('source', function ($query) {
+        //         return $query->where('source_data_id', '=', 3);
+        //     })
+        //     ->whereHas('teacher',  function($query) use($id) {
+        //         $query->where('users.id', '=', $id);
+        //     })->where(DB::raw('(paper_yearpub)'),$value)->count();
+        // }
+
+        // foreach ($year as $key => $value) { 
+        //     $paper_wos[] = Paper::whereHas('source', function ($query) {
+        //         return $query->where('source_data_id', '=', 2);
+        //     })
+        //     ->whereHas('teacher',  function($query) use($id) {
+        //         $query->where('users.id', '=', $id);
+        //     })->where(DB::raw('(paper_yearpub)'),$value)->count();
+        // }
+
         foreach ($year as $key => $value) { 
-            $paper_tci[] = Paper::whereHas('source', function ($query) {
-                return $query->where('source_data_id', '=', 3);
-            })
-            ->whereHas('teacher',  function($query) use($id) {
+            $paper_orcid[] = Paper::with('teacher')->whereHas('source', function ($query) {
+                return $query->where('source_data_id', '=', 4);
+            })->whereHas('teacher',  function($query) use($id) {
                 $query->where('users.id', '=', $id);
-            })->where(DB::raw('(paper_yearpub)'),$value)->count();
+            })
+            ->where(DB::raw('(paper_yearpub)'),$value)->count();
         }
 
         foreach ($year as $key => $value) { 
-            $paper_wos[] = Paper::whereHas('source', function ($query) {
-                return $query->where('source_data_id', '=', 2);
-            })
-            ->whereHas('teacher',  function($query) use($id) {
+            $paper_scholar[] = Paper::with('teacher')->whereHas('source', function ($query) {
+                return $query->where('source_data_id', '=', 5);
+            })->whereHas('teacher',  function($query) use($id) {
                 $query->where('users.id', '=', $id);
-            })->where(DB::raw('(paper_yearpub)'),$value)->count();
+            })
+            ->where(DB::raw('(paper_yearpub)'),$value)->count();
         }
-
+        
         $year2 = range(Carbon::now()->year-20, Carbon::now()->year);
-        $paper_tci_s = [];
+        // $paper_tci_s = [];
         $paper_scopus_s = [];
-        $paper_wos_s = [];
+        // $paper_wos_s = [];
+        $paper_orcid_s = [];
+        $paper_scholar_s = [];
         $paper_book_s = [];
         $paper_patent_s = [];
+
+
         foreach ($year2 as $key => $value) { 
             $paper_scopus_s[] = Paper::with('teacher')->whereHas('source', function ($query) {
                 return $query->where('source_data_id', '=', 1);
@@ -112,9 +154,27 @@ class ProfileController extends Controller
             ->where(DB::raw('(paper_yearpub)'),$value)->count();
         }
 
+        // foreach ($year2 as $key => $value) { 
+        //     $paper_tci_s[] = Paper::whereHas('source', function ($query) {
+        //         return $query->where('source_data_id', '=', 3);
+        //     })
+        //     ->whereHas('teacher',  function($query) use($id) {
+        //         $query->where('users.id', '=', $id);
+        //     })->where(DB::raw('(paper_yearpub)'),$value)->count();
+        // }
+
+        // foreach ($year2 as $key => $value) { 
+        //     $paper_wos_s[] = Paper::whereHas('source', function ($query) {
+        //         return $query->where('source_data_id', '=', 2);
+        //     })
+        //     ->whereHas('teacher',  function($query) use($id) {
+        //         $query->where('users.id', '=', $id);
+        //     })->where(DB::raw('(paper_yearpub)'),$value)->count();
+        // }
+
         foreach ($year2 as $key => $value) { 
-            $paper_tci_s[] = Paper::whereHas('source', function ($query) {
-                return $query->where('source_data_id', '=', 3);
+            $paper_orcid_s[] = Paper::whereHas('source', function ($query) {
+                return $query->where('source_data_id', '=', 4);
             })
             ->whereHas('teacher',  function($query) use($id) {
                 $query->where('users.id', '=', $id);
@@ -122,14 +182,13 @@ class ProfileController extends Controller
         }
 
         foreach ($year2 as $key => $value) { 
-            $paper_wos_s[] = Paper::whereHas('source', function ($query) {
-                return $query->where('source_data_id', '=', 2);
-            })
-            ->whereHas('teacher',  function($query) use($id) {
+            $paper_scholar_s[] = Paper::with('teacher')->whereHas('source', function ($query) {
+                return $query->where('source_data_id', '=', 5);
+            })->whereHas('teacher',  function($query) use($id) {
                 $query->where('users.id', '=', $id);
-            })->where(DB::raw('(paper_yearpub)'),$value)->count();
+            })
+            ->where(DB::raw('(paper_yearpub)'),$value)->count();
         }
-        
 
         foreach ($year2 as $key => $value) { 
             $paper_book_s[] = Academicwork::where('ac_type', '=', 'book')
@@ -148,15 +207,19 @@ class ProfileController extends Controller
 
 
     	return view('researchprofiles')->with('year',json_encode($year,JSON_NUMERIC_CHECK))
-                ->with('paper_tci',json_encode($paper_tci,JSON_NUMERIC_CHECK))
+                // ->with('paper_tci',json_encode($paper_tci,JSON_NUMERIC_CHECK))
                 ->with('paper_scopus',json_encode($paper_scopus,JSON_NUMERIC_CHECK))
-                ->with('paper_wos',json_encode($paper_wos,JSON_NUMERIC_CHECK))
-                ->with('paper_tci_s',json_encode($paper_tci_s,JSON_NUMERIC_CHECK))
+                // ->with('paper_wos',json_encode($paper_wos,JSON_NUMERIC_CHECK))
+                ->with('paper_orcid',json_encode($paper_orcid,JSON_NUMERIC_CHECK))
+                ->with('paper_scholar',json_encode($paper_scholar,JSON_NUMERIC_CHECK))
+                // ->with('paper_tci_s',json_encode($paper_tci_s,JSON_NUMERIC_CHECK))
                 ->with('paper_scopus_s',json_encode($paper_scopus_s,JSON_NUMERIC_CHECK))
-                ->with('paper_wos_s',json_encode($paper_wos_s,JSON_NUMERIC_CHECK))
+                // ->with('paper_wos_s',json_encode($paper_wos_s,JSON_NUMERIC_CHECK))
+                ->with('paper_orcid_s',json_encode($paper_orcid_s,JSON_NUMERIC_CHECK))
+                ->with('paper_scholar_s',json_encode($paper_scholar_s,JSON_NUMERIC_CHECK))
                 ->with('paper_book_s',json_encode($paper_book_s,JSON_NUMERIC_CHECK))
                 ->with('paper_patent_s',json_encode($paper_patent_s,JSON_NUMERIC_CHECK))
-                ->with(compact('res','teachers','papers','papers_tci','papers_scopus','papers_wos','book_chapter','patent'));
+                ->with(compact('res','teachers','papers','papers_scopus','papers_orcid','papers_scholar','book_chapter','patent'));
 
 
     //return view('researchprofiles',compact('res','papers','year','paper'))->with('year',json_encode($year,JSON_NUMERIC_CHECK))->with('paper',json_encode($paper,JSON_NUMERIC_CHECK));
