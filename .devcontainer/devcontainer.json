@@ -9,16 +9,23 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				// "mikestead.dotenv",
-				// "amiralizadeh9480.laravel-extra-intellisense",
-				// "ryannaddy.laravel-artisan",
-				// "onecentlin.laravel5-snippets",
-				// "onecentlin.laravel-blade"
+				"DEVSENSE.composer-php-vscode",
+				"DEVSENSE.intelli-php-vscode",
+				"ryannaddy.laravel-artisan",
+				"shufo.vscode-blade-formatter",
+				"onecentlin.laravel-blade",
+				"amiralizadeh9480.laravel-extra-intellisense",
+				"codingyu.laravel-goto-view",
+				"pgl.laravel-jump-controller",
+				"DEVSENSE.phptools-vscode",
+				"DEVSENSE.profiler-php-vscode",
+				"mikestead.dotenv",
+				"onecentlin.laravel5-snippets"
 			],
 			"settings": {}
 		}
 	},
-	"remoteUser": "sail",
+	"remoteUser": "root",
 	"postCreateCommand": "chown -R 1000:1000 /var/www/html"
 	// "forwardPorts": [],
 	// "runServices": [],

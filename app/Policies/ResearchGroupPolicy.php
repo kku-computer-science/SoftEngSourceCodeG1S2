@@ -41,7 +41,10 @@ class ResearchGroupPolicy
      */
     public function create(User $user)
     {
-        //return true;
+        if($user->hasRole('admin')){
+            return true;
+        }
+        return false;
     }
 
     /**
