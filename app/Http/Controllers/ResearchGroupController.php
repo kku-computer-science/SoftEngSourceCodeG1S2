@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Customer;
 use App\Models\ResearchGroup;
 use Illuminate\Http\Request;
@@ -27,29 +28,25 @@ class ResearchGroupController extends Controller
 
     public function index()
     {
-        //$researchGroups = ResearchGroup::latest()->paginate(5);
+        \Log::info('Showing Research Groups');
         $researchGroups = ResearchGroup::with('User')->get();
         return view('research_groups.index', compact('researchGroups'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
+        $user = auth()->user();
+        if (!$user->can('create', ResearchGroup::class)) {
+            \Log::warning("User $user->id tried to create a research group without permission");
+            return redirect()->route('researchGroups.index')->with('error', 'You do not have permission to create a research group');
+        }
+        \Log::info('Creating Research Group');
         $users = User::role(['teacher', 'student'])->get();
         $funds = Fund::get();
-        return view('research_groups.create', compact('users', 'funds'));
+        $authors = Author::get();
+        return response()->view('research_groups.create', compact('users', 'funds', 'authors'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -58,15 +55,21 @@ class ResearchGroupController extends Controller
             'head' => 'required',
             //'group_image' => 'required|mimes:png,jpg,jpeg|max:2048',
         ]);
+
+        if ($this->isDuplicateUserInRequest($request)) {
+            return redirect()->back()->with('error', 'Duplicate user in request');
+        }
+
         $input = $request->all();
+        $researchGroup = ResearchGroup::create($input);
         if ($request->group_image) {
-            $input['group_image'] = time() . '.' . $request->group_image->extension();
+            if (!$this->isFileExtensionValid($request->group_image)) {
+                return redirect()->back()->with('error', 'Invalid file type');
+            }
+            $input['group_image'] = 'RG'. $researchGroup->id . '.' . $request->group_image->extension();
             $request->group_image->move(public_path('img'), $input['group_image']);
         }
-        // $input['group_image'] = time().'.'.$request->group_image->extension();
-        // $request->group_image->move(public_path('img'), $input['group_image']);
-        //return $input['group_image'];
-        $researchGroup = ResearchGroup::create($input);
+        $researchGroup->update($input);
         $head = $request->head;
         $fund = $request->fund;
         $researchGroup->user()->attach($head, ['role' => 1]);
@@ -80,69 +83,46 @@ class ResearchGroupController extends Controller
         }
         return redirect()->route('researchGroups.index')->with('success', 'research group created successfully.');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Fund  $researchGroup
-     * @return \Illuminate\Http\Response
-     */
     public function show(ResearchGroup $researchGroup)
     {
-        #$researchGroup=ResearchGroup::find($researchGroup->id);
-        //dd($researchGroup->id);
-        //$data=ResearchGroup::find($researchGroup->id)->get(); 
-
-        //return $data;
         return view('research_groups.show', compact('researchGroup'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Fund  $researchGroup
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(ResearchGroup $researchGroup)
     {
         $researchGroup = ResearchGroup::find($researchGroup->id);
         $this->authorize('update', $researchGroup);
         $researchGroup = ResearchGroup::with(['user'])->where('id', $researchGroup->id)->first();
-        $users = User::get();
-        //return $users;
-        return view('research_groups.edit', compact('researchGroup', 'users'));
+        $users = User::role(["teacher", "student"])->get();
+        $authors = Author::get();
+        return view('research_groups.edit', compact('researchGroup', 'users', 'authors'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ResearchGroup  $researchGroup
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, ResearchGroup $researchGroup)
     {
         $request->validate([
             'group_name_th' => 'required',
             'group_name_en' => 'required',
-
         ]);
+
+        if ($this->isDuplicateUserInRequest($request)) {
+            return redirect()->back()->with('error', 'Duplicate user in request');
+        }
+
         $input = $request->all();
         if ($request->group_image) {
-            //dd($request->file('group_image'));
-            $input['group_image'] = time() . '.' . $request->group_image->extension();
-            //$file = $request->file('image');
-
-            //$url = Storage::putFileAs('images', $file, $name . '.' . $file->extension());
-            //dd($input['group_image']);
+            if (!$this->isFileExtensionValid($request->group_image)) {
+                return redirect()->back()->with('error', 'Invalid file type');
+            }
+            $input['group_image'] = 'RG'. $researchGroup->id . '.' . $request->group_image->extension();
             $request->group_image->move(public_path('img'), $input['group_image']);
         }
         $researchGroup->update($input);
         $head = $request->head;
         $researchGroup->user()->detach();
-        $researchGroup->user()->attach(array(
-            $head => array('role' => 1),
-        ));
+        $researchGroup->user()->attach($head, ['role' => 1]);
+
+
 
         if ($request->moreFields) {
             foreach ($request->moreFields as $key => $value) {
@@ -155,13 +135,6 @@ class ResearchGroupController extends Controller
         return redirect()->route('researchGroups.index')
             ->with('success', 'researchGroups updated successfully');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Fund  $researchGroup
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(ResearchGroup $researchGroup)
     {
         $this->authorize('delete', $researchGroup);
@@ -169,4 +142,24 @@ class ResearchGroupController extends Controller
         return redirect()->route('researchGroups.index')
             ->with('success', 'researchGroups deleted successfully');
     }
+
+    private function isDuplicateUserInRequest(Request $request){
+        $users = [];
+        foreach ($request->moreFields as $key => $value) {
+            if ($value['userid'] != null) {
+                if (in_array($value['userid'], $users) || $value['userid'] == $request->head) {
+                    return true;
+                }
+                $users[] = $value['userid'];
+            }
+        }
+        return false;
+    }
+
+    private function isFileExtensionValid($file){
+        $permitted_extensions = array('jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'bmp');
+        return in_array($file->extension(), $permitted_extensions);
+    }
 }
+
+

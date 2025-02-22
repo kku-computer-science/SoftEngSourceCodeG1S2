@@ -30,7 +30,7 @@ class ResearchGroupPolicy
      */
     public function view(User $user, ResearchGroup $researchGroup)
     {
-        
+
     }
 
     /**
@@ -41,7 +41,7 @@ class ResearchGroupPolicy
      */
     public function create(User $user)
     {
-        if($user->hasRole('admin')){
+        if ($user->hasRole('admin')) {
             return true;
         }
         return false;
@@ -56,23 +56,20 @@ class ResearchGroupPolicy
      */
     public function update(User $user, ResearchGroup $researchGroup)
     {
-        $researchGroup=ResearchGroup::find($researchGroup->id)->user()->where('user_id',$user->id)->get();
+        $researchGroup = ResearchGroup::find($researchGroup->id)->user()->where('user_id', $user->id)->get();
         //$researchProject = User::with(['researchProject'])->where('id',$user->id)->get();
-        if($user->hasRole('admin')){
+        if ($user->hasRole('admin')) {
             return true;
         }
-        if($user->hasRole('staff')){
+        if ($user->hasRole('staff')) {
             return true;
         }
         foreach ($researchGroup as $res) {
-            //print($res);
-            if($user->id == $res->id and $res->pivot->role == '1' ){
+            if ($user->id == $res->id && $res->pivot->permissions == '1') {
                 return true;
             }
-            else{
-                return false;
-            }
         }
+        return false;
     }
 
     /**
@@ -84,22 +81,10 @@ class ResearchGroupPolicy
      */
     public function delete(User $user, ResearchGroup $researchGroup)
     {
-        $researchGroup=ResearchGroup::find($researchGroup->id)->user()->where('user_id',$user->id)->get();
-        //$researchProject = User::with(['researchProject'])->where('id',$user->id)->get();
-        
-        
-        if($user->hasRole('admin')){
+        if ($user->hasRole('admin')) {
             return true;
         }
-        foreach ($researchGroup as $res) {
-            //print($res);
-            if($user->id == $res->id and $res->pivot->role == '1' ){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
+        return false;
     }
 
     /**
