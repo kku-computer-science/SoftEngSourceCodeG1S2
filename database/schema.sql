@@ -37,6 +37,25 @@ CREATE TABLE `academicworks` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `author_in_research_groups`
+--
+
+DROP TABLE IF EXISTS `author_in_research_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `author_in_research_groups` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `author_id` bigint unsigned NOT NULL,
+  `research_group_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `author_in_research_groups_author_id_foreign` (`author_id`),
+  KEY `author_in_research_groups_research_group_id_foreign` (`research_group_id`),
+  CONSTRAINT `author_in_research_groups_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `author_in_research_groups_research_group_id_foreign` FOREIGN KEY (`research_group_id`) REFERENCES `research_groups` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `author_of_academicworks`
 --
 
@@ -673,4 +692,4 @@ CREATE TABLE `work_of_research_projects` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-22 15:44:31
+-- Dump completed on 2025-02-22 16:52:00
