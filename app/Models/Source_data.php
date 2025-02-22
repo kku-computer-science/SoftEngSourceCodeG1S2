@@ -16,4 +16,8 @@ class Source_data extends Model
     {
         return $this->belongsToMany(Paper::class,'source_papers');
     }
+
+    public function user(){
+        return $this->belongsToMany(User::class,'source_users')->withPivot('search_id');
+    }
 }

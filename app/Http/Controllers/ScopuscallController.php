@@ -37,7 +37,7 @@ class ScopuscallController extends Controller
 
         $url = Http::get('https://api.elsevier.com/content/search/scopus?', [
             'query' => "AUTHOR-NAME(" . "$lname" . "," . "$fname" . ")",
-            'apikey' => '6ab3c2a01c29f0e36b00c8fa1d013f83',
+            'apikey' => 'c878103226c28e3421b01cf4f0319d03',
         ])->json();
 
 
@@ -71,7 +71,7 @@ class ScopuscallController extends Controller
                     $scoid = explode(":", $scoid);
                     $scoid = $scoid[1];
 
-                    $all = Http::get("https://api.elsevier.com/content/abstract/scopus_id/" . $scoid . "?filed=authors&apiKey=6ab3c2a01c29f0e36b00c8fa1d013f83&httpAccept=application%2Fjson");
+                    $all = Http::get("https://api.elsevier.com/content/abstract/scopus_id/" . $scoid . "?filed=authors&apiKey=c878103226c28e3421b01cf4f0319d03&httpAccept=application%2Fjson");
                     //$all = Http::get("https://api.crossref.org/works/"."");
                     //$all = Http::get("https://api.crossref.org/works?query.title=" . $item['dc:title'] . "&rows=2");
                     $paper = new Paper;

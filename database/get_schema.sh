@@ -6,4 +6,4 @@ if [ "$#" -ne 4 ]; then
     exit 1
 fi
 
-mysqldump -h $1 -u"$2" -p"$3" --no-data $4 > database/shcema.sql
+mysqldump -h $1 -u"$2" -p"$3" --no-data $4 > database/schema.sql

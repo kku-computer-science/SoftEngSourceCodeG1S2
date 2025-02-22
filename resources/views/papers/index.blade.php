@@ -15,8 +15,10 @@
             <h4 class="card-title">Published research</h4>
             <a class="btn btn-primary btn-menu btn-icon-text btn-sm mb-3" href="{{ route('papers.create') }}"><i class="mdi mdi-plus btn-icon-prepend"></i> ADD </a>
             @if(Auth::user()->hasRole('teacher'))
-            <!-- <a class="btn btn-primary btn-menu btn-icon-text btn-sm mb-3" href="{{ route('callscopus',Auth::user()->id) }}"><i class="mdi mdi-refresh btn-icon-prepend"></i> Call Paper</a> -->
-            <a class="btn btn-primary btn-icon-text btn-sm mb-3" href="{{ route('callscopus',Crypt::encrypt(Auth::user()->id)) }}"><i class="mdi mdi-refresh btn-icon-prepend icon-sm"></i> Call Paper</a>
+            <a class="btn btn-primary btn-icon-text btn-sm mb-3 call-papers"
+                data-id="{{ Crypt::encrypt(Auth::user()->id) }}">
+                <i class="mdi mdi-refresh btn-icon-prepend icon-sm"></i> Call Paper
+            </a>
             @endif
             <!-- <div class="table-responsive"> -->
                 <table id="example1" class="table table-striped">
@@ -84,10 +86,49 @@
     </div>
 
 </div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src = "http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>
 <script src = "https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js" defer ></script>
 <script src = "https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js" defer ></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function () {
+        $('.call-papers').click(function () {
+            var userId = $(this).data('id');
+            $.ajax({
+                url: "/callpapers/" + userId,
+                type: "GET",
+                beforeSend: function () {
+                    Swal.fire({
+                        title: 'Fetching papers...',
+                        text: 'Fetching data from ORCID and Scopus. Please wait...',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+                },
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Paper data updated successfully.',
+                        icon: 'success'
+                    }).then(function () {
+                        location.reload();
+                    });
+                },
+                error: function (error) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Failed to fetch paper data.',
+                        icon: 'error'
+                    });
+                }
+            });
+        });
+    });
+</script>
 <script>
     $(document).ready(function() {
         var table1 = $('#example1').DataTable({
