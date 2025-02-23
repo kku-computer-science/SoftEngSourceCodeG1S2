@@ -25,6 +25,8 @@
                             <th>Group name (ไทย)</th>
                             <th>Head</th>
                             <th>Member</th>
+                            <th>Post-Doctoral</th>
+                            <th>Visiting</th>
                             <th width="280px">Action</th>
                         </tr>
                     </thead>
@@ -53,6 +55,22 @@
 
                                 @endforeach
                             </td>
+                            <td>
+                                @php
+                                    $postDocs = collect($researchGroup->user)->filter(function($user) {
+                                        return $user->pivot->role == 3;
+                                    });
+                                @endphp
+                            
+                                {{ $postDocs->pluck('fname_th')->implode(', ') }}
+                            </td>
+                            <td>
+                                @php
+                                    $visitingAuthors = $researchGroup->author->pluck('author_fname')->implode(', ');
+                                @endphp
+                            
+                                {{ $visitingAuthors }}
+                            </td>                                                
                             <td>
                                 <form action="{{ route('researchGroups.destroy',$researchGroup->id) }}" method="POST">
 
