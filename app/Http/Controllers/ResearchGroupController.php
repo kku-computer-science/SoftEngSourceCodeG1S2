@@ -28,8 +28,12 @@ class ResearchGroupController extends Controller
 
     public function index()
     {
+        $userId = auth()->id();
+
         \Log::info('Showing Research Groups');
-        $researchGroups = ResearchGroup::with('User')->get();
+        $researchGroups = ResearchGroup::whereHas('user', function ($query) use ($userId) {
+            $query->where('users.id', $userId);
+        })->with('user')->get();
         return view('research_groups.index', compact('researchGroups'));
     }
 
