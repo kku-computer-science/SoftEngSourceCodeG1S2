@@ -30,7 +30,7 @@ class User extends Authenticatable
         'position_en',
         'position_th',
         'title_name_th',
-        'title_name_en',     
+        'title_name_en',
         'role',
         'picture',
         'status',
@@ -76,7 +76,7 @@ class User extends Authenticatable
     }
     public function researchGroup()
     {
-        return $this->belongsToMany(ResearchGroup::class,'work_of_research_groups')->withPivot('role');
+        return $this->belongsToMany(ResearchGroup::class,'work_of_research_groups')->withPivot(['role','permissions']);
         // OR return $this->belongsTo('App\User');
     }
 

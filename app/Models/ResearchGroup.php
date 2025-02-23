@@ -14,7 +14,13 @@ class ResearchGroup extends Model
 
     public function user()
     {
-        return $this->belongsToMany(User::class,'work_of_research_groups')->withPivot('role');
+        return $this->belongsToMany(User::class,'work_of_research_groups')->withPivot(['role','permissions']);
+        // OR return $this->hasOne('App\Phone');
+    }
+
+    public function author()
+    {
+        return $this->belongsToMany(Author::class,'author_in_research_groups');
         // OR return $this->hasOne('App\Phone');
     }
     public function product(){
