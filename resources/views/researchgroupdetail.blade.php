@@ -5,6 +5,7 @@
         font-size: 20px;
 
     }
+
 </style>
 @section('content')
 <div class="container card-4 mt-5">
@@ -48,7 +49,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title"> {{ $rg->{'group_name_'.app()->getLocale()} }}</>
+                    <h5 class="card-title"> {{ $rg->{'group_name_'.app()->getLocale()} }}adsadsa</>
                     </h5>
                     <h3 class="card-text">{{$rg->{'group_detail_'.app()->getLocale()} }}
                     </h3>
