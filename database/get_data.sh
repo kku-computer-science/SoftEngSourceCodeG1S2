@@ -6,4 +6,4 @@ if [ "$#" -ne 4 ]; then
     exit 1
 fi
 
-mysqldump -h $1 -u"$2" -p"$3" --no-create-info --complete-insert --skip-extended-insert $4 > database/data.sql
+mysqldump -h $1 -u"$2" -p"$3" $4 > database/data.sql
