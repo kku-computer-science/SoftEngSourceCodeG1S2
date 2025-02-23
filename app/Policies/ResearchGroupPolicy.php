@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\ResearchGroup;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\DB;
 
 class ResearchGroupPolicy
 {
@@ -81,11 +82,20 @@ class ResearchGroupPolicy
      */
     public function delete(User $user, ResearchGroup $researchGroup)
     {
-        if ($user->hasRole('admin')) {
+        // ตรวจสอบว่าผู้ใช้มีบทบาท 'admin' หรือไม่
+        if ($user->role === 'admin') {
             return true;
         }
-        return false;
+    
+        // ตรวจสอบบทบาทจากตาราง work_of_research_groups โดยใช้ user_id
+        $hasRole = DB::table('work_of_research_groups')
+            ->where('user_id', $user->id) // ใช้ user_id เพื่อเชื่อมโยงกับผู้ใช้
+            ->where('role', 1) // ตรวจสอบบทบาทเป็น headproject
+            ->exists();
+    
+        return $hasRole;
     }
+    
 
     /**
      * Determine whether the user can restore the model.

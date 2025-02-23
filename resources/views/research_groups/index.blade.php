@@ -13,7 +13,7 @@
     <div class="card" style="padding: 16px;">
         <div class="card-body">
             <h4 class="card-title">กลุ่มวิจัย</h4>
-            @can("groups-create")
+            @can('create', App\Models\ResearchGroup::class)
             <a class="btn btn-primary btn-menu btn-icon-text btn-sm mb-3" href="{{ route('researchGroups.create') }}"><i
                 class="mdi mdi-plus btn-icon-prepend"></i> ADD</a>
             @endcan
