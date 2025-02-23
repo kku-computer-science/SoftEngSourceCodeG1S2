@@ -102,7 +102,7 @@
                 beforeSend: function () {
                     Swal.fire({
                         title: 'Fetching papers...',
-                        text: 'Fetching data from ORCID and Scopus. Please wait...',
+                        text: 'Fetching data from ORCID  Scopus and Scholar. Please wait...',
                         allowOutsideClick: false,
                         didOpen: () => {
                             Swal.showLoading();

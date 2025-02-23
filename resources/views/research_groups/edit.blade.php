@@ -60,12 +60,16 @@
                             style="height:90px">{{ $researchGroup->group_detail_en }}</textarea>
                     </div>
                 </div>
+                {{-- แก้ไข การอัพโหลดรูปภาพ --}}
                 <div class="form-group row">
                     <p class="col-sm-3"><b>image</b></p>
                     <div class="col-sm-8">
-                        <input type="file" name="group_image" class="form-control" >
+                        <input type="file" name="group_image" class="form-control" id="group_image" accept="image/png, image/jpeg, image/jpg, image/gif">
+                        <small class="text-muted">Allowed file types: .png, .jpeg, .jpg, .gif</small>
+                        <p id="file-error" class="text-danger" style="display: none;">Invalid file type. Please upload an image file.</p>
                     </div>
                 </div>
+                
                 <div class="form-group row">
                     <p class="col-sm-3"><b>หัวหน้ากลุ่มวิจัย</b></p>
                     <div class="col-sm-8">
@@ -136,6 +140,22 @@ $(document).ready(function() {
         $(this).parents('tr').remove();
     });
 
+});
+
+$(document).ready(function() {
+    $("#group_image").change(function() {
+        var file = this.files[0];
+        if (file) {
+            var fileType = file.type;
+            var validImageTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
+            if (!validImageTypes.includes(fileType)) {
+                $("#file-error").show();
+                this.value = ""; // Reset file input
+            } else {
+                $("#file-error").hide();
+            }
+        }
+    });
 });
 </script>
 @stop
