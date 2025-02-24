@@ -169,6 +169,7 @@ class UserController extends Controller
         ]);
     
         $input = $request->all();
+        $input['picture'] = 'blank-profile.webp';
         
         if(!empty($input['password'])) { 
             $input['password'] = Hash::make($input['password']);
@@ -187,6 +188,7 @@ class UserController extends Controller
         $pro_id = $request->sub_cat;
         $program = Program::find($pro_id);
         $user = $user->program()->associate($program)->save();
+
 
         return redirect()->route('users.index')
             ->with('success', 'User updated successfully.');
@@ -214,7 +216,10 @@ class UserController extends Controller
         $path = 'images/imag_user/';
         //return 'aaaaaa';
         $file = $request->file('admin_image');
-       $new_name = 'UIMG_'.date('Ymd').uniqid().'.jpg';
+        $userName = Auth::user()->fname_en . '_'. Auth::user()->lname_en;
+        $fileName = $userName . '.' . $file->getClientOriginalExtension();
+        $fileName = str_replace(' ','_', $fileName);
+        $new_name = $fileName;
         
         //dd(public_path());
         //Upload new image
