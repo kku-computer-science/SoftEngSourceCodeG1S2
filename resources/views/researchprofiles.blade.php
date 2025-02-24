@@ -118,24 +118,6 @@
 
             </div>
         </div>
-        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">ความเชี่ยวชาญ</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    @foreach ($res->expertise as $exper)
-    <p class="card-text"> {{ $exper->expert_name }}</p>
-    @endforeach
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <br>
 
         <!-- Tab of Papers -->
@@ -149,12 +131,6 @@
                 <button class="nav-link" id="scopus-tab" data-bs-toggle="tab" data-bs-target="#scopus" type="button"
                     role="tab" aria-controls="scopus" aria-selected="false">SCOPUS</button>
             </li>
-            <!-- <li class="nav-item" role="presentation">
-                <button class="nav-link" id="wos-tab" data-bs-toggle="tab" data-bs-target="#wos" type="button" role="tab" aria-controls="wos" aria-selected="false">Web of Science</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="tci-tab" data-bs-toggle="tab" data-bs-target="#tci" type="button" role="tab" aria-controls="tci" aria-selected="false">TCI</button>
-            </li> -->
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="orcid-tab" data-bs-toggle="tab" data-bs-target="#orcid" type="button"
                     role="tab" aria-controls="orcid" aria-selected="false">ORCID</button>
@@ -184,9 +160,6 @@
                 </div>
                 <table id="example1" class="table table-striped" style="width:100%">
                     <thead>
-                        <!-- <tr>
-                            <th><a href="{{ route('excel', ['id' => $res->id]) }}" target="_blank">#Export</a></td>
-                        </tr> -->
                         <tr>
                             <th>No.</th>
                             <th>Year</th>

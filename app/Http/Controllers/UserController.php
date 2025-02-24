@@ -169,6 +169,7 @@ class UserController extends Controller
         ]);
     
         $input = $request->all();
+        $input['picture'] = 'blank-profile.webp';
         
         if(!empty($input['password'])) { 
             $input['password'] = Hash::make($input['password']);
@@ -187,6 +188,7 @@ class UserController extends Controller
         $pro_id = $request->sub_cat;
         $program = Program::find($pro_id);
         $user = $user->program()->associate($program)->save();
+
 
         return redirect()->route('users.index')
             ->with('success', 'User updated successfully.');
