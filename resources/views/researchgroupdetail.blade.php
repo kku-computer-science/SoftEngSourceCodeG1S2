@@ -401,36 +401,3 @@
         </div>
     </div>
 @stop
-
-
-<!-- <div class="card-body-research">
-                    <p>Research</p>
-                    <table class="table">
-                        @foreach ($rg->user as $user)
-<thead>
-                            <tr>
-                                <th><b class="name">{{ $user->{'position_' . app()->getLocale()} }} {{ $user->{'fname_' . app()->getLocale()} }} {{ $user->{'lname_' . app()->getLocale()} }}</b></th>
-                            </tr>
-                            @foreach ($user->paper->sortByDesc('paper_yearpub') as $p)
-<tr class="hidden">
-                                <th>
-                                    <b><math>{!! html_entity_decode(preg_replace('<inf>', 'sub', $p->paper_name)) !!}</math></b> (
-                                    <link>
-@foreach ($p->teacher as $teacher)
-{{ $teacher->fname_en }} {{ $teacher->lname_en }},
-@endforeach
-                                    @foreach ($p->author as $author)
-{{ $author->author_fname }} {{ $author->author_lname }}@if (!$loop->last)
-,
-@endif
-@endforeach
-</link>), {{ $p->paper_sourcetitle }}, {{ $p->paper_volume }},
-                                    {{ $p->paper_yearpub }}.
-                                    <a href="{{ $p->paper_url }} " target="_blank">[url]</a> <a href="https://doi.org/{{ $p->paper_doi }}" target="_blank">[doi]</a>
-                                </th>
-                            </tr>
-@endforeach
-                        </thead>
-@endforeach
-                    </table>
-                </div> -->
