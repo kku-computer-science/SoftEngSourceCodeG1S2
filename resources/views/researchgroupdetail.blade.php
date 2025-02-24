@@ -143,14 +143,14 @@
                                                     <p href="#" class="text-decoration-none text-dark">
                                                         @if ($r->doctoral_degree == 'Ph.D.')
                                                             @if (app()->getLocale() == 'en')
-                                                                {{ $r->fname_en }} {{ $r->lname_en }}, Ph.D.
+                                                                {{ str_replace('Dr.', ' ', $r->{'position_'.app()->getLocale()}) }} {{ $r->fname_en }} {{ $r->lname_en }}, Ph.D.
                                                             @elseif (app()->getLocale() == 'th')
                                                                 {{ $r->{'position_' . app()->getLocale()} }}{{ $r->fname_th }}
                                                                 {{ $r->lname_th }}
                                                             @endif
                                                         @else
                                                             @if (app()->getLocale() == 'en')
-                                                                {{ $r->fname_en }} {{ $r->lname_en }}
+                                                                {{ $r->{'position_'.app()->getLocale()} }} {{ $r->fname_en }} {{ $r->lname_en }}
                                                             @elseif (app()->getLocale() == 'th')
                                                                 {{ $r->{'position_' . app()->getLocale()} }}{{ $r->fname_th }}
                                                                 {{ $r->lname_th }}
@@ -198,14 +198,14 @@
                                                         <p class="text-decoration-none text-dark">
                                                             @if ($r->doctoral_degree == 'Ph.D.')
                                                                 @if (app()->getLocale() == 'en')
-                                                                    {{ $r->fname_en }} {{ $r->lname_en }}, Ph.D.
+                                                                    {{ str_replace('Dr.', ' ', $r->{'position_'.app()->getLocale()}) }} {{ $r->fname_en }} {{ $r->lname_en }}, Ph.D.
                                                                 @elseif (app()->getLocale() == 'th')
                                                                     {{ $r->{'position_' . app()->getLocale()} }}{{ $r->fname_th }}
                                                                     {{ $r->lname_th }}
                                                                 @endif
                                                             @else
                                                                 @if (app()->getLocale() == 'en')
-                                                                    {{ $r->fname_en }} {{ $r->lname_en }}
+                                                                    {{ $r->{'position_'.app()->getLocale()} }} {{ $r->fname_en }} {{ $r->lname_en }}
                                                                 @elseif (app()->getLocale() == 'th')
                                                                     {{ $r->{'position_' . app()->getLocale()} }}{{ $r->fname_th }}
                                                                     {{ $r->lname_th }}
@@ -250,14 +250,14 @@
                                                         <p class="text-decoration-none text-dark">
                                                             @if ($r->doctoral_degree == 'Ph.D.')
                                                                 @if (app()->getLocale() == 'en')
-                                                                    {{ $r->fname_en }} {{ $r->lname_en }}, Ph.D.
+                                                                    {{ str_replace('Dr.', ' ', $r->{'position_'.app()->getLocale()}) }} {{ $r->fname_en }} {{ $r->lname_en }}, Ph.D.
                                                                 @elseif (app()->getLocale() == 'th')
                                                                     {{ $r->{'position_' . app()->getLocale()} }}{{ $r->fname_th }}
                                                                     {{ $r->lname_th }}
                                                                 @endif
                                                             @else
                                                                 @if (app()->getLocale() == 'en')
-                                                                    {{ $r->fname_en }} {{ $r->lname_en }}
+                                                                    {{ $r->{'position_'.app()->getLocale()} }} {{ $r->fname_en }} {{ $r->lname_en }}
                                                                 @elseif (app()->getLocale() == 'th')
                                                                     {{ $r->{'position_' . app()->getLocale()} }}{{ $r->fname_th }}
                                                                     {{ $r->lname_th }}
@@ -299,14 +299,14 @@
                                                     <p href="#" class="text-decoration-none text-dark">
                                                         @if ($r->doctoral_degree == 'Ph.D.')
                                                             @if (app()->getLocale() == 'en')
-                                                                {{ $r->fname_en }} {{ $r->lname_en }}, Ph.D.
+                                                                {{ str_replace('Dr.', ' ', $r->{'position_'.app()->getLocale()}) }} {{ $r->fname_en }} {{ $r->lname_en }}, Ph.D.
                                                             @elseif (app()->getLocale() == 'th')
                                                                 {{ $r->{'position_' . app()->getLocale()} }}{{ $r->fname_th }}
                                                                 {{ $r->lname_th }}
                                                             @endif
                                                         @else
                                                             @if (app()->getLocale() == 'en')
-                                                                {{ $r->fname_en }} {{ $r->lname_en }}
+                                                                {{ $r->{'position_'.app()->getLocale()} }} {{ $r->fname_en }} {{ $r->lname_en }}
                                                             @elseif (app()->getLocale() == 'th')
                                                                 {{ $r->{'position_' . app()->getLocale()} }}{{ $r->fname_th }}
                                                                 {{ $r->lname_th }}
@@ -345,14 +345,14 @@
                                                     <p href="#" class="text-decoration-none text-dark">
                                                         @if ($r->doctoral_degree == 'Ph.D.')
                                                             @if (app()->getLocale() == 'en')
-                                                                {{ $r->fname_en }} {{ $r->lname_en }}, Ph.D.
+                                                                {{ str_replace('Dr.', ' ', $r->{'position_'.app()->getLocale()}) }} {{ $r->fname_en }} {{ $r->lname_en }}, Ph.D.
                                                             @elseif (app()->getLocale() == 'th')
                                                                 {{ $r->{'position_' . app()->getLocale()} }}{{ $r->fname_th }}
                                                                 {{ $r->lname_th }}
                                                             @endif
                                                         @else
                                                             @if (app()->getLocale() == 'en')
-                                                                {{ $r->fname_en }} {{ $r->lname_en }}
+                                                                {{ $r->{'position_'.app()->getLocale()} }} {{ $r->fname_en }} {{ $r->lname_en }}
                                                             @elseif (app()->getLocale() == 'th')
                                                                 {{ $r->{'position_' . app()->getLocale()} }}{{ $r->fname_th }}
                                                                 {{ $r->lname_th }}
