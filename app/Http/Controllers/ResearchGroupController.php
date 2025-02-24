@@ -90,7 +90,7 @@ class ResearchGroupController extends Controller
     {
         $researchGroup = ResearchGroup::find($researchGroup->id);
         $this->authorize('update', $researchGroup);
-        $researchGroup = ResearchGroup::with(['user'])->where('id', $researchGroup->id)->first();
+        $researchGroup = ResearchGroup::with(['user','author'])->where('id', $researchGroup->id)->first();
         $users = User::role(["teacher", "student"])->get();
         $authors = Author::get();
         return view('research_groups.edit', compact('researchGroup', 'users', 'authors'));
@@ -103,14 +103,17 @@ class ResearchGroupController extends Controller
             'group_name_th' => 'required',
             'group_name_en' => 'required',
         ]);
-        if ($this->isDuplicateUserInRequest($request)) {
+        if ($this->isDuplicateUserInRequest($request) || $this->isDuplicateAuthorInRequest($request)) {
             return redirect()->back()->with('error', 'Duplicate user in request');
         }
+        \Log::info('Updating Research Group : ' . json_encode($request->all()));
         $input = $request->all();
         $input['group_image'] = $this->setImage($request, $researchGroup);
         $researchGroup->update($input);
         $researchGroup->user()->detach();
         $this->addUsersToResearchGroup($researchGroup, $request);
+        $researchGroup->author()->detach();
+        $this->addAuthorsToResearchGroup($researchGroup, $request);
         return redirect()->route('researchGroups.index')
             ->with('success', 'researchGroups updated successfully');
     }
@@ -126,15 +129,30 @@ class ResearchGroupController extends Controller
 
     private function isDuplicateUserInRequest(Request $request){
         $users = [];
-        if ($request->moreFields == null) {
+        if ($request->moreFields['users'] == null) {
             return false;
         }
-        foreach ($request->moreFields as $value) {
+        foreach ($request->moreFields['users'] as $value) {
             if ($value['userid'] != null) {
                 if (in_array($value['userid'], $users) || $value['userid'] == $request->head) {
                     return true;
                 }
                 $users[] = $value['userid'];
+            }
+        }
+        return false;
+    }
+    private function isDuplicateAuthorInRequest(Request $request){
+        $authors = [];
+        if ($request->authors == null) {
+            return false;
+        }
+        foreach ($request->authors as $value) {
+            if ($value['userid'] != null) {
+                if (in_array($value['userid'], $authors) || $value['userid'] == $request->head) {
+                    return true;
+                }
+                $authors[] = $value['userid'];
             }
         }
         return false;
@@ -167,11 +185,22 @@ class ResearchGroupController extends Controller
     }
     private function addUsersToResearchGroup($researchGroup, $request){
         $head = $request->head;
-        $researchGroup->user()->attach($head, ['role' => 1]);
-        if ($request->moreFields) {
-            foreach ($request->moreFields as $value) {
+        $researchGroup->user()->attach($head, ['role' => 1, 'permissions' => 1]);
+        if ($request->moreFields['users']) {
+            foreach ($request->moreFields['users'] as $value) {
                 if ($value['userid'] != null) {
-                    $researchGroup->user()->attach($value, ['role' => 2]);
+                    \Log::info('Adding user to research group : ' . json_encode($value));
+                    $researchGroup->user()->attach($value['userid'], ['role' => $value['role'], 'permissions' => $value['permission']]);
+                }
+            }
+        }
+    }
+
+    private function addAuthorsToResearchGroup($researchGroup, $request){
+        if ($request->authors) {
+            foreach ($request->authors as $value) {
+                if ($value['userid'] != null) {
+                    $researchGroup->author()->attach($value['userid']);
                 }
             }
         }
