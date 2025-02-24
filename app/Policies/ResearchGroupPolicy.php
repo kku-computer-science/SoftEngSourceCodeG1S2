@@ -80,21 +80,23 @@ class ResearchGroupPolicy
      * @param  \App\Models\ResearchGroup  $researchGroup
      * @return mixed
      */
+
+    // Only admin and HeadProject can delete
     public function delete(User $user, ResearchGroup $researchGroup)
     {
-        // ตรวจสอบว่าผู้ใช้มีบทบาท 'admin' หรือไม่
-        if ($user->role === 'admin') {
+        // ตรวจสอบว่าผู้ใช้เป็น admin
+        if ($user->hasRole('admin')) {
             return true;
         }
     
-        // ตรวจสอบบทบาทจากตาราง work_of_research_groups โดยใช้ user_id
-        $hasRole = DB::table('work_of_research_groups')
-            ->where('user_id', $user->id) // ใช้ user_id เพื่อเชื่อมโยงกับผู้ใช้
-            ->where('role', 1) // ตรวจสอบบทบาทเป็น headproject
+        // ตรวจสอบว่า user เป็น headproject ของ researchGroup 
+        $isHeadProject = DB::table('work_of_research_groups')
+            ->where('user_id', $user->id) // ตรวจสอบ user_id
+            ->where('research_group_id', $researchGroup->id) // ตรวจสอบว่าอยู่ใน researchGroup นี้
+            ->where('role', 1) // ตรวจสอบว่าเป็น headproject (role = 1)
             ->exists();
-    
-        return $hasRole;
-    }
+        return $isHeadProject;
+    }    
     
 
     /**
