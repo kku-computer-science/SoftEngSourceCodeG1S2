@@ -21,4 +21,10 @@ class Author extends Model
         return $this->belongsToMany(Academicwork::class,'author_of_academicworks')->withPivot('author_type');
         // OR return $this->belongsTo('App\User');
     }
+
+    public function researchGroup()
+    {
+        return $this->belongsToMany(ResearchGroup::class,'author_in_research_groups');
+        // OR return $this->belongsTo('App\User');
+    }
 }

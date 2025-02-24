@@ -2,36 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Author;
-use App\Models\Paper;
 use App\Models\ResearchGroup;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class ResearchGroupDetailController extends Controller
 {
     public function request($id)
     {
-        $resgd = ResearchGroup::with(['User.paper' => function ($query) {
-            return $query->orderBy('paper_yearpub','DESC');
-        }])->where('id','=',$id)->get();
+        $studentRoleId = Role::where("name", "student")->first()->id;
+        $teacherRoleId = Role::where("name", "teacher")->first()->id;
+        $resgd = ResearchGroup::with([
+            'user' => function ($query) {
+                $query->select('users.*', 'roles.name as role')
+                    ->join('work_of_research_groups as w', 'users.id', '=', 'w.user_id')
+                    ->selectRaw("
+                        CASE 
+                            WHEN w.role = 1 THEN 'Head'
+                            WHEN w.role = 2 THEN 'Member'
+                            WHEN w.role = 3 THEN 'Post-Doc'
+                            WHEN w.role = 4 THEN 'Visitors'
+                            ELSE 'Unknown' 
+                        END AS research_group_role
+                    ")
+                    ->leftJoin('model_has_roles as mh', 'users.id', '=', 'mh.model_id')
+                    ->leftJoin('roles', 'mh.role_id', '=', 'roles.id')
+                    ->orderBy('users.id');
+            }
+        ])->where('id', '=', $id)->get();
 
-        //return $resgd;
-        // $std = ResearchGroup::hasRole('student')::with(['User.paper' => function ($query) {
-        //     return $query->orderBy('paper_yearpub','DESC');
-        // }])->where('id','=',$id)->get();
-        // $ref = $resgd[0]->user[1]->fname_en;
-        // $rel = $resgd[0]->user[1]->lname_en;
-        // $author = Author::where([['author_fname', '=', $ref], ['author_lname', '=', $rel]])->get();
-        //return  $author;
+        $authorInRG = ResearchGroup::where('id', '=', $id)->first();
+        $authors = $authorInRG->author;
 
-        // $author = Paper::whereHas('author', function($q){
-        //     $q->where('author_fname', '=', 'Pongsathon');
-        // })->get();
-        // $author = collect($author);
-        //return  $author;
 
-        return view('researchgroupdetail', compact('resgd'));
-        //return $resgd;
-
+        return view('researchgroupdetail', compact('resgd', 'authors'));
     }
 }
