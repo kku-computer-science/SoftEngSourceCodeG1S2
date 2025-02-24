@@ -214,7 +214,10 @@ class UserController extends Controller
         $path = 'images/imag_user/';
         //return 'aaaaaa';
         $file = $request->file('admin_image');
-       $new_name = 'UIMG_'.date('Ymd').uniqid().'.jpg';
+        $userName = Auth::user()->fname_en . '_'. Auth::user()->lname_en;
+        $fileName = $userName . '.' . $file->getClientOriginalExtension();
+        $fileName = str_replace(' ','_', $fileName);
+        $new_name = $fileName;
         
         //dd(public_path());
         //Upload new image

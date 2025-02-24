@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\ResearchGroup;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class ResearchGroupDetailController extends Controller
 {
     public function request($id)
     {
+        $studentRoleId = Role::where("name", "student")->first()->id;
+        $teacherRoleId = Role::where("name", "teacher")->first()->id;
         $resgd = ResearchGroup::with([
             'user' => function ($query) {
-                $query->select('users.*')
+                $query->select('users.*', 'roles.name as role')
                     ->join('work_of_research_groups as w', 'users.id', '=', 'w.user_id')
                     ->selectRaw("
                         CASE 
@@ -28,6 +31,10 @@ class ResearchGroupDetailController extends Controller
             }
         ])->where('id', '=', $id)->get();
 
-        return view('researchgroupdetail', compact('resgd'));
+        $authorInRG = ResearchGroup::where('id', '=', $id)->first();
+        $authors = $authorInRG->author;
+
+
+        return view('researchgroupdetail', compact('resgd', 'authors'));
     }
 }
