@@ -25,6 +25,8 @@
                             <th>Group name (ไทย)</th>
                             <th>Head</th>
                             <th>Member</th>
+                            <th>Post-Doctoral</th>
+                            <th>Visiting</th>
                             <th width="280px">Action</th>
                         </tr>
                     </thead>
@@ -33,7 +35,9 @@
                         @foreach ($researchGroups as $i=>$researchGroup)
                         <tr>
                             <td>{{ $i+1 }}</td>
-                            <td>{{ Str::limit($researchGroup->group_name_th,50) }}</td>
+                            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 17vw; max-width: 17vw; line-height: 1.6; padding: 0.5em 0.75em;">
+                                {{ $researchGroup->group_name_th }}
+                            </td>                            
                             <td>
                                 @foreach($researchGroup->user as $user)
                                 @if ( $user->pivot->role == 1)
@@ -44,7 +48,7 @@
 
                                 @endforeach
                             </td>
-                            <td>
+                            <td style="white-space: normal; overflow: hidden; min-width: 8vw; line-height: 1.6; padding: 0.5em 0.75em;">
                                 @foreach($researchGroup->user as $user)
                                 @if ( $user->pivot->role == 2)
                                 {{ $user->fname_th}}
@@ -53,6 +57,22 @@
 
                                 @endforeach
                             </td>
+                            <td style="white-space: normal; overflow: hidden; min-width: 8vw; line-height: 1.6; padding: 0.5em 0.75em;">
+                                @php
+                                    $postDocs = collect($researchGroup->user)->filter(function($user) {
+                                        return $user->pivot->role == 3;
+                                    });
+                                @endphp
+                            
+                                {{ $postDocs->pluck('fname_th')->implode(', ') }}
+                            </td>
+                            <td style="white-space: normal; overflow: hidden; min-width: 8vw; line-height: 1.6; padding: 0.5em 0.75em;">
+                                @php
+                                    $visitingAuthors = $researchGroup->author->pluck('author_fname')->implode(', ');
+                                @endphp
+                            
+                                {{ $visitingAuthors }}
+                            </td>                                                
                             <td>
                                 <form action="{{ route('researchGroups.destroy',$researchGroup->id) }}" method="POST">
 
