@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ResearchGroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function __construct()
     {
         $this->middleware('permission:groups-list|groups-create|groups-edit|groups-delete', ['only' => ['index', 'show']]);
@@ -44,7 +39,6 @@ class ResearchGroupController extends Controller
         return view('research_groups.index', compact('researchGroups'));
     }
 
-    // Create new Research Group Form
     public function create()
     {
         $user = auth()->user();
@@ -74,7 +68,7 @@ class ResearchGroupController extends Controller
         $input['group_image'] = $this->setImage($request, $researchGroup);
         $researchGroup->update($input);
         $this->addUsersToResearchGroup($researchGroup, $request);
-        return redirect()->route('researchGroups.index')->with('success', 'research group created successfully.');
+        return redirect()->route('researchGroups.index')->with('success', 'Research group created successfully.');
     }
 
     public function show(ResearchGroup $researchGroup)
@@ -82,7 +76,6 @@ class ResearchGroupController extends Controller
         return view('research_groups.show', compact('researchGroup'));
     }
 
-    // Edit Research Group Form
     public function edit(ResearchGroup $researchGroup)
     {
         $this->authorize('update', $researchGroup);
@@ -92,29 +85,38 @@ class ResearchGroupController extends Controller
         return view('research_groups.edit', compact('researchGroup', 'users', 'authors'));
     }
 
-    // Edit Research Group Trigger
     public function update(Request $request, ResearchGroup $researchGroup)
     {
         $request->validate([
             'group_name_th' => 'required',
             'group_name_en' => 'required',
         ]);
+
         if ($this->isDuplicateUserInRequest($request) || $this->isDuplicateAuthorInRequest($request)) {
             return redirect()->back()->with('error', 'Duplicate user in request');
         }
+
         \Log::info('Updating Research Group : ' . json_encode($request->all()));
+
         $input = $request->all();
+
+        // ❌ ถ้าไม่ใช่ Admin ห้ามเปลี่ยนหัวหน้ากลุ่ม
+        if (!auth()->user()->hasRole('admin')) {
+            unset($input['head']);
+        }
+
         $input['group_image'] = $this->setImage($request, $researchGroup);
         $researchGroup->update($input);
+
         $researchGroup->user()->detach();
         $this->addUsersToResearchGroup($researchGroup, $request);
         $researchGroup->author()->detach();
         $this->addAuthorsToResearchGroup($researchGroup, $request);
+
         return redirect()->route('researchGroups.index')
-            ->with('success', 'researchGroups updated successfully');
+            ->with('success', 'Research group updated successfully');
     }
 
-    // Delete Research Group
     public function destroy(ResearchGroup $researchGroup)
     {
         $this->authorize('delete', $researchGroup);
