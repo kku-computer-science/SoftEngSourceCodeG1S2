@@ -65,7 +65,6 @@ class ResearchGroupController extends Controller
         }
         $input = $request->all();
         $researchGroup = ResearchGroup::create($input);
-        $this->addUsersToResearchGroup($researchGroup, $request);
         $researchGroup->update($input);
         $this->addUsersToResearchGroup($researchGroup, $request);
         return redirect()->route('researchGroups.index')->with('success', 'Research group created successfully.');
@@ -124,7 +123,7 @@ class ResearchGroupController extends Controller
     private function isDuplicateUserInRequest(Request $request)
     {
         $users = [];
-        if ($request->moreFields['users'] == null) {
+        if ($request->moreFields == null || $request->moreFields['users'] == null) {
             return false;
         }
         foreach ($request->moreFields['users'] as $value) {
@@ -185,12 +184,13 @@ class ResearchGroupController extends Controller
     {
         $head = null;
         if ($prev_head && !auth()->user()->hasRole('admin')) {
-            $researchGroup->user()->attach($prev_head, ['role' => 1, 'permissions' => 1]);
+            $head = $prev_head;
         }else{
             $head = $request->head;
         }
+        \Log::info('Adding head to research group : ' . $head);
         $researchGroup->user()->attach($head, ['role' => 1, 'permissions' => 1]);
-        if ($request->moreFields['users']) {
+        if ($request->moreFields && $request->moreFields['users']) {
             foreach ($request->moreFields['users'] as $value) {
                 if ($value['userid'] != null) {
                     \Log::info('Adding user to research group : ' . json_encode($value));
