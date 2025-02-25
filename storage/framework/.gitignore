@@ -6,4 +6,8 @@ maintenance.php
 routes.php
 routes.scanned.php
 schedule-*
+<<<<<<< HEAD
 services.json
+=======
+services.json
+>>>>>>> parent of 04ee77c (Update .gitignore and track storage/app/Orcid_to_DB/)
