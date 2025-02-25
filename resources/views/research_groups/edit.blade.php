@@ -71,17 +71,19 @@
                     </div>
 
                     <div class="form-group row">
-                        <p class="col-sm-3"><b>หัวหน้ากลุ่มวิจัย</b></p>
+                        <p class="col-sm-3"><b>หัวหน้ากลุ่มวิจัย</b></p>
                         <div class="col-sm-8">
-                            <select id='head0' name="head" class="form-control">
+                            <select id='head0' name="head" class="form-control"
+                                @if (!auth()->user()->hasRole('admin')) disabled @endif>
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" @if ($researchGroup->user->contains('id', $user->id) && $researchGroup->user->where('id', $user->id)->first()->pivot->role == 1) selected @endif>
+                                    <option value="{{ $user->id }}"
+                                        @if ($researchGroup->user->contains('id', $user->id) && $researchGroup->user->where('id', $user->id)->first()->pivot->role == 1) selected @endif>
                                         {{ $user->fname_th }} {{ $user->lname_th }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-                    </div>
+                    </div>                    
 
                     <div class="form-group row">
                         <p class="col-sm-3 pt-4"><b>สมาชิกกลุ่มวิจัย</b></p>
@@ -124,6 +126,13 @@
 @stop
 @section('javascript')
     <script>
+        $(document).ready(function() {
+            var isAdmin = @json(auth()->user()->hasRole('admin')); // ตรวจสอบว่าเป็น admin หรือไม่
+
+            if (!isAdmin) {
+                $("#head0").prop("disabled", true); // ถ้าไม่ใช่ admin ปิดการแก้ไข dropdown
+            }
+        });
         $(document).ready(function() {
             $("#head0").select2()
             $("#fund").select2()
