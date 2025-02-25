@@ -185,7 +185,7 @@ class ResearchGroupController extends Controller
         if (auth()->user()->hasRole('admin')){
             $head = $request->head;
         }else{
-            $head = $researchGroup->head->userid;
+            $head = $researchGroup->head->userId;
         }
         $researchGroup->user()->attach($head, ['role' => 1, 'permissions' => 1]);
         if ($request->moreFields['users']) {
