@@ -20,7 +20,8 @@
 				"DEVSENSE.phptools-vscode",
 				"DEVSENSE.profiler-php-vscode",
 				"mikestead.dotenv",
-				"onecentlin.laravel5-snippets"
+				"onecentlin.laravel5-snippets",
+				"SonarSource.sonarlint-vscode"
 			],
 			"settings": {}
 		}
