@@ -42,12 +42,38 @@
             <div class="row mt-1">
                 <p class="card-text col-sm-3"><b>สมาชิกกลุ่มวิจัย</b></p>
                 <p class="card-text col-sm-9">
-                    @foreach($researchGroup->user as $user)
-                    @if ( $user->pivot->role == 2)
-                    {{$user->position_th}}{{ $user->fname_th}} {{ $user->lname_th}},
-                    @endif
-                    @endforeach</p>
+                    @php
+                        $members = $researchGroup->user->filter(function($user) {
+                            return $user->pivot->role == 2;
+                        })->map(function($user) {
+                            return $user->position_th . ' ' . $user->fname_th . ' ' . $user->lname_th;
+                        })->implode(', ');
+                    @endphp
+                    {{ !empty($members) ? $members : '-' }}
+                </p>                
             </div>
+            <div class="row mt-1">
+                <p class="card-text col-sm-3"><b>นักวิจัยหลังปริญญาเอก</b></p>
+                <p class="card-text col-sm-9">
+                    @php
+                        $postDocs = $researchGroup->user->filter(function($user) {
+                            return $user->pivot->role == 3;
+                        })->map(function($user) {
+                            return $user->position_th . ' ' . $user->fname_th . ' ' . $user->lname_th;
+                        })->implode(', ');
+                    @endphp
+                    {{ !empty($postDocs) ? $postDocs : '-' }}
+                </p>                
+            </div>            
+            <div class="row mt-1">
+                <p class="card-text col-sm-3"><b>นักวิจัยภายนอก</b></p>
+                <p class="card-text col-sm-9">
+                    @php
+                        $visitingResearchers = $researchGroup->author->map(fn($author) => $author->author_fname . ' ' . $author->author_lname)->implode(', ');
+                    @endphp
+                    {{ !empty($visitingResearchers) ? $visitingResearchers : '-' }}
+                </p>                
+            </div>                                    
             <a class="btn btn-primary mt-5" href="{{ route('researchGroups.index') }}"> Back</a>
         </div>
     </div>
