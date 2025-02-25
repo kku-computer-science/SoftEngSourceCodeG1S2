@@ -149,19 +149,20 @@
                         '<option value="3" ' + (obj.pivot.role === 3 ? "selected" : "") + '>Post-Doc</option>' +
                         '<option value="4" ' + (obj.pivot.role === 4 ? "selected" : "") + '>Visitor</option>';
 
-                        var isAdmin = @json(auth()->user()->hasRole('admin')); // เช็คว่าเป็น admin หรือไม่
+                        var isAdmin = @json(auth()->user()->hasRole('admin')); // ตรวจสอบว่าเป็น admin หรือไม่
 
                         var permissionOptions;
                         if (isAdmin) {
-                            // ถ้าเป็น admin ให้กด dropdown ได้
+                            // Admin ใช้ dropdown แก้ไขได้
                             permissionOptions = '<select name="moreFields[users][' + i + '][permission]" class="form-control">' +
                                 '<option value="2" ' + (obj.pivot.permissions === 2 ? "selected" : "") + '>View</option>' +
                                 '<option value="1" ' + (obj.pivot.permissions === 1 ? "selected" : "") + '>Edit</option>' +
                             '</select>';
                         } else {
-                            // ถ้าไม่ใช่ admin ให้แสดงเป็น text และแก้ไขไม่ได้
+                            // สมาชิกทั่วไปแค่ดูได้ แต่แก้ไม่ได้
                             permissionOptions = '<input type="text" class="form-control" value="' + 
-                                (obj.pivot.permissions === 1 ? "Edit" : "View") + '" readonly>';
+                                (obj.pivot.permissions === 1 ? "Edit" : "View") + '" readonly>' +
+                                '<input type="hidden" name="moreFields[users][' + i + '][permission]" value="' + obj.pivot.permissions + '">';
                         }
 
                         $("#dynamicAddRemove").append(
@@ -174,8 +175,9 @@
                             '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
                             '</tr>'
                         );
-                    document.getElementById("selUser" + i).value = obj.id;
-                    $("#selUser" + i).select2();
+                        document.getElementById("selUser" + i).value = obj.id;
+                        $("#selUser" + i).select2();
+
                 }
             }
             $("#add-btn2").click(function() {
@@ -190,14 +192,15 @@
 
                 var permissionOptions;
                 if (isAdmin) {
-                    // ถ้าเป็น admin ให้ใช้ dropdown
+                    // ถ้าเป็น admin ให้ dropdown แก้ไข permission ได้
                     permissionOptions = '<select name="moreFields[users][' + i + '][permission]" class="form-control">' +
-                        '<option value="2">View</option>' +
-                        '<option value="1">Edit</option>' +
+                        '<option value="2" selected>View</option>' + // ค่าเริ่มต้นเป็น View
+                        '<option value="1">Edit</option>' + 
                     '</select>';
                 } else {
-                    // ถ้าไม่ใช่ admin ให้ใช้ input ธรรมดา
-                    permissionOptions = '<input type="text" class="form-control" value="View" readonly>';
+                    // ถ้าไม่ใช่ admin ให้ค่า permission เป็น 2 (View) และปิดการแก้ไข
+                    permissionOptions = '<input type="text" class="form-control" value="View" readonly>' +
+                                        '<input type="hidden" name="moreFields[users][' + i + '][permission]" value="2">';
                 }
 
                 var newRow = '<tr>' +
@@ -206,7 +209,7 @@
                     '<option value="">Select User</option>' + userOptions + '</select></td>' +
                     '<td><select name="moreFields[users][' + i + '][role]" class="form-control">' +
                     roleOptions + '</select></td>' +
-                    '<td>' + permissionOptions + '</td>' + // แสดงแค่ 1 element ไม่มีการซ้อน
+                    '<td>' + permissionOptions + '</td>' + 
                     '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
                     '</tr>';
                 $("#dynamicAddRemove").append(newRow);
