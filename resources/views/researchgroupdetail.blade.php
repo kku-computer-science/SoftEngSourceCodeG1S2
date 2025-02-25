@@ -286,7 +286,7 @@
                         <div class="mt-5">
                             <hr>
                             <h1 class="text-center my-4">
-                                Post-Doctoral Scholars
+                                Post-Doctoral
                             </h1>
                             <div class="row justify-content-center">
                                 @foreach ($rg->user->where('research_group_role', 'Post-Doc') as $r)
