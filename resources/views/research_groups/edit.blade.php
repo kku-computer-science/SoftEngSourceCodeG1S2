@@ -70,21 +70,18 @@
                         </div>
                     </div>
 
-                    @if(auth()->user()->hasRole('admin'))
                     <div class="form-group row">
                         <p class="col-sm-3"><b>หัวหน้ากลุ่มวิจัย</b></p>
                         <div class="col-sm-8">
                             <select id='head0' name="head" class="form-control">
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}"
-                                        @if ($researchGroup->user->contains('id', $user->id) && $researchGroup->user->where('id', $user->id)->first()->pivot->role == 1) selected @endif>
+                                    <option value="{{ $user->id }}" @if ($researchGroup->user->contains('id', $user->id) && $researchGroup->user->where('id', $user->id)->first()->pivot->role == 1) selected @endif>
                                         {{ $user->fname_th }} {{ $user->lname_th }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    @endif
 
                     <div class="form-group row">
                         <p class="col-sm-3 pt-4"><b>สมาชิกกลุ่มวิจัย</b></p>

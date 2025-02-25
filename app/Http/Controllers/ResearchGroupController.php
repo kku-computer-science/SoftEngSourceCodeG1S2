@@ -65,7 +65,7 @@ class ResearchGroupController extends Controller
         }
         $input = $request->all();
         $researchGroup = ResearchGroup::create($input);
-        $input['group_image'] = $this->setImage($request, $researchGroup);
+        $this->addUsersToResearchGroup($researchGroup, $request);
         $researchGroup->update($input);
         $this->addUsersToResearchGroup($researchGroup, $request);
         return redirect()->route('researchGroups.index')->with('success', 'Research group created successfully.');
@@ -104,9 +104,9 @@ class ResearchGroupController extends Controller
 
         $input['group_image'] = $this->setImage($request, $researchGroup);
         $researchGroup->update($input);
-
+        $prev_head = optional($researchGroup->user()->wherePivot("role", 1)->first())->id;
         $researchGroup->user()->detach();
-        $this->addUsersToResearchGroup($researchGroup, $request);
+        $this->addUsersToResearchGroup($researchGroup, $request, $prev_head);
         $researchGroup->author()->detach();
         $this->addAuthorsToResearchGroup($researchGroup, $request);
 
@@ -181,12 +181,13 @@ class ResearchGroupController extends Controller
         return in_array($file->extension(), $permitted_extensions);
     }
 
-    private function addUsersToResearchGroup($researchGroup, $request)
+    private function addUsersToResearchGroup($researchGroup, $request, $prev_head = null)
     {
-        if (auth()->user()->hasRole('admin')){
-            $head = $request->head;
+        $head = null;
+        if ($prev_head && !auth()->user()->hasRole('admin')) {
+            $researchGroup->user()->attach($prev_head, ['role' => 1, 'permissions' => 1]);
         }else{
-            $head = $researchGroup->head->userId;
+            $head = $request->head;
         }
         $researchGroup->user()->attach($head, ['role' => 1, 'permissions' => 1]);
         if ($request->moreFields['users']) {
