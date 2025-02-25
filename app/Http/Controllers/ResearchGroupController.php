@@ -102,8 +102,10 @@ class ResearchGroupController extends Controller
 
         // ❌ ถ้าไม่ใช่ Admin ห้ามเปลี่ยนหัวหน้ากลุ่ม
         if (!auth()->user()->hasRole('admin')) {
-            unset($input['head']);
+        unset($input['head']);
+        $input['head'] = $researchGroup->head; // กำหนดค่าหัวหน้ากลุ่มเดิมกลับไป
         }
+
 
         $input['group_image'] = $this->setImage($request, $researchGroup);
         $researchGroup->update($input);
