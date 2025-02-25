@@ -134,120 +134,168 @@
             }
         });
         $(document).ready(function() {
-            $("#head0").select2()
-            $("#fund").select2()
-            var j = 0;
-            var researchGroup = <?php echo json_encode($researchGroup['user'] ?? []); ?>;
+            $("#head0").select2();
+            
+            var isAdmin = @json(auth()->user()->hasRole('admin'));
+            if (!isAdmin) {
+                $("#head0").prop("disabled", true);
+            }
+            
             var i = 0;
-            for (i = 0; i < researchGroup.length; i++) {
-                var obj = researchGroup[i];
+            var researchGroup = @json($researchGroup['user'] ?? []);
+            researchGroup.forEach(function(obj) {
                 if (obj.pivot.role !== 1) {
-                    var userOptions =
-                        '@foreach ($users as $user)<option value="{{ $user->id }}">{{ $user->fname_th }} {{ $user->lname_th }}</option>@endforeach';
-                    var roleOptions = '<option value="2" ' + (obj.pivot.role === 2 ? "selected" : "") +
-                        '>Member</option>' +
-                        '<option value="3" ' + (obj.pivot.role === 3 ? "selected" : "") + '>Post-Doc</option>' +
-                        '<option value="4" ' + (obj.pivot.role === 4 ? "selected" : "") + '>Visitor</option>';
-
-                        var isAdmin = @json(auth()->user()->hasRole('admin')); // ตรวจสอบว่าเป็น admin หรือไม่
-
-                        var permissionOptions;
-                        if (isAdmin) {
-                            // Admin ใช้ dropdown แก้ไขได้
-                            permissionOptions = '<select name="moreFields[users][' + i + '][permission]" class="form-control">' +
-                                '<option value="2" ' + (obj.pivot.permissions === 2 ? "selected" : "") + '>View</option>' +
-                                '<option value="1" ' + (obj.pivot.permissions === 1 ? "selected" : "") + '>Edit</option>' +
-                            '</select>';
-                        } else {
-                            // สมาชิกทั่วไปแค่ดูได้ แต่แก้ไม่ได้
-                            permissionOptions = '<input type="text" class="form-control" value="' + 
-                                (obj.pivot.permissions === 1 ? "Edit" : "View") + '" readonly>' +
-                                '<input type="hidden" name="moreFields[users][' + i + '][permission]" value="' + obj.pivot.permissions + '">';
-                        }
-
-                        $("#dynamicAddRemove").append(
-                            '<tr>' +
-                            '<td><select id="selUser' + i + '" name="moreFields[users][' + i +
-                            '][userid]" style="width: 200px;">' + userOptions + '</select></td>' +
-                            '<td><select name="moreFields[users][' + i + '][role]" class="form-control">' +
-                            roleOptions + '</select></td>' +
-                            '<td>' + permissionOptions + '</td>' + 
-                            '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
-                            '</tr>'
-                        );
-                        document.getElementById("selUser" + i).value = obj.id;
-                        $("#selUser" + i).select2();
-
+                    appendMemberRow(i, obj.id, obj.pivot.role, obj.pivot.permissions);
+                    i++;
                 }
-            }
-            $("#add-btn2").click(function() {
-                ++i;
-                var userOptions =
-                    '@foreach ($users as $user)<option value="{{ $user->id }}">{{ $user->fname_th }} {{ $user->lname_th }}</option>@endforeach';
-                var roleOptions = '<option value="2">Member</option>' +
-                    '<option value="3">Post-Doc</option>' +
-                    '<option value="4">Visitor</option>';
-
-                var isAdmin = @json(auth()->user()->hasRole('admin')); // เช็คว่าเป็น admin หรือไม่
-
-                var permissionOptions;
-                if (isAdmin) {
-                    // ถ้าเป็น admin ให้ dropdown แก้ไข permission ได้
-                    permissionOptions = '<select name="moreFields[users][' + i + '][permission]" class="form-control">' +
-                        '<option value="2" selected>View</option>' + // ค่าเริ่มต้นเป็น View
-                        '<option value="1">Edit</option>' + 
-                    '</select>';
-                } else {
-                    // ถ้าไม่ใช่ admin ให้ค่า permission เป็น 2 (View) และปิดการแก้ไข
-                    permissionOptions = '<input type="text" class="form-control" value="View" readonly>' +
-                                        '<input type="hidden" name="moreFields[users][' + i + '][permission]" value="2">';
-                }
-
-                var newRow = '<tr>' +
-                    '<td><select id="selUser' + i + '" name="moreFields[users][' + i +
-                    '][userid]" style="width: 200px;">' +
-                    '<option value="">Select User</option>' + userOptions + '</select></td>' +
-                    '<td><select name="moreFields[users][' + i + '][role]" class="form-control">' +
-                    roleOptions + '</select></td>' +
-                    '<td>' + permissionOptions + '</td>' + 
-                    '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
-                    '</tr>';
-                $("#dynamicAddRemove").append(newRow);
-                $("#selUser" + i).select2();
-            });
-
-            var authors = <?php echo json_encode($researchGroup['author'] ?? []); ?>;
-            for (var j = 0; j < authors.length; j++) {
-                var author = authors[j];
-                var authorOptions = '@foreach ($authors as $author)<option value="{{ $author->id }}">{{ $author->author_fname }} {{ $author->author_lname }}</option>@endforeach';
-                $("#AuthorsDynamicAddRemove").append( '<tr>' +
-                    '<td><select id="selAuthor' + j + '" name="authors[' + j +
-                    '][userid]" style="width: 200px;">' + authorOptions + '</select></td>' +
-                    '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
-                    '</tr>');
-                document.getElementById("selAuthor" + j).value = author.id;
-                $("#selAuthor" + j).select2();
-            }
-            $(document).on('click', '.remove-tr', function() {
-                $(this).parents('tr').remove();
             });
             
-            $("#add-btn2-authors").click(function() {
-                ++j;
-                var userOptions =
-                    '@foreach ($authors as $author)<option value="{{ $author->id }}">{{ $author->author_fname }} {{ $author->author_lname }}</option>@endforeach';
+            $("#add-btn2").click(function() {
+                appendMemberRow(i, "", "2", "2");
+                i++;
+            });
+            
+            function appendMemberRow(index, userId, roleVal, permissionVal) {
+                var userOptions = '@foreach ($users as $user)<option value="{{ $user->id }}" ' +
+                                (userId == "{{ $user->id }}" ? "selected" : "") + '>{{ $user->fname_th }} {{ $user->lname_th }}</option>@endforeach';
+                var roleOptions = '<option value="2" ' + (roleVal == "2" ? "selected" : "") + '>Member</option>' +
+                                '<option value="3" ' + (roleVal == "3" ? "selected" : "") + '>Post-Doc</option>' +
+                                '<option value="4" ' + (roleVal == "4" ? "selected" : "") + '>Visitor</option>';
+
+                var permissionOptions = isAdmin ? 
+                    '<select name="moreFields[users][' + index + '][permission]" class="form-control">' +
+                        '<option value="2" ' + (permissionVal == "2" ? "selected" : "") + '>View</option>' +
+                        '<option value="1" ' + (permissionVal == "1" ? "selected" : "") + '>Edit</option>' +
+                    '</select>' :
+                    '<input type="text" class="form-control" value="' + (permissionVal == "1" ? "Edit" : "View") + '" readonly>' +
+                    '<input type="hidden" name="moreFields[users][' + index + '][permission]" value="' + permissionVal + '">';
+
                 var newRow = '<tr>' +
-                    '<td><select id="selAuthor' + j + '" name="authors[' + j +
-                    '][userid]" style="width: 200px;">' +
+                    '<td><select id="selUser' + index + '" name="moreFields[users][' + index + '][userid]" class="member-select form-control" style="width: 200px;">' +
                     '<option value="">Select User</option>' + userOptions + '</select></td>' +
+                    '<td><select name="moreFields[users][' + index + '][role]" class="form-control">' + roleOptions + '</select></td>' +
+                    '<td>' + permissionOptions + '</td>' +
                     '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
                     '</tr>';
+                
+                $("#dynamicAddRemove").append(newRow);
+                $("#selUser" + index).select2();
+                if (userId) {
+                    $("#selUser" + index).val(userId).trigger("change");
+                }
+                updateMemberOptions();
+            }
+            
+            $(document).on("click", ".remove-tr", function() {
+                $(this).closest("tr").remove();
+                updateMemberOptions();
+            });
+            
+            $(document).on("change", ".member-select, #head0", function() {
+                updateMemberOptions();
+            });
+            
+            function updateMemberOptions() {
+                var selectedValues = new Set();
+                var headValue = $("#head0").val();
+                if (headValue) {
+                    selectedValues.add(headValue);
+                }
+
+                $(".member-select").each(function() {
+                    var value = $(this).val();
+                    if (value) {
+                        selectedValues.add(value);
+                    }
+                });
+                
+                $(".member-select, #head0").each(function() {
+                    var $this = $(this);
+                    var currentValue = $this.val();
+                    $this.find("option").each(function() {
+                        var optionValue = $(this).val();
+                        if (selectedValues.has(optionValue) && optionValue !== "" && optionValue !== currentValue) {
+                            $(this).prop("disabled", true);
+                        } else {
+                            $(this).prop("disabled", false);
+                        }
+                    });
+                });
+
+                $("#head0").select2();
+                $(".member-select").select2();
+            }
+            
+            $("#head0").on("change", function(){
+                updateMemberOptions();
+            });
+
+            $("form").submit(function(event) {
+                $(".member-select").each(function() {
+                    if ($(this).val() === "") {
+                        $(this).closest("tr").remove();
+                    }
+                });
+            });
+            
+            // Add authors functionality
+            var j = 0;
+            var authors = @json($researchGroup['author'] ?? []);
+            authors.forEach(function(author) {
+                appendAuthorRow(j, author.id);
+                j++;
+            });
+
+            $("#add-btn2-authors").click(function() {
+                appendAuthorRow(j, "");
+                j++;
+            });
+
+            function appendAuthorRow(index, authorId) {
+                var authorOptions = '@foreach ($authors as $author)<option value="{{ $author->id }}">{{ $author->author_fname }} {{ $author->author_lname }}</option>@endforeach';
+                var newRow = '<tr>' +
+                    '<td><select id="selAuthor' + index + '" name="authors[' + index + '][userid]" class="author-select form-control" style="width: 200px;">' +
+                    '<option value="">Select Author</option>' + authorOptions + '</select></td>' +
+                    '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
+                    '</tr>';
+                
                 $("#AuthorsDynamicAddRemove").append(newRow);
-                $("#selAuthor" + j).select2();
+                $("#selAuthor" + index).select2();
+                if (authorId) {
+                    $("#selAuthor" + index).val(authorId).trigger("change");
+                }
+                updateAuthorOptions();
+            }
+            
+            $(document).on("click", ".remove-tr", function() {
+                $(this).closest("tr").remove();
+                updateAuthorOptions();
             });
-            $(document).on('click', '.remove-tr', function() {
-                $(this).parents('tr').remove();
-            });
+            
+            function updateAuthorOptions() {
+                var selectedValues = new Set();
+                $(".author-select").each(function() {
+                    var value = $(this).val();
+                    if (value) {
+                        selectedValues.add(value);
+                    }
+                });
+                
+                $(".author-select").each(function() {
+                    var $this = $(this);
+                    var currentValue = $this.val();
+                    $this.find("option").each(function() {
+                        var optionValue = $(this).val();
+                        if (selectedValues.has(optionValue) && optionValue !== "" && optionValue !== currentValue) {
+                            $(this).prop("disabled", true);
+                        } else {
+                            $(this).prop("disabled", false);
+                        }
+                    });
+                });
+                
+                $(".author-select").select2();
+            }
         });
         $(document).ready(function() {
             $("#group_image").change(function() {
