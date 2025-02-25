@@ -70,7 +70,7 @@
                         </div>
                     </div>
 
-                    @if(auth()->user()->is_admin)
+                    @if(auth()->user()->hasRole('admin'))
                     <div class="form-group row">
                         <p class="col-sm-3"><b>หัวหน้ากลุ่มวิจัย</b></p>
                         <div class="col-sm-8">
@@ -96,6 +96,20 @@
                                     <th>Permission</th>
                                     <th>
                                         <button type="button" name="add" id="add-btn2"
+                                            class="btn btn-success btn-sm add">
+                                            <i class="mdi mdi-plus"></i>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                        <p class="col-sm-3 pt-4"><b>Other Visitors</b></p>
+                        <div class="col-sm-8">
+                            <table class="table" id="AuthorsDynamicAddRemove">
+                                <tr>
+                                    <th>Member</th>
+                                    <th>
+                                        <button type="button" name="add" id="add-btn2-authors"
                                             class="btn btn-success btn-sm add">
                                             <i class="mdi mdi-plus"></i>
                                         </button>

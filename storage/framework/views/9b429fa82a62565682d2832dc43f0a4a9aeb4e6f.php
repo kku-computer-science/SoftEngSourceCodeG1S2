@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.bootstrap4.min.css">
@@ -13,8 +12,10 @@
     <div class="card" style="padding: 16px;">
         <div class="card-body">
             <h4 class="card-title">กลุ่มวิจัย</h4>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create', App\Models\ResearchGroup::class)): ?>
             <a class="btn btn-primary btn-menu btn-icon-text btn-sm mb-3" href="<?php echo e(route('researchGroups.create')); ?>"><i
-                    class="mdi mdi-plus btn-icon-prepend"></i> ADD</a>
+                class="mdi mdi-plus btn-icon-prepend"></i> ADD</a>
+            <?php endif; ?>
             <!-- <div class="table-responsive"> -->
                 <table id ="example1" class="table table-striped">
                     <thead>
@@ -23,6 +24,8 @@
                             <th>Group name (ไทย)</th>
                             <th>Head</th>
                             <th>Member</th>
+                            <th>Post-Doctoral</th>
+                            <th>Visiting</th>
                             <th width="280px">Action</th>
                         </tr>
                     </thead>
@@ -31,7 +34,10 @@
                         <?php $__currentLoopData = $researchGroups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i=>$researchGroup): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td><?php echo e($i+1); ?></td>
-                            <td><?php echo e(Str::limit($researchGroup->group_name_th,50)); ?></td>
+                            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 17vw; max-width: 17vw; line-height: 1.6; padding: 0.5em 0.75em;">
+                                <?php echo e($researchGroup->group_name_th); ?>
+
+                            </td>                            
                             <td>
                                 <?php $__currentLoopData = $researchGroup->user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if( $user->pivot->role == 1): ?>
@@ -43,7 +49,7 @@
 
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </td>
-                            <td>
+                            <td style="white-space: normal; overflow: hidden; min-width: 8vw; line-height: 1.6; padding: 0.5em 0.75em;">
                                 <?php $__currentLoopData = $researchGroup->user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if( $user->pivot->role == 2): ?>
                                 <?php echo e($user->fname_th); ?>
@@ -53,6 +59,24 @@
 
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </td>
+                            <td style="white-space: normal; overflow: hidden; min-width: 8vw; line-height: 1.6; padding: 0.5em 0.75em;">
+                                <?php
+                                    $postDocs = collect($researchGroup->user)->filter(function($user) {
+                                        return $user->pivot->role == 3;
+                                    });
+                                ?>
+                            
+                                <?php echo e($postDocs->pluck('fname_th')->implode(', ')); ?>
+
+                            </td>
+                            <td style="white-space: normal; overflow: hidden; min-width: 8vw; line-height: 1.6; padding: 0.5em 0.75em;">
+                                <?php
+                                    $visitingAuthors = $researchGroup->author->pluck('author_fname')->implode(', ');
+                                ?>
+                            
+                                <?php echo e($visitingAuthors); ?>
+
+                            </td>                                                
                             <td>
                                 <form action="<?php echo e(route('researchGroups.destroy',$researchGroup->id)); ?>" method="POST">
 
