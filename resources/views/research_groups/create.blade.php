@@ -56,12 +56,18 @@
                             <textarea name="group_detail_en" value="{{ old('group_detail_en') }}" class="form-control" style="height:90px"></textarea>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <p class="col-sm-3"><b>image</b></p>
                         <div class="col-sm-8">
-                            <input type="file" name="group_image" class="form-control" value="{{ old('group_image') }}">
+                            <input type="file" name="group_image" class="form-control" id="group_image"
+                                accept="image/png, image/jpeg, image/jpg, image/gif">
+                            <small class="text-muted">Allowed file types: .png, .jpeg, .jpg, .gif</small>
+                            <p id="file-error" class="text-danger" style="display: none;">Invalid file type. Please upload an image file.</p>
                         </div>
                     </div>
+                    
+
                     <div class="form-group row">
                         <p class="col-sm-3"><b>หัวหน้ากลุ่มวิจัย</b></p>
                         <div class="col-sm-8">
@@ -130,6 +136,21 @@
                 $(this).parents('tr').remove();
             });
 
+        });
+        $(document).ready(function() {
+            $("#group_image").change(function() {
+                var file = this.files[0];
+                if (file) {
+                    var fileType = file.type;
+                    var validImageTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
+                    if (!validImageTypes.includes(fileType)) {
+                        $("#file-error").show();
+                        this.value = ""; // รีเซ็ต input ถ้าประเภทไฟล์ไม่ถูกต้อง
+                    } else {
+                        $("#file-error").hide();
+                    }
+                }
+            });
         });
     </script>
 @stop
