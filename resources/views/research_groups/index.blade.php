@@ -49,14 +49,14 @@
                                 @endforeach
                             </td>
                             <td style="white-space: normal; overflow: hidden; min-width: 8vw; line-height: 1.6; padding: 0.5em 0.75em;">
-                                @foreach($researchGroup->user as $user)
-                                @if ( $user->pivot->role == 2)
-                                {{ $user->fname_th}}
-                                @if (!$loop->last),@endif
-                                @endif
-
-                                @endforeach
-                            </td>
+                                @php
+                                    $members = collect($researchGroup->user)->filter(function($user) {
+                                        return $user->pivot->role == 2;
+                                    });
+                                @endphp
+                            
+                                {{ $members->pluck('fname_th')->implode(', ') }}
+                            </td>                            
                             <td style="white-space: normal; overflow: hidden; min-width: 8vw; line-height: 1.6; padding: 0.5em 0.75em;">
                                 @php
                                     $postDocs = collect($researchGroup->user)->filter(function($user) {
