@@ -139,20 +139,32 @@
                         '>Member</option>' +
                         '<option value="3" ' + (obj.pivot.role === 3 ? "selected" : "") + '>Post-Doc</option>' +
                         '<option value="4" ' + (obj.pivot.role === 4 ? "selected" : "") + '>Visitor</option>';
-                    var permissionOptions = '<option value="2" ' + (obj.pivot.permissions === 2 ? "selected" : "") +
-                        '>View</option>' +
-                        '<option value="1" ' + (obj.pivot.permissions === 1 ? "selected" : "") + '>Edit</option>';
-                    $("#dynamicAddRemove").append(
-                        '<tr>' +
-                        '<td><select id="selUser' + i + '" name="moreFields[users][' + i +
-                        '][userid]" style="width: 200px;">' + userOptions + '</select></td>' +
-                        '<td><select name="moreFields[users][' + i + '][role]" class="form-control">' +
-                        roleOptions + '</select></td>' +
-                        '<td><select name="moreFields[users][' + i + '][permission]" class="form-control">' +
-                        permissionOptions + '</select></td>' +
-                        '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
-                        '</tr>'
-                    );
+                        
+                        var isAdmin = @json(auth()->user()->hasRole('admin')); // เช็คว่าเป็น admin หรือไม่
+
+                        var permissionOptions;
+                        if (isAdmin) {
+                            // ถ้าเป็น admin ให้กด dropdown ได้
+                            permissionOptions = '<select name="moreFields[users][' + i + '][permission]" class="form-control">' +
+                                '<option value="2" ' + (obj.pivot.permissions === 2 ? "selected" : "") + '>View</option>' +
+                                '<option value="1" ' + (obj.pivot.permissions === 1 ? "selected" : "") + '>Edit</option>' +
+                            '</select>';
+                        } else {
+                            // ถ้าไม่ใช่ admin ให้แสดงเป็น text และแก้ไขไม่ได้
+                            permissionOptions = '<input type="text" class="form-control" value="' + 
+                                (obj.pivot.permissions === 1 ? "Edit" : "View") + '" readonly>';
+                        }
+
+                        $("#dynamicAddRemove").append(
+                            '<tr>' +
+                            '<td><select id="selUser' + i + '" name="moreFields[users][' + i +
+                            '][userid]" style="width: 200px;">' + userOptions + '</select></td>' +
+                            '<td><select name="moreFields[users][' + i + '][role]" class="form-control">' +
+                            roleOptions + '</select></td>' +
+                            '<td>' + permissionOptions + '</td>' + 
+                            '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
+                            '</tr>'
+                        );
                     document.getElementById("selUser" + i).value = obj.id;
                     $("#selUser" + i).select2();
                 }
