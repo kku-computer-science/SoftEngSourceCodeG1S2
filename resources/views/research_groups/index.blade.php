@@ -54,7 +54,7 @@
                                         return $user->pivot->role == 2;
                                     });
                                 @endphp
-                            
+                                {{-- use pluck --}}
                                 {{ $members->pluck('fname_th')->implode(', ') }}
                             </td>                            
                             <td style="white-space: normal; overflow: hidden; min-width: 8vw; line-height: 1.6; padding: 0.5em 0.75em;">
