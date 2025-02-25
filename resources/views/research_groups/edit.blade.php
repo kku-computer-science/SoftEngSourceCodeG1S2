@@ -139,7 +139,7 @@
                         '>Member</option>' +
                         '<option value="3" ' + (obj.pivot.role === 3 ? "selected" : "") + '>Post-Doc</option>' +
                         '<option value="4" ' + (obj.pivot.role === 4 ? "selected" : "") + '>Visitor</option>';
-                        
+
                         var isAdmin = @json(auth()->user()->hasRole('admin')); // เช็คว่าเป็น admin หรือไม่
 
                         var permissionOptions;
@@ -176,21 +176,34 @@
                 var roleOptions = '<option value="2">Member</option>' +
                     '<option value="3">Post-Doc</option>' +
                     '<option value="4">Visitor</option>';
-                var permissionOptions = '<option value="2">View</option>' +
-                    '<option value="1">Edit</option>';
+
+                var isAdmin = @json(auth()->user()->hasRole('admin')); // เช็คว่าเป็น admin หรือไม่
+
+                var permissionOptions;
+                if (isAdmin) {
+                    // ถ้าเป็น admin ให้ใช้ dropdown
+                    permissionOptions = '<select name="moreFields[users][' + i + '][permission]" class="form-control">' +
+                        '<option value="2">View</option>' +
+                        '<option value="1">Edit</option>' +
+                    '</select>';
+                } else {
+                    // ถ้าไม่ใช่ admin ให้ใช้ input ธรรมดา
+                    permissionOptions = '<input type="text" class="form-control" value="View" readonly>';
+                }
+
                 var newRow = '<tr>' +
                     '<td><select id="selUser' + i + '" name="moreFields[users][' + i +
                     '][userid]" style="width: 200px;">' +
                     '<option value="">Select User</option>' + userOptions + '</select></td>' +
                     '<td><select name="moreFields[users][' + i + '][role]" class="form-control">' +
                     roleOptions + '</select></td>' +
-                    '<td><select name="moreFields[users][' + i + '][permission]" class="form-control">' +
-                    permissionOptions + '</select></td>' +
+                    '<td>' + permissionOptions + '</td>' + // แสดงแค่ 1 element ไม่มีการซ้อน
                     '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
                     '</tr>';
                 $("#dynamicAddRemove").append(newRow);
                 $("#selUser" + i).select2();
             });
+
             var authors = <?php echo json_encode($researchGroup['author'] ?? []); ?>;
             for (var j = 0; j < authors.length; j++) {
                 var author = authors[j];
