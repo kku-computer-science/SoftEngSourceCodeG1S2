@@ -81,6 +81,7 @@ class ResearchGroupController extends Controller
 
     public function show(ResearchGroup $researchGroup)
     {
+        $researchGroup->load(['user', 'author']);
         return view('research_groups.show', compact('researchGroup'));
     }
 
