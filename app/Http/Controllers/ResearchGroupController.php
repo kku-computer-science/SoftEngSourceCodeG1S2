@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ResearchGroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function __construct()
     {
         $this->middleware('permission:groups-list|groups-create|groups-edit|groups-delete', ['only' => ['index', 'show']]);
@@ -44,7 +39,6 @@ class ResearchGroupController extends Controller
         return view('research_groups.index', compact('researchGroups'));
     }
 
-    // Create new Research Group Form
     public function create()
     {
         $user = auth()->user();
@@ -58,15 +52,13 @@ class ResearchGroupController extends Controller
         $authors = Author::get();
         return response()->view('research_groups.create', compact('users', 'funds', 'authors'));
     }
-    
-    // Create new Research Group Trigger
+
     public function store(Request $request)
     {
         $request->validate([
             'group_name_th' => 'required',
             'group_name_en' => 'required',
             'head' => 'required',
-            //'group_image' => 'required|mimes:png,jpg,jpeg|max:2048',
         ]);
         if ($this->isDuplicateUserInRequest($request)) {
             return redirect()->back()->with('error', 'Duplicate user in request');
@@ -76,7 +68,7 @@ class ResearchGroupController extends Controller
         $input['group_image'] = $this->setImage($request, $researchGroup);
         $researchGroup->update($input);
         $this->addUsersToResearchGroup($researchGroup, $request);
-        return redirect()->route('researchGroups.index')->with('success', 'research group created successfully.');
+        return redirect()->route('researchGroups.index')->with('success', 'Research group created successfully.');
     }
 
     public function show(ResearchGroup $researchGroup)
@@ -85,11 +77,8 @@ class ResearchGroupController extends Controller
         return view('research_groups.show', compact('researchGroup'));
     }
 
-
-    // Edit Research Group Form
     public function edit(ResearchGroup $researchGroup)
     {
-        $researchGroup = ResearchGroup::find($researchGroup->id);
         $this->authorize('update', $researchGroup);
         $researchGroup = ResearchGroup::with(['user','author'])->where('id', $researchGroup->id)->first();
         $users = User::role(["teacher", "student"])->get();
@@ -97,38 +86,49 @@ class ResearchGroupController extends Controller
         return view('research_groups.edit', compact('researchGroup', 'users', 'authors'));
     }
 
-    // Edit Research Group Trigger
     public function update(Request $request, ResearchGroup $researchGroup)
     {
         $request->validate([
             'group_name_th' => 'required',
             'group_name_en' => 'required',
         ]);
+
         if ($this->isDuplicateUserInRequest($request) || $this->isDuplicateAuthorInRequest($request)) {
             return redirect()->back()->with('error', 'Duplicate user in request');
         }
+
         \Log::info('Updating Research Group : ' . json_encode($request->all()));
+
         $input = $request->all();
+
+        // ❌ ถ้าไม่ใช่ Admin ห้ามเปลี่ยนหัวหน้ากลุ่ม
+    if (!auth()->user()->hasRole('admin')) {
+    unset($input['head']);
+    $input['head'] = $researchGroup->head; // กำหนดค่าหัวหน้ากลุ่มเดิมกลับไป
+    }
+
+
         $input['group_image'] = $this->setImage($request, $researchGroup);
         $researchGroup->update($input);
+
         $researchGroup->user()->detach();
         $this->addUsersToResearchGroup($researchGroup, $request);
         $researchGroup->author()->detach();
         $this->addAuthorsToResearchGroup($researchGroup, $request);
+
         return redirect()->route('researchGroups.index')
-            ->with('success', 'researchGroups updated successfully');
+            ->with('success', 'Research group updated successfully');
     }
 
-    // Delete Research Group
     public function destroy(ResearchGroup $researchGroup)
     {
         $this->authorize('delete', $researchGroup);
         $researchGroup->delete();
-        return redirect()->route('researchGroups.index')
-            ->with('success', 'researchGroups deleted successfully');
+        return redirect()->route('researchGroups.index')->with('success', 'Research group deleted successfully.');
     }
 
-    private function isDuplicateUserInRequest(Request $request){
+    private function isDuplicateUserInRequest(Request $request)
+    {
         $users = [];
         if ($request->moreFields['users'] == null) {
             return false;
@@ -143,7 +143,9 @@ class ResearchGroupController extends Controller
         }
         return false;
     }
-    private function isDuplicateAuthorInRequest(Request $request){
+
+    private function isDuplicateAuthorInRequest(Request $request)
+    {
         $authors = [];
         if ($request->authors == null) {
             return false;
@@ -159,8 +161,8 @@ class ResearchGroupController extends Controller
         return false;
     }
 
-    
-    private function setImage($request, $researchGroup){
+    private function setImage($request, $researchGroup)
+    {
         $fileName = '';
         if ($request->group_image) {
             if (!$this->isFileExtensionValid($request->group_image)) {
@@ -168,23 +170,25 @@ class ResearchGroupController extends Controller
             }
             $fileName = 'RG'. $researchGroup->id . '.' . $request->group_image->extension();
             $request->group_image->move(public_path('img'), $fileName);
-        }else{
+        } else {
             if ($researchGroup->group_image) {
                 $fileName = $researchGroup->group_image;
-            }else{
+            } else {
                 $fileName = 'img.jpg';
             }
         }
         \Log::info('Image uploaded ' . $fileName);
         return $fileName;
-        
     }
-    
-    private function isFileExtensionValid($file){
+
+    private function isFileExtensionValid($file)
+    {
         $permitted_extensions = array('jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'bmp');
         return in_array($file->extension(), $permitted_extensions);
     }
-    private function addUsersToResearchGroup($researchGroup, $request){
+
+    private function addUsersToResearchGroup($researchGroup, $request)
+    {
         $head = $request->head;
         $researchGroup->user()->attach($head, ['role' => 1, 'permissions' => 1]);
         if ($request->moreFields['users']) {
@@ -197,7 +201,8 @@ class ResearchGroupController extends Controller
         }
     }
 
-    private function addAuthorsToResearchGroup($researchGroup, $request){
+    private function addAuthorsToResearchGroup($researchGroup, $request)
+    {
         if ($request->authors) {
             foreach ($request->authors as $value) {
                 if ($value['userid'] != null) {
@@ -207,5 +212,4 @@ class ResearchGroupController extends Controller
         }
     }
 }
-
 

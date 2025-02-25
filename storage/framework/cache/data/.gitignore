@@ -1,2 +1,7 @@
 *
+<<<<<<< HEAD
+!data/
 !.gitignore
+=======
+!.gitignore
+>>>>>>> parent of 04ee77c (Update .gitignore and track storage/app/Orcid_to_DB/)
