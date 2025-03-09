@@ -7,59 +7,56 @@ use App\Models\RecruitmentPosition;
 use App\Models\RecruitmentQualification;
 use App\Models\ResearchGroup;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class RecruitmentController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:recruitment-list|recruitment-create|recruitment-edit|recruitment-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:recruitment-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:recruitment-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:recruitment-delete', ['only' => ['destroy']]);
-    }
-
     public function index()
     {
         $user = auth()->user();
         Log::info('Showing Recruitment Announcements');
 
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('headproject')) {
             $recruitments = Recruitment::with(['researchGroup', 'position', 'qualifications'])->get();
         } else {
             $userId = $user->id;
-            $recruitments = Recruitment::whereHas('researchGroup', function ($query) use ($userId) {
-                $query->where('user_id', $userId);
+            $recruitments = Recruitment::whereHas('researchGroup.user', function ($query) use ($userId) {
+                $query->where('users.id', $userId);
             })->with(['researchGroup', 'position', 'qualifications'])->get();
         }
 
-        return view('recruitments.index', compact('recruitments'));
+        return view('recruitment.index', compact('recruitments'));
     }
 
     public function create()
     {
         $user = auth()->user();
-        
+
         if (!$user->hasRole('headproject')) {
             Log::warning("User $user->id attempted to create a recruitment announcement without 'headproject' role.");
-            return redirect()->route('recruitments.index')->with('error', 'Only headproject role can create recruitment announcements.');
+            return redirect()->route('recruitment.index')->with('error', 'Only headproject role can create recruitment announcements.');
         }
 
         Log::info('Creating Recruitment Announcement');
-        $researchGroups = ResearchGroup::where('user_id', $user->id)->get();
+
+        // ดึงเฉพาะกลุ่มวิจัยที่ผู้ใช้เป็นหัวหน้า (role = 1)
+        $researchGroups = ResearchGroup::whereHas('user', function ($query) use ($user) {
+            $query->where('users.id', $user->id)
+                  ->where('work_of_research_groups.role', 1);
+        })->get();
+
         $positions = RecruitmentPosition::all();
 
-        return response()->view('recruitments.create', compact('researchGroups', 'positions'));
+        return view('recruitment.create', compact('researchGroups', 'positions'));
     }
 
     public function store(Request $request)
     {
         $user = auth()->user();
-        
+
         if (!$user->hasRole('headproject')) {
-            return redirect()->route('recruitments.index')->with('error', 'Only headproject role can create recruitment announcements.');
+            return redirect()->route('recruitment.index')->with('error', 'Only headproject role can create recruitment announcements.');
         }
 
         $request->validate([
@@ -79,38 +76,40 @@ class RecruitmentController extends Controller
             return redirect()->back()->with('error', 'Duplicate qualifications found.');
         }
 
-        $input = $request->all();
-        $recruitment = Recruitment::create($input);
+        $recruitment = Recruitment::create($request->all());
         $this->addQualificationsToRecruitment($recruitment, $request);
 
-        return redirect()->route('recruitments.index')->with('success', 'Recruitment announcement created successfully.');
-    }
-
-    public function show(Recruitment $recruitment)
-    {
-        $recruitment->load(['researchGroup', 'position', 'qualifications']);
-        return view('recruitments.show', compact('recruitment'));
+        return redirect()->route('recruitment.index')->with('success', 'Recruitment announcement created successfully.');
     }
 
     public function edit(Recruitment $recruitment)
     {
         $user = auth()->user();
+
         if (!$user->hasRole('headproject')) {
-            return redirect()->route('recruitments.index')->with('error', 'Only headproject role can edit recruitment announcements.');
+            return redirect()->route('recruitment.index')->with('error', 'Only headproject role can edit recruitment announcements.');
         }
 
-        $researchGroups = ResearchGroup::where('user_id', $user->id)->get();
+        Log::info('Editing Recruitment Announcement');
+
+        // ดึงเฉพาะกลุ่มวิจัยที่ผู้ใช้เป็นหัวหน้า (role = 1)
+        $researchGroups = ResearchGroup::whereHas('user', function ($query) use ($user) {
+            $query->where('users.id', $user->id)
+                  ->where('work_of_research_groups.role', 1);
+        })->get();
+
         $positions = RecruitmentPosition::all();
         $recruitment->load(['qualifications']);
 
-        return view('recruitments.edit', compact('recruitment', 'researchGroups', 'positions'));
+        return view('recruitment.edit', compact('recruitment', 'researchGroups', 'positions'));
     }
 
     public function update(Request $request, Recruitment $recruitment)
     {
         $user = auth()->user();
+
         if (!$user->hasRole('headproject')) {
-            return redirect()->route('recruitments.index')->with('error', 'Only headproject role can update recruitment announcements.');
+            return redirect()->route('recruitment.index')->with('error', 'Only headproject role can update recruitment announcements.');
         }
 
         $request->validate([
@@ -130,26 +129,25 @@ class RecruitmentController extends Controller
             return redirect()->back()->with('error', 'Duplicate qualifications found.');
         }
 
-        Log::info('Updating Recruitment Announcement : ' . json_encode($request->all()));
+        Log::info('Updating Recruitment Announcement: ' . json_encode($request->all()));
 
-        $input = $request->all();
-        $recruitment->update($input);
-
-        $recruitment->qualifications()->detach();
+        $recruitment->update($request->all());
+        $recruitment->qualifications()->delete();
         $this->addQualificationsToRecruitment($recruitment, $request);
 
-        return redirect()->route('recruitments.index')->with('success', 'Recruitment announcement updated successfully.');
+        return redirect()->route('recruitment.index')->with('success', 'Recruitment announcement updated successfully.');
     }
 
     public function destroy(Recruitment $recruitment)
     {
         $user = auth()->user();
+
         if (!$user->hasRole('headproject')) {
-            return redirect()->route('recruitments.index')->with('error', 'Only headproject role can delete recruitment announcements.');
+            return redirect()->route('recruitment.index')->with('error', 'Only headproject role can delete recruitment announcements.');
         }
 
         $recruitment->delete();
-        return redirect()->route('recruitments.index')->with('success', 'Recruitment announcement deleted successfully.');
+        return redirect()->route('recruitment.index')->with('success', 'Recruitment announcement deleted successfully.');
     }
 
     private function isDuplicateQualificationInRequest(Request $request)
@@ -175,7 +173,7 @@ class RecruitmentController extends Controller
         if ($request->qualifications) {
             foreach ($request->qualifications as $value) {
                 if ($value['text_th'] != null || $value['text_en'] != null) {
-                    $recruitment->qualifications()->attach([
+                    $recruitment->qualifications()->create([
                         'text_th' => $value['text_th'],
                         'text_en' => $value['text_en']
                     ]);

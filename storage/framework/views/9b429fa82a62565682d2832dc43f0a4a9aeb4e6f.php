@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.bootstrap4.min.css">
@@ -50,15 +51,15 @@
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </td>
                             <td style="white-space: normal; overflow: hidden; min-width: 8vw; line-height: 1.6; padding: 0.5em 0.75em;">
-                                <?php $__currentLoopData = $researchGroup->user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php if( $user->pivot->role == 2): ?>
-                                <?php echo e($user->fname_th); ?>
+                                <?php
+                                    $members = collect($researchGroup->user)->filter(function($user) {
+                                        return $user->pivot->role == 2;
+                                    });
+                                ?>
+                                
+                                <?php echo e($members->pluck('fname_th')->implode(', ')); ?>
 
-                                <?php if(!$loop->last): ?>,<?php endif; ?>
-                                <?php endif; ?>
-
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </td>
+                            </td>                            
                             <td style="white-space: normal; overflow: hidden; min-width: 8vw; line-height: 1.6; padding: 0.5em 0.75em;">
                                 <?php
                                     $postDocs = collect($researchGroup->user)->filter(function($user) {

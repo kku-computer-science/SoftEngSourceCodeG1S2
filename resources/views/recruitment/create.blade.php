@@ -4,7 +4,7 @@
 <div class="container">
     <h2 class="mb-4">สร้างประกาศรับสมัครงาน</h2>
     
-    <form action="{{ route('recruitments.store') }}" method="POST">
+    <form action="{{ route('recruitment.store') }}" method="POST">
         @csrf
 
         <!-- กลุ่มวิจัย (เลือกได้เฉพาะกลุ่มของตัวเอง) -->
@@ -13,7 +13,7 @@
             <select class="form-control" id="research_group_id" name="research_group_id" required>
                 <option value="">-- เลือกกลุ่มวิจัย --</option>
                 @foreach($researchGroups as $group)
-                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                    <option value="{{ $group->id }}">{{ $group->group_name_th }}</option>
                 @endforeach
             </select>
         </div>
@@ -104,7 +104,7 @@
 
         <!-- ปุ่ม Submit -->
         <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="{{ route('recruitments.index') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ route('recruitment.index') }}" class="btn btn-secondary">Back</a>
     </form>
 </div>
 
