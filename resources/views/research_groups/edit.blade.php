@@ -159,8 +159,7 @@
                 var userOptions = '@foreach ($users as $user)<option value="{{ $user->id }}" ' +
                                 (userId == "{{ $user->id }}" ? "selected" : "") + '>{{ $user->fname_th }} {{ $user->lname_th }}</option>@endforeach';
                 var roleOptions = '<option value="2" ' + (roleVal == "2" ? "selected" : "") + '>Member</option>' +
-                                '<option value="3" ' + (roleVal == "3" ? "selected" : "") + '>Post-Doc</option>' +
-                                '<option value="4" ' + (roleVal == "4" ? "selected" : "") + '>Visitor</option>';
+                                '<option value="3" ' + (roleVal == "3" ? "selected" : "") + '>Post-Doc</option>';
 
                 var permissionOptions = isAdmin ? 
                     '<select name="moreFields[users][' + index + '][permission]" class="form-control">' +
