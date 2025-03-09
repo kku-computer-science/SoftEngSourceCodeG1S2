@@ -1,19 +1,20 @@
--- MySQL dump 10.13  Distrib 8.0.41, for Linux (x86_64)
+/*M!999999\- enable the sandbox mode */ 
+-- MariaDB dump 10.19-11.4.5-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: mysql    Database: example_app
+-- Host: 127.0.0.1    Database: example_app
 -- ------------------------------------------------------
--- Server version	8.0.32
+-- Server version	9.2.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
 
 --
 -- Table structure for table `academicworks`
@@ -21,7 +22,7 @@
 
 DROP TABLE IF EXISTS `academicworks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `academicworks` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `ac_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -42,7 +43,7 @@ CREATE TABLE `academicworks` (
 
 DROP TABLE IF EXISTS `author_in_research_groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `author_in_research_groups` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `author_id` bigint unsigned NOT NULL,
@@ -61,7 +62,7 @@ CREATE TABLE `author_in_research_groups` (
 
 DROP TABLE IF EXISTS `author_of_academicworks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `author_of_academicworks` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `author_type` int DEFAULT NULL,
@@ -81,7 +82,7 @@ CREATE TABLE `author_of_academicworks` (
 
 DROP TABLE IF EXISTS `author_of_papers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `author_of_papers` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `author_id` bigint unsigned NOT NULL,
@@ -101,7 +102,7 @@ CREATE TABLE `author_of_papers` (
 
 DROP TABLE IF EXISTS `authors`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `authors` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `author_fname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -118,7 +119,7 @@ CREATE TABLE `authors` (
 
 DROP TABLE IF EXISTS `degrees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `degrees` (
   `id` bigint unsigned NOT NULL,
   `degree_name_th` varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -137,7 +138,7 @@ CREATE TABLE `degrees` (
 
 DROP TABLE IF EXISTS `departments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `departments` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `department_name_th` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -154,7 +155,7 @@ CREATE TABLE `departments` (
 
 DROP TABLE IF EXISTS `education`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `education` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `uname` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -176,7 +177,7 @@ CREATE TABLE `education` (
 
 DROP TABLE IF EXISTS `expertises`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `expertises` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `expert_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -195,7 +196,7 @@ CREATE TABLE `expertises` (
 
 DROP TABLE IF EXISTS `failed_jobs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `failed_jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -215,7 +216,7 @@ CREATE TABLE `failed_jobs` (
 
 DROP TABLE IF EXISTS `files`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `files` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -232,7 +233,7 @@ CREATE TABLE `files` (
 
 DROP TABLE IF EXISTS `funds`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `funds` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `fund_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -256,7 +257,7 @@ CREATE TABLE `funds` (
 
 DROP TABLE IF EXISTS `migrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -271,7 +272,7 @@ CREATE TABLE `migrations` (
 
 DROP TABLE IF EXISTS `model_has_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `model_has_permissions` (
   `permission_id` bigint unsigned NOT NULL,
   `model_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -288,7 +289,7 @@ CREATE TABLE `model_has_permissions` (
 
 DROP TABLE IF EXISTS `model_has_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `model_has_roles` (
   `role_id` bigint unsigned NOT NULL,
   `model_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -305,7 +306,7 @@ CREATE TABLE `model_has_roles` (
 
 DROP TABLE IF EXISTS `outsiders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `outsiders` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `fname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -323,7 +324,7 @@ CREATE TABLE `outsiders` (
 
 DROP TABLE IF EXISTS `outsiders_work_of_project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `outsiders_work_of_project` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `outsider_id` bigint unsigned NOT NULL,
@@ -343,7 +344,7 @@ CREATE TABLE `outsiders_work_of_project` (
 
 DROP TABLE IF EXISTS `papers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `papers` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `paper_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -374,7 +375,7 @@ CREATE TABLE `papers` (
 
 DROP TABLE IF EXISTS `password_resets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `password_resets` (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -389,7 +390,7 @@ CREATE TABLE `password_resets` (
 
 DROP TABLE IF EXISTS `permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `permissions` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -407,7 +408,7 @@ CREATE TABLE `permissions` (
 
 DROP TABLE IF EXISTS `programs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `programs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `program_name_th` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -425,12 +426,80 @@ CREATE TABLE `programs` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `recruitment`
+--
+
+DROP TABLE IF EXISTS `recruitment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recruitment` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `research_group_id` bigint unsigned NOT NULL,
+  `title_th` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `position_id` bigint unsigned NOT NULL,
+  `job_description_th` text COLLATE utf8mb4_unicode_ci,
+  `job_description_en` text COLLATE utf8mb4_unicode_ci,
+  `place_th` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `place_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `salary` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `other_th` text COLLATE utf8mb4_unicode_ci,
+  `other_en` text COLLATE utf8mb4_unicode_ci,
+  `apply_channel` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_recruitment_group` (`research_group_id`),
+  KEY `fk_recruitment_position` (`position_id`),
+  CONSTRAINT `fk_recruitment_group` FOREIGN KEY (`research_group_id`) REFERENCES `research_groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_recruitment_position` FOREIGN KEY (`position_id`) REFERENCES `recruitment_position` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `recruitment_position`
+--
+
+DROP TABLE IF EXISTS `recruitment_position`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recruitment_position` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name_th` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_en` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `recruitment_qualification`
+--
+
+DROP TABLE IF EXISTS `recruitment_qualification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recruitment_qualification` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `recruitment_id` bigint unsigned NOT NULL,
+  `text_th` text COLLATE utf8mb4_unicode_ci,
+  `text_en` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_recruitment_qualification` (`recruitment_id`),
+  CONSTRAINT `fk_recruitment_qualification` FOREIGN KEY (`recruitment_id`) REFERENCES `recruitment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `research_groups`
 --
 
 DROP TABLE IF EXISTS `research_groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `research_groups` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `group_name_th` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -452,7 +521,7 @@ CREATE TABLE `research_groups` (
 
 DROP TABLE IF EXISTS `research_projects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `research_projects` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `project_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -478,7 +547,7 @@ CREATE TABLE `research_projects` (
 
 DROP TABLE IF EXISTS `role_has_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role_has_permissions` (
   `permission_id` bigint unsigned NOT NULL,
   `role_id` bigint unsigned NOT NULL,
@@ -495,7 +564,7 @@ CREATE TABLE `role_has_permissions` (
 
 DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -513,7 +582,7 @@ CREATE TABLE `roles` (
 
 DROP TABLE IF EXISTS `source_data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `source_data` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `source_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -529,7 +598,7 @@ CREATE TABLE `source_data` (
 
 DROP TABLE IF EXISTS `source_papers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `source_papers` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `source_data_id` bigint unsigned NOT NULL,
@@ -548,7 +617,7 @@ CREATE TABLE `source_papers` (
 
 DROP TABLE IF EXISTS `source_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `source_users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `source_data_id` bigint unsigned NOT NULL,
@@ -568,7 +637,7 @@ CREATE TABLE `source_users` (
 
 DROP TABLE IF EXISTS `user_of_academicworks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_of_academicworks` (
   `user_id` bigint unsigned NOT NULL,
   `author_type` int DEFAULT NULL,
@@ -588,7 +657,7 @@ CREATE TABLE `user_of_academicworks` (
 
 DROP TABLE IF EXISTS `user_papers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_papers` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint unsigned NOT NULL,
@@ -608,7 +677,7 @@ CREATE TABLE `user_papers` (
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -648,7 +717,7 @@ CREATE TABLE `users` (
 
 DROP TABLE IF EXISTS `work_of_research_groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `work_of_research_groups` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `role` int NOT NULL,
@@ -669,7 +738,7 @@ CREATE TABLE `work_of_research_groups` (
 
 DROP TABLE IF EXISTS `work_of_research_projects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `work_of_research_projects` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `role` int NOT NULL,
@@ -690,6 +759,6 @@ CREATE TABLE `work_of_research_projects` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2025-02-22 16:52:00
+-- Dump completed on 2025-03-09 21:33:52
