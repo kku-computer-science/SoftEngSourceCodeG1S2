@@ -17,17 +17,15 @@ class RecruitmentController extends Controller
         $user = auth()->user();
         Log::info('Showing Recruitment Announcements');
 
-        if ($user->hasRole('headproject')) {
-            $recruitments = Recruitment::with(['researchGroup', 'position', 'qualifications'])->get();
-        } else {
-            $userId = $user->id;
-            $recruitments = Recruitment::whereHas('researchGroup.user', function ($query) use ($userId) {
-                $query->where('users.id', $userId);
-            })->with(['researchGroup', 'position', 'qualifications'])->get();
-        }
+        // ดึงเฉพาะ recruitment ที่อยู่ในกลุ่มวิจัยของ user ที่เป็น headproject
+        $recruitments = Recruitment::whereHas('researchGroup.user', function ($query) use ($user) {
+            $query->where('users.id', $user->id)
+                ->where('work_of_research_groups.role', 1);
+        })->with(['researchGroup', 'position', 'qualifications'])->get();
 
         return view('recruitment.index', compact('recruitments'));
     }
+
 
     public function create()
     {

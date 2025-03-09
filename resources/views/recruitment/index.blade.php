@@ -17,12 +17,10 @@
             <h4 class="card-title">Recruitment Announcement</h4>
 
             <!-- ปุ่มเพิ่มประกาศรับสมัคร -->
-            
             <a class="btn btn-primary btn-menu btn-icon-text btn-sm mb-3" href="{{ route('recruitment.create') }}">
                 <i class="mdi mdi-plus btn-icon-prepend"></i> ADD 
             </a>
             
-
             <!-- ตรวจสอบว่ามีประกาศหรือไม่ -->
             @if($recruitments->isEmpty())
                 <p class="text-center text-muted">ยังไม่มีประกาศรับสมัคร</p>
@@ -50,23 +48,23 @@
                                     <i class="mdi mdi-eye"></i>
                                 </a>
 
-                                <!-- ปุ่มแก้ไข -->
-                                {{-- @if(Auth::user()->can('update', $recruitment)) --}}
+                                <!-- ปุ่มแก้ไข (เฉพาะ headproject ของกลุ่มตัวเอง) -->
+                                @if(auth()->user()->hasRole('headproject'))
                                 <a class="btn btn-outline-success btn-sm" href="{{ route('recruitment.edit', $recruitment->id) }}" 
                                     data-toggle="tooltip" title="Edit">
                                     <i class="mdi mdi-pencil"></i>
                                 </a>
-                                {{-- @endif --}}
+                                @endif
 
-                                <!-- ปุ่มลบ -->
-                                {{-- @if(Auth::user()->can('delete', $recruitment)) --}}
+                                <!-- ปุ่มลบ (เฉพาะ headproject ของกลุ่มตัวเอง) -->
+                                @if(auth()->user()->hasRole('headproject'))
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-outline-danger btn-sm show_confirm" type="submit" 
                                     data-toggle="tooltip" title="Delete">
                                     <i class="mdi mdi-delete"></i>
                                 </button>
-                                {{-- @endif --}}
+                                @endif
                             </form>
                         </td>
                     </tr>
