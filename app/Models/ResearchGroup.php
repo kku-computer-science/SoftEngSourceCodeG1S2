@@ -26,4 +26,9 @@ class ResearchGroup extends Model
     public function product(){
         return $this->hasOne(Product::class,'group_id');
     }
+
+    public function recruitment()
+    {
+        return $this->hasMany(Recruitment::class, 'research_group_id');
+    }
 }
