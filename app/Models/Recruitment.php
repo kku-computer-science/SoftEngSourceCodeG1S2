@@ -23,7 +23,8 @@ class Recruitment extends Model
         'salary',
         'other_th',
         'other_en',
-        'apply_channel',
+        'apply_channel_th',
+        'apply_channel_en',
     ];
 
     /**

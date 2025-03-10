@@ -192,6 +192,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                     </li>
                     @endcan
+                    @can('recruitments-list')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('recruitment.index')}}">
+                            <i class="menu-icon mdi mdi-account-box-outline"></i>
+                            <span class="menu-title">Recuitments</span>
+
+                        </a>
+                    </li>
+                    @endcan
                     @can('papers-list')
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#ManagePublications" aria-expanded="false" aria-controls="ManagePublications">
