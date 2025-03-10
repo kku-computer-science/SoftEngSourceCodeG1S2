@@ -192,6 +192,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                     </li>
                     <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('recruitments-list')): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo e(route('recruitment.index')); ?>">
+                            <i class="menu-icon mdi mdi-account-box-outline"></i>
+                            <span class="menu-title">Recuitments</span>
+
+                        </a>
+                    </li>
+                    <?php endif; ?>
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('papers-list')): ?>
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#ManagePublications" aria-expanded="false" aria-controls="ManagePublications">
