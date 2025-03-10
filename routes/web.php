@@ -22,6 +22,9 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\RunPythonController;
 use App\Http\Controllers\PaperController;
+// Recuitment Routes
+use App\Http\Controllers\RecruitmentController;
+
 use App\Http\Controllers\ResearchGroupController;
 use App\Http\Controllers\ResearcherController;
 use App\Http\Controllers\ResearchGroupDetailController;
@@ -153,6 +156,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
     Route::get('/ajax-get-subcat', [UserController::class, 'getCategory']);
     Route::get('tests', [TestController::class, 'index']); //call department
     Route::get('tests/{id}', [TestController::class, 'getCategory'])->name('tests'); //call program
+
+    //add new routes for recuitment
+    Route::resource('recruitment', RecruitmentController::class);
 
 });
 
