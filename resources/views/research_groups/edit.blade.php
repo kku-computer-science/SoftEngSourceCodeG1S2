@@ -182,7 +182,7 @@
                                 '<option value="3" ' + (roleVal == "3" ? "selected" : "") + ' ' + postDocDisabled + '>Post-Doc</option>';
 
                 var permissionOptions = isAdmin ? 
-                    '<select name="moreFields[users][' + index + '][permission]" class="form-control">' +
+                    '<select name="moreFields[users][' + index + '][permission]" class="form-control" style="color: black;">' +
                         '<option value="2" ' + (permissionVal == "2" ? "selected" : "") + '>View</option>' +
                         '<option value="1" ' + (permissionVal == "1" ? "selected" : "") + '>Edit</option>' +
                     '</select>' :
@@ -190,9 +190,9 @@
                     '<input type="hidden" name="moreFields[users][' + index + '][permission]" value="' + permissionVal + '">';
 
                 var newRow = '<tr>' +
-                    '<td><select id="selUser' + index + '" name="moreFields[users][' + index + '][userid]" class="member-select form-control user-select" style="width: 200px;">' +
+                    '<td><select id="selUser' + index + '" name="moreFields[users][' + index + '][userid]" class="member-select form-control user-select" style="width: 200px; color: black;">' +
                     '<option value="">Select User</option>' + userOptions + '</select></td>' +
-                    '<td><select name="moreFields[users][' + index + '][role]" class="form-control role-select">' + roleOptions + '</select></td>' +
+                    '<td><select name="moreFields[users][' + index + '][role]" class="form-control role-select" style="color: black;">' + roleOptions + '</select></td>' +
                     '<td>' + permissionOptions + '</td>' +
                     '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
                     '</tr>';
@@ -384,7 +384,7 @@
                 var disabled = isNew ? "" : "disabled";
 
                 var newRow = `
-                    <div class="author-box card p-3 mb-2">
+                    <div class="author-box p-3 mb-3" style="border: 1px solid #ddd; border-radius: 0.5em; box-shadow: none; background: transparent;">
                         <div class="row">
                             <div class="col-sm-4">
                                 <label>เลือกจากรายชื่อ</label>
@@ -471,4 +471,16 @@
             });
         });
     </script>
+
+    {{-- <style>
+        /* ทำให้ dropdown ที่ถูกเลือกแล้วเป็นสีดำ */
+        select.form-control {
+            color: black !important;
+        }
+
+        /* สำหรับ Select2 */
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: black !important;
+        }
+    </style> --}}
 @stop
