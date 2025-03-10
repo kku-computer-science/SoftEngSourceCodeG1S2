@@ -94,7 +94,7 @@
         <!-- ช่องทางการสมัคร -->
         <div class="form-group">
             <label for="apply_channel">ช่องทางการสมัคร (ภาษาไทย) *</label>
-            <input type="text" class="form-control" id="apply_channel" name="apply_channel" required>
+            <input type="text" class="form-control" id="apply_channel_th" name="apply_channel_th" required>
         </div>
 
         <div class="form-group">

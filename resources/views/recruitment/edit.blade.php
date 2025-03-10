@@ -116,7 +116,11 @@
                 <!-- ช่องทางการสมัคร -->
                 <div class="form-group">
                     <label for="apply_channel">ช่องทางการสมัคร (ภาษาไทย) *</label>
-                    <input type="text" class="form-control" id="apply_channel" name="apply_channel" value="{{ $recruitment->apply_channel }}" required>
+                    <input type="text" class="form-control" id="apply_channel_th" name="apply_channel_th" value="{{ $recruitment->apply_channel_th }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="apply_channel">ช่องทางการสมัคร (อังกฤษ) *</label>
+                    <input type="text" class="form-control" id="apply_channel_en" name="apply_channel_en" value="{{ $recruitment->apply_channel_en }}" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Update</button>

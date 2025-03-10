@@ -67,7 +67,8 @@ class RecruitmentController extends Controller
             'place_th' => 'required',
             'place_en' => 'required',
             'salary' => 'required|numeric',
-            'apply_channel' => 'required',
+            'apply_channel_th' => 'required',
+            'apply_channel_en' => 'required',
         ]);
 
         if ($this->isDuplicateQualificationInRequest($request)) {
@@ -120,7 +121,8 @@ class RecruitmentController extends Controller
             'place_th' => 'required',
             'place_en' => 'required',
             'salary' => 'required|numeric',
-            'apply_channel' => 'required',
+            'apply_channel_th' => 'required',
+            'apply_channel_en' => 'required',
         ]);
 
         if ($this->isDuplicateQualificationInRequest($request)) {
