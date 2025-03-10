@@ -168,9 +168,18 @@
             
             function appendMemberRow(index, userId, roleVal, permissionVal) {
                 var userOptions = '@foreach ($users as $user)<option value="{{ $user->id }}" ' +
-                                (userId == "{{ $user->id }}" ? "selected" : "") + '>{{ $user->fname_th }} {{ $user->lname_th }}</option>@endforeach';
+                                (userId == "{{ $user->id }}" ? "selected" : "") +
+                                ' data-degree="{{ $user->doctoral_degree }}">{{ $user->fname_th }} {{ $user->lname_th }}</option>@endforeach';
+
+                var postDocDisabled = "";
+                @foreach ($users as $user)
+                    if (userId == "{{ $user->id }}" && "{{ $user->doctoral_degree }}" !== "Ph.D.") {
+                        postDocDisabled = "disabled";
+                    }
+                @endforeach
+
                 var roleOptions = '<option value="2" ' + (roleVal == "2" ? "selected" : "") + '>Member</option>' +
-                                '<option value="3" ' + (roleVal == "3" ? "selected" : "") + '>Post-Doc</option>';
+                                '<option value="3" ' + (roleVal == "3" ? "selected" : "") + ' ' + postDocDisabled + '>Post-Doc</option>';
 
                 var permissionOptions = isAdmin ? 
                     '<select name="moreFields[users][' + index + '][permission]" class="form-control">' +
@@ -181,21 +190,42 @@
                     '<input type="hidden" name="moreFields[users][' + index + '][permission]" value="' + permissionVal + '">';
 
                 var newRow = '<tr>' +
-                    '<td><select id="selUser' + index + '" name="moreFields[users][' + index + '][userid]" class="member-select form-control" style="width: 200px;">' +
+                    '<td><select id="selUser' + index + '" name="moreFields[users][' + index + '][userid]" class="member-select form-control user-select" style="width: 200px;">' +
                     '<option value="">Select User</option>' + userOptions + '</select></td>' +
-                    '<td><select name="moreFields[users][' + index + '][role]" class="form-control">' + roleOptions + '</select></td>' +
+                    '<td><select name="moreFields[users][' + index + '][role]" class="form-control role-select">' + roleOptions + '</select></td>' +
                     '<td>' + permissionOptions + '</td>' +
                     '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
                     '</tr>';
-                
+
                 $("#dynamicAddRemove").append(newRow);
                 $("#selUser" + index).select2();
+
                 if (userId) {
                     $("#selUser" + index).val(userId).trigger("change");
                 }
+
                 updateMemberOptions();
             }
             
+            $(document).on("change", ".user-select", function() {
+                var selectedUser = $(this).val();
+                var $roleSelect = $(this).closest("tr").find(".role-select");
+
+                // ตรวจสอบวุฒิการศึกษา
+                var doctoralDegree = $(this).find(":selected").data("degree");
+                var isPhD = (doctoralDegree === "Ph.D.");
+
+                if (!isPhD) {
+                    // ปิดการใช้งาน Post-Doc ถ้าผู้ใช้ไม่มี Ph.D.
+                    $roleSelect.find("option[value='3']").prop("disabled", true);
+                    if ($roleSelect.val() == "3") {
+                        $roleSelect.val("2"); // ถ้าเลือกผิด ให้เปลี่ยนเป็น Member
+                    }
+                } else {
+                    $roleSelect.find("option[value='3']").prop("disabled", false);
+                }
+            });
+
             $(document).on("click", ".remove-tr", function() {
                 $(this).closest("tr").remove();
                 updateMemberOptions();
@@ -230,6 +260,22 @@
                             $(this).prop("disabled", false);
                         }
                     });
+                });
+
+                //ปิดใช้งาน Post-Doc สำหรับผู้ที่ไม่มี Ph.D.
+                $(".user-select").each(function() {
+                    var selectedUser = $(this).val();
+                    var $roleSelect = $(this).closest("tr").find(".role-select");
+                    var doctoralDegree = $(this).find(":selected").data("degree");
+
+                    if (doctoralDegree !== "Ph.D.") {
+                        $roleSelect.find("option[value='3']").prop("disabled", true);
+                        if ($roleSelect.val() == "3") {
+                            $roleSelect.val("2"); // เปลี่ยนเป็น Member ถ้าผิด
+                        }
+                    } else {
+                        $roleSelect.find("option[value='3']").prop("disabled", false);
+                    }
                 });
 
                 $("#head0").select2();

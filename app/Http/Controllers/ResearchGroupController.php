@@ -47,6 +47,8 @@ class ResearchGroupController extends Controller
             return redirect()->route('researchGroups.index')->with('error', 'You do not have permission to create a research group');
         }
         \Log::info('Creating Research Group');
+        // ดึงเฉพาะคนที่มีวุฒิเป็น Ph.D.
+        $usersWithPhD = User::where('doctoral_degree', 'Ph.D.')->get();
         $users = User::role(['teacher', 'student'])->get();
         $funds = Fund::get();
         $authors = Author::get();
@@ -80,6 +82,8 @@ class ResearchGroupController extends Controller
     {
         $this->authorize('update', $researchGroup);
         $researchGroup = ResearchGroup::with(['user','author'])->where('id', $researchGroup->id)->first();
+        // ดึงเฉพาะคนที่มีวุฒิเป็น Ph.D.
+        $usersWithPhD = User::where('doctoral_degree', 'Ph.D.')->get();
         $users = User::role(["teacher", "student"])->get();
         $authors = Author::get();
         return view('research_groups.edit', compact('researchGroup', 'users', 'authors'));
