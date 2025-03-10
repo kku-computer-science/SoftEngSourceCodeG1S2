@@ -102,7 +102,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <p class="col-sm-3 pt-4"><b>Other Visitors</b></p>
+                        {{-- <p class="col-sm-3 pt-4"><b>Other Visitors</b></p>
                         <div class="col-sm-8">
                             <table class="table" id="AuthorsDynamicAddRemove">
                                 <tr>
@@ -115,8 +115,19 @@
                                     </th>
                                 </tr>
                             </table>
-                        </div>
+                        </div> --}}
                     </div>
+                    <div class="form-group row">
+                        <p class="col-sm-3"><b>นักวิจัยภายนอก</b></p>
+                        <div class="col-sm-8">
+                            <div id="authors-container">
+                                <!-- กล่อง Authors จะถูกเพิ่มที่นี่ -->
+                            </div>
+                            <button type="button" id="add-author-btn" class="btn btn-success btn-sm mt-2">
+                                <i class="mdi mdi-plus"></i>
+                            </button>
+                        </div>
+                    </div>                    
                     <button type="submit" class="btn btn-primary mt-5">Submit</button>
                     <a class="btn btn-light mt-5" href="{{ route('researchGroups.index') }}"> Back</a>
                 </form>
@@ -309,6 +320,108 @@
                         $("#file-error").hide();
                     }
                 }
+            });
+        });
+        $(document).ready(function() {
+            var authorIndex = 0;
+            var authorsData = @json($authors);
+            var existingAuthors = new Set();
+
+            function appendAuthorRow(index, authorId = "", fname = "", lname = "", isNew = false) {
+                var authorOptions = '<option value="">เลือก Visiting </option>';
+                authorsData.forEach(function(author) {
+                    authorOptions += `<option value="${author.id}" ${author.id == authorId ? "selected" : ""}>
+                                        ${author.author_fname} ${author.author_lname}
+                                    </option>`;
+                });
+
+                var disabled = isNew ? "" : "disabled";
+
+                var newRow = `
+                    <div class="author-box card p-3 mb-2">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label>เลือกจากรายชื่อ</label>
+                                <select class="form-control author-select" name="authors[${index}][userid]" id="author-select-${index}" data-index="${index}">
+                                    ${authorOptions}
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>ชื่อ</label>
+                                <input type="text" name="authors[${index}][author_fname]" class="form-control author-fname" id="author-fname-${index}" value="${fname}" ${disabled}>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>นามสกุล</label>
+                                <input type="text" name="authors[${index}][author_lname]" class="form-control author-lname" id="author-lname-${index}" value="${lname}" ${disabled}>
+                            </div>
+                            <div class="col-sm-2 mt-4">
+                                <button type="button" class="btn btn-danger btn-sm remove-author">
+                                    <i class="mdi mdi-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $("#authors-container").append(newRow);
+                $("#author-select-" + index).select2(); // ✅ รีโหลด select2 ให้ dropdown ใช้ได้
+                updateAuthorOptions();
+            }
+
+            function updateAuthorOptions() {
+                var selectedAuthors = new Set();
+                $(".author-select").each(function() {
+                    var value = $(this).val();
+                    if (value) selectedAuthors.add(value);
+                });
+
+                $(".author-select").each(function() {
+                    var $this = $(this);
+                    var currentValue = $this.val();
+                    $this.find("option").each(function() {
+                        var optionValue = $(this).val();
+                        if (selectedAuthors.has(optionValue) && optionValue !== "" && optionValue !== currentValue) {
+                            $(this).prop("disabled", true);
+                        } else {
+                            $(this).prop("disabled", false);
+                        }
+                    });
+                });
+
+                $(".author-select").select2();
+            }
+
+            $("#add-author-btn").click(function() {
+                appendAuthorRow(authorIndex, "", "", "", true);
+                authorIndex++;
+            });
+
+            $(document).on("change", ".author-select", function() {
+                var index = $(this).data("index");
+                var selectedId = $(this).val();
+                if (selectedId) {
+                    var selectedAuthor = authorsData.find(author => author.id == selectedId);
+                    if (selectedAuthor) {
+                        $("#author-fname-" + index).val(selectedAuthor.author_fname).prop("disabled", true);
+                        $("#author-lname-" + index).val(selectedAuthor.author_lname).prop("disabled", true);
+                    }
+                } else {
+                    $("#author-fname-" + index).val("").prop("disabled", false);
+                    $("#author-lname-" + index).val("").prop("disabled", false);
+                }
+                updateAuthorOptions();
+            });
+
+            $(document).on("click", ".remove-author", function() {
+                $(this).closest(".author-box").remove();
+                updateAuthorOptions();
+            });
+
+            // โหลดข้อมูล Author ที่มีอยู่แล้ว
+            var authors = @json($researchGroup['author'] ?? []);
+            authors.forEach(function(author) {
+                appendAuthorRow(authorIndex, author.id, author.author_fname, author.author_lname, false);
+                authorIndex++;
             });
         });
     </script>

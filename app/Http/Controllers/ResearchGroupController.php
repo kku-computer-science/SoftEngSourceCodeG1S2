@@ -210,5 +210,6 @@ class ResearchGroupController extends Controller
             }
         }
     }
+    private function storeAuthor($fname, $lname)
 }
 
