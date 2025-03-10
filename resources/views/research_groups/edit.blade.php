@@ -127,7 +127,7 @@
                                 <i class="mdi mdi-plus"></i>
                             </button>
                         </div>
-                    </div>                    
+                    </div>
                     <button type="submit" class="btn btn-primary mt-5">Submit</button>
                     <a class="btn btn-light mt-5" href="{{ route('researchGroups.index') }}"> Back</a>
                 </form>
@@ -328,7 +328,7 @@
             var existingAuthors = new Set();
 
             function appendAuthorRow(index, authorId = "", fname = "", lname = "", isNew = false) {
-                var authorOptions = '<option value="">เลือก Visiting </option>';
+                var authorOptions = '<option value="">เลือก Visiting จากรายชื่อ</option>';
                 authorsData.forEach(function(author) {
                     authorOptions += `<option value="${author.id}" ${author.id == authorId ? "selected" : ""}>
                                         ${author.author_fname} ${author.author_lname}
@@ -348,11 +348,11 @@
                             </div>
                             <div class="col-sm-4">
                                 <label>ชื่อ</label>
-                                <input type="text" name="authors[${index}][author_fname]" class="form-control author-fname" id="author-fname-${index}" value="${fname}" ${disabled}>
+                                <input type="text" name="authors[${index}][author_fname]" class="form-control author-fname" id="author-fname-${index}" value="${fname}" ${disabled} placeholder="กรอกชื่อหากไม่มีในรายชื่อ">
                             </div>
                             <div class="col-sm-4">
                                 <label>นามสกุล</label>
-                                <input type="text" name="authors[${index}][author_lname]" class="form-control author-lname" id="author-lname-${index}" value="${lname}" ${disabled}>
+                                <input type="text" name="authors[${index}][author_lname]" class="form-control author-lname" id="author-lname-${index}" value="${lname}" ${disabled} placeholder="กรอกนามสกุลหากไม่มีในรายชื่อ">
                             </div>
                             <div class="col-sm-2 mt-4">
                                 <button type="button" class="btn btn-danger btn-sm remove-author">
@@ -364,7 +364,7 @@
                 `;
 
                 $("#authors-container").append(newRow);
-                $("#author-select-" + index).select2(); // ✅ รีโหลด select2 ให้ dropdown ใช้ได้
+                $("#author-select-" + index).select2(); // รีโหลด select2 ให้ dropdown ใช้ได้
                 updateAuthorOptions();
             }
 
