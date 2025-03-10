@@ -204,12 +204,37 @@ class ResearchGroupController extends Controller
     {
         if ($request->authors) {
             foreach ($request->authors as $value) {
-                if ($value['userid'] != null) {
+                if (!empty($value['userid'])) {
+                    // กรณีเลือก Author จากที่มีอยู่แล้ว
                     $researchGroup->author()->attach($value['userid']);
+                } elseif (!empty($value['author_fname']) && !empty($value['author_lname'])) {
+                    // กรณีสร้าง Author ใหม่จากค่าที่กรอกมา
+                    $newAuthorId = $this->storeAuthor($value['author_fname'], $value['author_lname']);
+                    $researchGroup->author()->attach($newAuthorId);
                 }
             }
         }
     }
+
     private function storeAuthor($fname, $lname)
+    {
+        // ตรวจสอบว่ามี Author นี้อยู่แล้วหรือไม่
+        $existingAuthor = Author::whereRaw("LOWER(author_fname) = ?", [strtolower(trim($fname))])
+                                ->whereRaw("LOWER(author_lname) = ?", [strtolower(trim($lname))])
+                                ->first();
+
+        // ถ้ามีอยู่แล้ว ให้ใช้ ID เดิม
+        if ($existingAuthor) {
+            return $existingAuthor->id;
+        }
+
+        // ถ้ายังไม่มี ให้สร้างใหม่
+        $newAuthor = Author::create([
+            'author_fname' => trim($fname),
+            'author_lname' => trim($lname)
+        ]);
+        return $newAuthor->id;
+    }
+
 }
 
