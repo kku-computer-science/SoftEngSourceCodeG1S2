@@ -12,6 +12,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 /storage/framework/cache
+/storage/framework/views
 
 <<<<<<< HEAD
 docker-compose.yml
