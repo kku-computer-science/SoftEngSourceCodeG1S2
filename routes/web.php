@@ -94,6 +94,7 @@ Route::get('researchers/{id}/search', [ResearcherController::class, 'search'])->
 Route::get('/researchproject', [App\Http\Controllers\ResearchProjController::class, 'index'])->name('researchproject');
 Route::get('/researchgroup', [App\Http\Controllers\ResearchgroupsController::class, 'index'])->name('researchgroup');
 Route::get('researchgroupdetail/{id}', [ResearchGroupDetailController::class, 'request'])->name('researchgroupdetail');
+Route::get('recruitmentdetail/{id}', [App\Http\Controllers\RecruitmentDetailController::class, 'request'])->name('recruitmentdetail');
 Route::get('/reports', [App\Http\Controllers\ReportController::class, 'index'])->name('reports');
 Route::get('loadindex', [PDFController::class, 'index']);
 Route::get('pdf', [PDFController::class, 'generateInvoicePDF'])->name('pdf');
