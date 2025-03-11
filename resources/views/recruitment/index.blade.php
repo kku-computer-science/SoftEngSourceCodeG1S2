@@ -16,10 +16,12 @@
         <div class="card-body">
             <h4 class="card-title">Recruitment Announcement</h4>
 
+            @can('create', App\Models\Recruitment::class)
             <!-- ปุ่มเพิ่มประกาศรับสมัคร -->
             <a class="btn btn-primary btn-menu btn-icon-text btn-sm mb-3" href="{{ route('recruitment.create') }}">
                 <i class="mdi mdi-plus btn-icon-prepend"></i> ADD 
             </a>
+            @endcan
             
             <!-- ตรวจสอบว่ามีประกาศหรือไม่ -->
             @if($recruitments->isEmpty())
@@ -49,7 +51,8 @@
                                 </a>
 
                                 <!-- ปุ่มแก้ไข (เฉพาะ headproject ของกลุ่มตัวเอง) -->
-                                @if(auth()->user()->hasRole('headproject'))
+                                @if(auth()->user()->hasRole('headproject') && auth()->user()->can('update', $recruitment))
+                                <!-- แสดงข้อความสิทธิ์ก่อนปุ่ม Edit -->
                                 <a class="btn btn-outline-success btn-sm" href="{{ route('recruitment.edit', $recruitment->id) }}" 
                                     data-toggle="tooltip" title="Edit">
                                     <i class="mdi mdi-pencil"></i>
@@ -57,7 +60,7 @@
                                 @endif
 
                                 <!-- ปุ่มลบ (เฉพาะ headproject ของกลุ่มตัวเอง) -->
-                                @if(auth()->user()->hasRole('headproject'))
+                                @if(auth()->user()->hasRole('headproject') && auth()->user()->can('delete', $recruitment))
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-outline-danger btn-sm show_confirm" type="submit" 
