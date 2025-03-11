@@ -192,14 +192,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                     </li>
                     @endcan
-                    @can('groups-list')
+                    @php
+                        // ดึงข้อมูล user ที่ล็อกอิน
+                        $user = Auth::user();
+
+                        // ตรวจสอบว่าผู้ใช้เป็นหัวหน้ากลุ่มวิจัย (role = 1) หรือไม่
+                        $isHeadResearchGroup = DB::table('work_of_research_groups')
+                            ->where('user_id', $user->id)
+                            ->where('role', 1)
+                            ->exists();
+                    @endphp
+
+                    @if ($isHeadResearchGroup)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('recruitment.index')}}">
+                        <a class="nav-link" href="{{ route('recruitment.index') }}">
                             <i class="menu-icon mdi mdi-account-box-outline"></i>
-                            <span class="menu-title">Recruitments</span>
+                            <span class="menu-title">Recuitments</span>
                         </a>
                     </li>
-                    @endcan
+                    @endif
                     @can('papers-list')
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#ManagePublications" aria-expanded="false" aria-controls="ManagePublications">

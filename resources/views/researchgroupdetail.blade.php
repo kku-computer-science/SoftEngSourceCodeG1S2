@@ -219,7 +219,7 @@
                                 <h1 class="text-center my-4">หัวหน้ากลุ่มวิจัย</h1>
                             @endif
                             <div class="row justify-content-center">
-                                @foreach ($rg->user->where('research_group_role', 'Head') as $r)
+                                @foreach ($rg->user->where('research_group_role', 'Head')->take(1) as $r)
                                     <div class="col-md-6 col-lg-4">
                                         <div class="text-center shadow p-4 rounded">
                                             <img src="{{ $r->picture }}" class="card-img-top rounded mx-auto"
@@ -500,11 +500,12 @@
                                                         <div class="col-md-9">
                                                             <h4 class="recruitment-title">
                                                                 @if (app()->getLocale() == 'en')
-                                                                    {{ $r->title_en }}
+                                                                    {{ $r->title_en }}, {{ $r->position->name_en }}
                                                                 @elseif (app()->getLocale() == 'th')
-                                                                    {{ $r->title_th }}
+                                                                    {{ $r->title_th }}, {{ $r->position->name_th }}
                                                                 @endif
                                                             </h4>
+
                                                             
                                                             <p class="recruitment-description">
                                                                 @if (app()->getLocale() == 'en')

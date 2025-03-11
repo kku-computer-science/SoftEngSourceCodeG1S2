@@ -182,17 +182,17 @@
                                 '<option value="3" ' + (roleVal == "3" ? "selected" : "") + ' ' + postDocDisabled + '>Post-Doc</option>';
 
                 var permissionOptions = isAdmin ? 
-                    '<select name="moreFields[users][' + index + '][permission]" class="form-control" style="color: black;">' +
+                    '<select name="moreFields[users][' + index + '][permission]" class="member-select form-control" style="color: black;">' +
                         '<option value="2" ' + (permissionVal == "2" ? "selected" : "") + '>View</option>' +
                         '<option value="1" ' + (permissionVal == "1" ? "selected" : "") + '>Edit</option>' +
                     '</select>' :
                     '<input type="text" class="form-control" value="' + (permissionVal == "1" ? "Edit" : "View") + '" readonly>' +
                     '<input type="hidden" name="moreFields[users][' + index + '][permission]" value="' + permissionVal + '">';
 
-                var newRow = '<tr>' +
+                var newRow = '<tr role="row">' +
                     '<td><select id="selUser' + index + '" name="moreFields[users][' + index + '][userid]" class="member-select form-control user-select" style="width: 200px; color: black;">' +
                     '<option value="">Select User</option>' + userOptions + '</select></td>' +
-                    '<td><select name="moreFields[users][' + index + '][role]" class="form-control role-select" style="color: black;">' + roleOptions + '</select></td>' +
+                    '<td><select name="moreFields[users][' + index + '][role]" class="member-select form-control role-select" style="color: black;">' + roleOptions + '</select></td>' +
                     '<td>' + permissionOptions + '</td>' +
                     '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
                     '</tr>';

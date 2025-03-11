@@ -33,6 +33,7 @@
                         <th>No.</th>
                         <th>Research Group</th>
                         <th>Title</th>
+                        <th>Postion</th>
                         <th width="180px">Action</th>
                     </tr>
                 </thead>
@@ -42,6 +43,7 @@
                         <td>{{ $i+1 }}</td>
                         <td>{{ $recruitment->researchGroup->group_name_th ?? '-' }}</td>
                         <td>{{ $recruitment->title_th }}</td>
+                        <td>{{ $recruitment->position->name_th }}</td>
                         <td>
                             <form action="{{ route('recruitment.destroy', $recruitment->id) }}" method="POST">
                                 <!-- ปุ่มดูรายละเอียด -->
