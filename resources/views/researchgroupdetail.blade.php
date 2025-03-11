@@ -80,6 +80,83 @@
     .text-detail {
         font-size: 1.3rem;
     }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #333;
+    }
+    
+    .section-divider {
+        border-top: 1px solid #ddd;
+        margin-bottom: 1.5rem;
+        margin-top: 0.5rem;
+    }
+    
+    .recruitment-item .card {
+        border-radius: 10px;
+        overflow: hidden;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+    }
+    
+    .recruitment-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: #333;
+    }
+    
+    .recruitment-description {
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 0;
+    }
+    
+    .detail-button {
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        color: #333;
+        font-weight: 500;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    
+    .detail-button:hover {
+        background-color: #e9ecef;
+    }
+
+    .btn-outline-primary {
+        color: #007bff;
+        border-color: #007bff;
+        background-color: transparent;
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        border-radius: 25px; /* ทำให้ปุ่มมน */
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-outline-primary:hover {
+        color: white;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .recruitment-text {
+        font-size: 1.2rem;
+        text-decoration: none;
+    }
+
+    .btn-outline-primary i {
+        margin-right: 10px; /* เพิ่มระยะห่างระหว่างไอคอนกับข้อความ */
+    }
+
 </style>
 
 @section('content')
@@ -103,6 +180,15 @@
                 <div class="container my-5">
                     <div class="row">
                         <div class="col-md-12">
+                            @if (count($recruitments) > 0)
+                                <button class="btn btn-outline-primary ml-3 recruitment-text" onclick="scrollToRecruitment()">
+                                    @if (app()->getLocale() == 'en')
+                                        Recruitment researcher *
+                                    @elseif (app()->getLocale() == 'th')
+                                        รับสมัครนักวิจัย *
+                                    @endif
+                                </button>
+                            @endif
                             <h2 class="text-center">
                                 @if (app()->getLocale() == 'en')
                                     Research Group Information
@@ -372,6 +458,8 @@
                             </div>
                         </div>
                     @endif
+
+                    <!-- Authors -->
                     @if (count($authors) > 0)
                         <div class="mt-5">
                             <hr>
@@ -395,7 +483,66 @@
                             </div>
                         </div>
                     @endif
-
+                    
+                    <!--Recruitments -->
+                    @if (count($recruitments) > 0)
+                        <section class="recruitment-section py-4" id="recruitment-section">
+                            <div class="container">
+                                <h2>Recruitment announcement</h2>
+                                <hr class="section-divider">
+                                
+                                <div class="recruitment-list">
+                                    @foreach ($recruitments as $r)
+                                        <div class="recruitment-item mb-3">
+                                            <div class="card border-0 shadow-sm rounded">
+                                                <div class="card-body p-4">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-9">
+                                                            <h4 class="recruitment-title">
+                                                                @if (app()->getLocale() == 'en')
+                                                                    {{ $r->title_en }}
+                                                                @elseif (app()->getLocale() == 'th')
+                                                                    {{ $r->title_th }}
+                                                                @endif
+                                                            </h4>
+                                                            
+                                                            <p class="recruitment-description">
+                                                                @if (app()->getLocale() == 'en')
+                                                                    {{ Str::limit($r->{'job_description_en'}, 150) }}
+                                                                @elseif (app()->getLocale() == 'th')
+                                                                    {{ Str::limit($r->{'job_description_th'}, 150) }}
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-md-3 text-end">
+                                                            <a href="{{ route('recruitmentdetail', ['id' => $r->id]) }}" class="btn btn-light detail-button">
+                                                                @if (app()->getLocale() == 'en')
+                                                                    More Detail
+                                                                @elseif (app()->getLocale() == 'th')
+                                                                    รายละเอียดเพิ่มเติม
+                                                                @endif
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </section>   
+                    @endif
+                    
+                    <script>
+                        function scrollToRecruitment() {
+                            const recruitmentSection = document.getElementById('recruitment-section');
+                            if (recruitmentSection) {
+                                recruitmentSection.scrollIntoView({
+                                    behavior: 'smooth'
+                                });
+                            }
+                        }
+                    </script>
                 </div>
             @endforeach
         </div>

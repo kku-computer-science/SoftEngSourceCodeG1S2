@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\ResearchGroup;
 use App\Models\Recruitment;
+use App\Models\RecruitmentPosition;
+use App\Models\RecruitmentQualification;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 
-class ResearchGroupDetailController extends Controller
+class RecruitmentDetailController extends Controller
 {
     public function request($id)
     {
-        // ini_set('max_execution_time', 600); 
+        // ดึงข้อมูล recruitment พร้อมกับ researchGroup
+        $recruitment = Recruitment::with('researchGroup')->where('id', '=', $id)->first();
+
+        // ดึงข้อมูล research group
         $resgd = ResearchGroup::with([
             'user' => function ($query) use ($id) {
                 $query->select('users.*', 'roles.name as role')
@@ -32,15 +36,14 @@ class ResearchGroupDetailController extends Controller
                     ->leftJoin('roles', 'mh.role_id', '=', 'roles.id')
                     ->orderBy('users.id');
             }
-        ])->where('id', '=', $id)->get();
+        ])->where('id', '=', $recruitment->research_group_id)->get();
 
-        $authorInRG = ResearchGroup::where('id', '=', $id)->first();
-        $authors = $authorInRG->author;
+        // ดึงข้อมูล position name จากตาราง recruitment_position
+        $position = RecruitmentPosition::where('id', $recruitment->position_id)->first();
 
-        $recruitmentInRG = ResearchGroup::where('id', '=', $id)->first();
-        $recruitments = $recruitmentInRG->recruitment;
+        // ดึงข้อมูล qualifications จากตาราง recruitment_qualification
+        $qualifications = RecruitmentQualification::where('recruitment_id', $recruitment->id)->get();
 
-
-        return view('researchgroupdetail', compact('resgd', 'authors', 'recruitments'));
+        return view('recruitmentdetail', compact('recruitment', 'resgd', 'position', 'qualifications'));
     }
 }

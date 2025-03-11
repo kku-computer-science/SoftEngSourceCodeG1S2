@@ -14,12 +14,7 @@ yarn-error.log
 /storage/framework/cache
 /storage/framework/views
 
-<<<<<<< HEAD
-docker-compose.yml
-/.devcontainer/
-=======
 git add -f storage/app/Orcid_to_DB/all_papers.json
 git commit -m "Force add JSON file"
->>>>>>> parent of 04ee77c (Update .gitignore and track storage/app/Orcid_to_DB/)
 storage
 bootstrap/cache
