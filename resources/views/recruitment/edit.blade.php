@@ -104,7 +104,7 @@
             <!-- ค่าตอบแทน -->
             <div class="form-group">
                 <label for="salary">ค่าตอบแทน *</label>
-                <input type="number" class="form-control" id="salary" name="salary" value="{{ $recruitment->salary }}" min="0" placeholder="บาท" required>
+                <input type="number" class="form-control" id="salary" name="salary" value="{{ $recruitment->salary }}" min="0" placeholder="บาท" >
             </div>
 
             <!-- ช่องทางการสมัคร -->
