@@ -50,24 +50,24 @@
                                     <i class="mdi mdi-eye"></i>
                                 </a>
 
-                                <!-- ปุ่มแก้ไข (เฉพาะ headproject ของกลุ่มตัวเอง) -->
+                                {{-- <!-- ปุ่มแก้ไข (เฉพาะ headproject ของกลุ่มตัวเอง) -->
                                 @if(auth()->user()->hasRole('headproject') && auth()->user()->can('update', $recruitment))
-                                <!-- แสดงข้อความสิทธิ์ก่อนปุ่ม Edit -->
+                                <!-- แสดงข้อความสิทธิ์ก่อนปุ่ม Edit --> --}}
                                 <a class="btn btn-outline-success btn-sm" href="{{ route('recruitment.edit', $recruitment->id) }}" 
                                     data-toggle="tooltip" title="Edit">
                                     <i class="mdi mdi-pencil"></i>
                                 </a>
-                                @endif
+                                {{-- @endif --}}
 
                                 <!-- ปุ่มลบ (เฉพาะ headproject ของกลุ่มตัวเอง) -->
-                                @if(auth()->user()->hasRole('headproject') && auth()->user()->can('delete', $recruitment))
+                                {{-- @if(auth()->user()->hasRole('headproject') && auth()->user()->can('delete', $recruitment)) --}}
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-outline-danger btn-sm show_confirm" type="submit" 
                                     data-toggle="tooltip" title="Delete">
                                     <i class="mdi mdi-delete"></i>
                                 </button>
-                                @endif
+                                {{-- @endif --}}
                             </form>
                         </td>
                     </tr>
