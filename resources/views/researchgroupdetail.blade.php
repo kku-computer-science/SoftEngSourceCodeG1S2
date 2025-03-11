@@ -219,7 +219,7 @@
                                 <h1 class="text-center my-4">หัวหน้ากลุ่มวิจัย</h1>
                             @endif
                             <div class="row justify-content-center">
-                                @foreach ($rg->user->where('research_group_role', 'Head') as $r)
+                                @foreach ($rg->user->where('research_group_role', 'Head')->take(1) as $r)
                                     <div class="col-md-6 col-lg-4">
                                         <div class="text-center shadow p-4 rounded">
                                             <img src="{{ $r->picture }}" class="card-img-top rounded mx-auto"

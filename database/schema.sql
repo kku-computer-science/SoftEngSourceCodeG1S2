@@ -53,7 +53,7 @@ CREATE TABLE `author_in_research_groups` (
   KEY `author_in_research_groups_research_group_id_foreign` (`research_group_id`),
   CONSTRAINT `author_in_research_groups_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`) ON DELETE CASCADE,
   CONSTRAINT `author_in_research_groups_research_group_id_foreign` FOREIGN KEY (`research_group_id`) REFERENCES `research_groups` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -440,13 +440,13 @@ CREATE TABLE `recruitment` (
   `position_id` bigint unsigned NOT NULL,
   `job_description_th` text COLLATE utf8mb4_unicode_ci,
   `job_description_en` text COLLATE utf8mb4_unicode_ci,
-  `place_th` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `place_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `place_th` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `place_en` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `salary` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `other_th` text COLLATE utf8mb4_unicode_ci,
   `other_en` text COLLATE utf8mb4_unicode_ci,
-  `apply_channel_th` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `apply_channel_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `apply_channel_th` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `apply_channel_en` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -629,7 +629,7 @@ CREATE TABLE `source_users` (
   KEY `source_users_user_id_foreign` (`user_id`),
   CONSTRAINT `source_users_source_data_id_foreign` FOREIGN KEY (`source_data_id`) REFERENCES `source_data` (`id`) ON DELETE CASCADE,
   CONSTRAINT `source_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
