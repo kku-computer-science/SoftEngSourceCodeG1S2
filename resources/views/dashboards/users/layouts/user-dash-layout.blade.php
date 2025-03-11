@@ -207,7 +207,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('recruitment.index') }}">
                             <i class="menu-icon mdi mdi-account-box-outline"></i>
-                            <span class="menu-title">Recuitments</span>
+                            <span class="menu-title">Recruitments</span>
                         </a>
                     </li>
                     @endif
