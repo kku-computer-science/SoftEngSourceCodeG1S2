@@ -192,7 +192,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                     </li>
                     @endcan
-                    @can('recruitments-list')
+                    @can('groups-list')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('recruitment.index')}}">
                             <i class="menu-icon mdi mdi-account-box-outline"></i>

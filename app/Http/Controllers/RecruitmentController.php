@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\Auth;
 
 class RecruitmentController extends Controller
 {
+    private function isHeadProject($user)
+    {
+        return \DB::table('work_of_research_groups')
+            ->where('user_id', $user->id)
+            ->where('role', 1) // ตรวจสอบว่าเป็น headproject (role = 1)
+            ->exists();
+    }
+
     public function index()
     {
         $user = auth()->user();
@@ -31,7 +39,7 @@ class RecruitmentController extends Controller
     {
         $user = auth()->user();
 
-        if (!$user->hasRole('headproject')) {
+        if (!$user->hasRole('headproject') && !$this->isHeadProject($user)) {
             Log::warning("User $user->id attempted to create a recruitment announcement without 'headproject' role.");
             return redirect()->route('recruitment.index')->with('error', 'Only headproject role can create recruitment announcements.');
         }
@@ -53,7 +61,7 @@ class RecruitmentController extends Controller
     {
         $user = auth()->user();
 
-        if (!$user->hasRole('headproject')) {
+        if (!$user->hasRole('headproject') && !$this->isHeadProject($user)) {
             return redirect()->route('recruitment.index')->with('error', 'Only headproject role can create recruitment announcements.');
         }
 
@@ -81,11 +89,18 @@ class RecruitmentController extends Controller
         return redirect()->route('recruitment.index')->with('success', 'Recruitment announcement created successfully.');
     }
 
+    public function show($id)
+    {
+        $recruitment = Recruitment::with(['position', 'researchGroup'])->findOrFail($id);
+
+        return view('recruitment.show', compact('recruitment'));
+    }
+
     public function edit(Recruitment $recruitment)
     {
         $user = auth()->user();
 
-        if (!$user->hasRole('headproject')) {
+        if (!$user->hasRole('headproject') && !$this->isHeadProject($user)) {
             return redirect()->route('recruitment.index')->with('error', 'Only headproject role can edit recruitment announcements.');
         }
 
@@ -107,7 +122,7 @@ class RecruitmentController extends Controller
     {
         $user = auth()->user();
 
-        if (!$user->hasRole('headproject')) {
+        if (!$user->hasRole('headproject') && !$this->isHeadProject($user)) {
             return redirect()->route('recruitment.index')->with('error', 'Only headproject role can update recruitment announcements.');
         }
 
@@ -142,7 +157,7 @@ class RecruitmentController extends Controller
     {
         $user = auth()->user();
 
-        if (!$user->hasRole('headproject')) {
+        if (!$user->hasRole('headproject') && !$this->isHeadProject($user)) {
             return redirect()->route('recruitment.index')->with('error', 'Only headproject role can delete recruitment announcements.');
         }
 
