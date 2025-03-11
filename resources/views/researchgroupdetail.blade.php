@@ -494,8 +494,8 @@
                                 <div class="recruitment-list">
                                     @foreach ($recruitments as $r)
                                         <div class="recruitment-item mb-3">
-                                            <div class="card border-0 shadow-sm rounded">
-                                                <div class="card-body p-4">
+                                            <div class="card border border-dark shadow-sm rounded">
+                                                <div class="card-body shadow p-4" >
                                                     <div class="row align-items-center">
                                                         <div class="col-md-9">
                                                             <h4 class="recruitment-title">
