@@ -310,7 +310,7 @@
                 @endif
             </div>
             
-            @if (!empty($recruitment->other_en))
+            @if (!empty($recruitment->salary))
                 <h3 class="info-heading">
                     @if (app()->getLocale() == 'en')
                         Salary
