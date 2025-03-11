@@ -310,20 +310,22 @@
                 @endif
             </div>
             
-            <h3 class="info-heading">
-                @if (app()->getLocale() == 'en')
-                    Salary
-                @elseif (app()->getLocale() == 'th')
-                    ค่าตอบแทน
-                @endif
-            </h3>
-            <div class="info-content">
-                @if (app()->getLocale() == 'en')
-                    {{ $recruitment->salary }} Baht
-                @elseif (app()->getLocale() == 'th')
-                    {{ $recruitment->salary }} บาท
-                @endif
-            </div>
+            @if (!empty($recruitment->salary))
+                <h3 class="info-heading">
+                    @if (app()->getLocale() == 'en')
+                        Salary
+                    @elseif (app()->getLocale() == 'th')
+                        ค่าตอบแทน
+                    @endif
+                </h3>
+                <div class="info-content">
+                    @if (app()->getLocale() == 'en')
+                        {{ $recruitment->salary }} Baht
+                    @elseif (app()->getLocale() == 'th')
+                        {{ $recruitment->salary }} บาท
+                    @endif
+                </div>
+            @endif
             
             <h3 class="info-heading">
                 @if (app()->getLocale() == 'en')
