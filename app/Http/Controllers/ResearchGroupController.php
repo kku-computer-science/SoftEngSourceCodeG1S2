@@ -47,6 +47,8 @@ class ResearchGroupController extends Controller
             return redirect()->route('researchGroups.index')->with('error', 'You do not have permission to create a research group');
         }
         \Log::info('Creating Research Group');
+        // ดึงเฉพาะคนที่มีวุฒิเป็น Ph.D.
+        $usersWithPhD = User::where('doctoral_degree', 'Ph.D.')->get();
         $users = User::role(['teacher', 'student'])->get();
         $funds = Fund::get();
         $authors = Author::get();
@@ -80,6 +82,8 @@ class ResearchGroupController extends Controller
     {
         $this->authorize('update', $researchGroup);
         $researchGroup = ResearchGroup::with(['user','author'])->where('id', $researchGroup->id)->first();
+        // ดึงเฉพาะคนที่มีวุฒิเป็น Ph.D.
+        $usersWithPhD = User::where('doctoral_degree', 'Ph.D.')->get();
         $users = User::role(["teacher", "student"])->get();
         $authors = Author::get();
         return view('research_groups.edit', compact('researchGroup', 'users', 'authors'));
@@ -204,11 +208,37 @@ class ResearchGroupController extends Controller
     {
         if ($request->authors) {
             foreach ($request->authors as $value) {
-                if ($value['userid'] != null) {
+                if (!empty($value['userid'])) {
+                    // กรณีเลือก Author จากที่มีอยู่แล้ว
                     $researchGroup->author()->attach($value['userid']);
+                } elseif (!empty($value['author_fname']) && !empty($value['author_lname'])) {
+                    // กรณีสร้าง Author ใหม่จากค่าที่กรอกมา
+                    $newAuthorId = $this->storeAuthor($value['author_fname'], $value['author_lname']);
+                    $researchGroup->author()->attach($newAuthorId);
                 }
             }
         }
     }
+
+    private function storeAuthor($fname, $lname)
+    {
+        // ตรวจสอบว่ามี Author นี้อยู่แล้วหรือไม่
+        $existingAuthor = Author::whereRaw("LOWER(author_fname) = ?", [strtolower(trim($fname))])
+                                ->whereRaw("LOWER(author_lname) = ?", [strtolower(trim($lname))])
+                                ->first();
+
+        // ถ้ามีอยู่แล้ว ให้ใช้ ID เดิม
+        if ($existingAuthor) {
+            return $existingAuthor->id;
+        }
+
+        // ถ้ายังไม่มี ให้สร้างใหม่
+        $newAuthor = Author::create([
+            'author_fname' => trim($fname),
+            'author_lname' => trim($lname)
+        ]);
+        return $newAuthor->id;
+    }
+
 }
 

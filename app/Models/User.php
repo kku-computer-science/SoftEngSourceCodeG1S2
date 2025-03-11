@@ -117,4 +117,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Fund::class);
     }
+
+    public function getIsPhDAttribute()
+    {
+        return strtolower($this->doctoral_degree) === 'Ph.D.';
+    }
+
 }

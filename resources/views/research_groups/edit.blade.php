@@ -102,7 +102,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <p class="col-sm-3 pt-4"><b>Other Visitors</b></p>
+                        {{-- <p class="col-sm-3 pt-4"><b>Other Visitors</b></p>
                         <div class="col-sm-8">
                             <table class="table" id="AuthorsDynamicAddRemove">
                                 <tr>
@@ -115,6 +115,17 @@
                                     </th>
                                 </tr>
                             </table>
+                        </div> --}}
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-sm-3"><b>นักวิจัยภายนอก</b></p>
+                        <div class="col-sm-8">
+                            <div id="authors-container">
+                                <!-- กล่อง Authors จะถูกเพิ่มที่นี่ -->
+                            </div>
+                            <button type="button" id="add-author-btn" class="btn btn-success btn-sm mt-2">
+                                <i class="mdi mdi-plus"></i>
+                            </button>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-5">Submit</button>
@@ -157,13 +168,21 @@
             
             function appendMemberRow(index, userId, roleVal, permissionVal) {
                 var userOptions = '@foreach ($users as $user)<option value="{{ $user->id }}" ' +
-                                (userId == "{{ $user->id }}" ? "selected" : "") + '>{{ $user->fname_th }} {{ $user->lname_th }}</option>@endforeach';
+                                (userId == "{{ $user->id }}" ? "selected" : "") +
+                                ' data-degree="{{ $user->doctoral_degree }}">{{ $user->fname_th }} {{ $user->lname_th }}</option>@endforeach';
+
+                var postDocDisabled = "";
+                @foreach ($users as $user)
+                    if (userId == "{{ $user->id }}" && "{{ $user->doctoral_degree }}" !== "Ph.D.") {
+                        postDocDisabled = "disabled";
+                    }
+                @endforeach
+
                 var roleOptions = '<option value="2" ' + (roleVal == "2" ? "selected" : "") + '>Member</option>' +
-                                '<option value="3" ' + (roleVal == "3" ? "selected" : "") + '>Post-Doc</option>' +
-                                '<option value="4" ' + (roleVal == "4" ? "selected" : "") + '>Visitor</option>';
+                                '<option value="3" ' + (roleVal == "3" ? "selected" : "") + ' ' + postDocDisabled + '>Post-Doc</option>';
 
                 var permissionOptions = isAdmin ? 
-                    '<select name="moreFields[users][' + index + '][permission]" class="form-control">' +
+                    '<select name="moreFields[users][' + index + '][permission]" class="form-control" style="color: black;">' +
                         '<option value="2" ' + (permissionVal == "2" ? "selected" : "") + '>View</option>' +
                         '<option value="1" ' + (permissionVal == "1" ? "selected" : "") + '>Edit</option>' +
                     '</select>' :
@@ -171,21 +190,42 @@
                     '<input type="hidden" name="moreFields[users][' + index + '][permission]" value="' + permissionVal + '">';
 
                 var newRow = '<tr>' +
-                    '<td><select id="selUser' + index + '" name="moreFields[users][' + index + '][userid]" class="member-select form-control" style="width: 200px;">' +
+                    '<td><select id="selUser' + index + '" name="moreFields[users][' + index + '][userid]" class="member-select form-control user-select" style="width: 200px; color: black;">' +
                     '<option value="">Select User</option>' + userOptions + '</select></td>' +
-                    '<td><select name="moreFields[users][' + index + '][role]" class="form-control">' + roleOptions + '</select></td>' +
+                    '<td><select name="moreFields[users][' + index + '][role]" class="form-control role-select" style="color: black;">' + roleOptions + '</select></td>' +
                     '<td>' + permissionOptions + '</td>' +
                     '<td><button type="button" class="btn btn-danger btn-sm remove-tr"><i class="mdi mdi-minus"></i></button></td>' +
                     '</tr>';
-                
+
                 $("#dynamicAddRemove").append(newRow);
                 $("#selUser" + index).select2();
+
                 if (userId) {
                     $("#selUser" + index).val(userId).trigger("change");
                 }
+
                 updateMemberOptions();
             }
             
+            $(document).on("change", ".user-select", function() {
+                var selectedUser = $(this).val();
+                var $roleSelect = $(this).closest("tr").find(".role-select");
+
+                // ตรวจสอบวุฒิการศึกษา
+                var doctoralDegree = $(this).find(":selected").data("degree");
+                var isPhD = (doctoralDegree === "Ph.D.");
+
+                if (!isPhD) {
+                    // ปิดการใช้งาน Post-Doc ถ้าผู้ใช้ไม่มี Ph.D.
+                    $roleSelect.find("option[value='3']").prop("disabled", true);
+                    if ($roleSelect.val() == "3") {
+                        $roleSelect.val("2"); // ถ้าเลือกผิด ให้เปลี่ยนเป็น Member
+                    }
+                } else {
+                    $roleSelect.find("option[value='3']").prop("disabled", false);
+                }
+            });
+
             $(document).on("click", ".remove-tr", function() {
                 $(this).closest("tr").remove();
                 updateMemberOptions();
@@ -220,6 +260,22 @@
                             $(this).prop("disabled", false);
                         }
                     });
+                });
+
+                //ปิดใช้งาน Post-Doc สำหรับผู้ที่ไม่มี Ph.D.
+                $(".user-select").each(function() {
+                    var selectedUser = $(this).val();
+                    var $roleSelect = $(this).closest("tr").find(".role-select");
+                    var doctoralDegree = $(this).find(":selected").data("degree");
+
+                    if (doctoralDegree !== "Ph.D.") {
+                        $roleSelect.find("option[value='3']").prop("disabled", true);
+                        if ($roleSelect.val() == "3") {
+                            $roleSelect.val("2"); // เปลี่ยนเป็น Member ถ้าผิด
+                        }
+                    } else {
+                        $roleSelect.find("option[value='3']").prop("disabled", false);
+                    }
                 });
 
                 $("#head0").select2();
@@ -312,5 +368,119 @@
                 }
             });
         });
+        $(document).ready(function() {
+            var authorIndex = 0;
+            var authorsData = @json($authors);
+            var existingAuthors = new Set();
+
+            function appendAuthorRow(index, authorId = "", fname = "", lname = "", isNew = false) {
+                var authorOptions = '<option value="">เลือก Visiting จากรายชื่อ</option>';
+                authorsData.forEach(function(author) {
+                    authorOptions += `<option value="${author.id}" ${author.id == authorId ? "selected" : ""}>
+                                        ${author.author_fname} ${author.author_lname}
+                                    </option>`;
+                });
+
+                var disabled = isNew ? "" : "disabled";
+
+                var newRow = `
+                    <div class="author-box p-3 mb-3" style="border: 1px solid #ddd; border-radius: 0.5em; box-shadow: none; background: transparent;">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label>เลือกจากรายชื่อ</label>
+                                <select class="form-control author-select" name="authors[${index}][userid]" id="author-select-${index}" data-index="${index}">
+                                    ${authorOptions}
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label>ชื่อ</label>
+                                <input type="text" name="authors[${index}][author_fname]" class="form-control author-fname" id="author-fname-${index}" value="${fname}" ${disabled} placeholder="กรอกชื่อหากไม่มีในรายชื่อ">
+                            </div>
+                            <div class="col-sm-4">
+                                <label>นามสกุล</label>
+                                <input type="text" name="authors[${index}][author_lname]" class="form-control author-lname" id="author-lname-${index}" value="${lname}" ${disabled} placeholder="กรอกนามสกุลหากไม่มีในรายชื่อ">
+                            </div>
+                            <div class="col-sm-2 mt-4">
+                                <button type="button" class="btn btn-danger btn-sm remove-author">
+                                    <i class="mdi mdi-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $("#authors-container").append(newRow);
+                $("#author-select-" + index).select2(); // รีโหลด select2 ให้ dropdown ใช้ได้
+                updateAuthorOptions();
+            }
+
+            function updateAuthorOptions() {
+                var selectedAuthors = new Set();
+                $(".author-select").each(function() {
+                    var value = $(this).val();
+                    if (value) selectedAuthors.add(value);
+                });
+
+                $(".author-select").each(function() {
+                    var $this = $(this);
+                    var currentValue = $this.val();
+                    $this.find("option").each(function() {
+                        var optionValue = $(this).val();
+                        if (selectedAuthors.has(optionValue) && optionValue !== "" && optionValue !== currentValue) {
+                            $(this).prop("disabled", true);
+                        } else {
+                            $(this).prop("disabled", false);
+                        }
+                    });
+                });
+
+                $(".author-select").select2();
+            }
+
+            $("#add-author-btn").click(function() {
+                appendAuthorRow(authorIndex, "", "", "", true);
+                authorIndex++;
+            });
+
+            $(document).on("change", ".author-select", function() {
+                var index = $(this).data("index");
+                var selectedId = $(this).val();
+                if (selectedId) {
+                    var selectedAuthor = authorsData.find(author => author.id == selectedId);
+                    if (selectedAuthor) {
+                        $("#author-fname-" + index).val(selectedAuthor.author_fname).prop("disabled", true);
+                        $("#author-lname-" + index).val(selectedAuthor.author_lname).prop("disabled", true);
+                    }
+                } else {
+                    $("#author-fname-" + index).val("").prop("disabled", false);
+                    $("#author-lname-" + index).val("").prop("disabled", false);
+                }
+                updateAuthorOptions();
+            });
+
+            $(document).on("click", ".remove-author", function() {
+                $(this).closest(".author-box").remove();
+                updateAuthorOptions();
+            });
+
+            // โหลดข้อมูล Author ที่มีอยู่แล้ว
+            var authors = @json($researchGroup['author'] ?? []);
+            authors.forEach(function(author) {
+                appendAuthorRow(authorIndex, author.id, author.author_fname, author.author_lname, false);
+                authorIndex++;
+            });
+        });
     </script>
+
+    {{-- <style>
+        /* ทำให้ dropdown ที่ถูกเลือกแล้วเป็นสีดำ */
+        select.form-control {
+            color: black !important;
+        }
+
+        /* สำหรับ Select2 */
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: black !important;
+        }
+    </style> --}}
 @stop

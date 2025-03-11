@@ -10,6 +10,8 @@ class Author extends Model
     use HasFactory;
     //protected $hidden = ['pivot'];
 
+    protected $fillable = ['author_fname', 'author_lname'];
+
     public function paper()
     {
         return $this->belongsToMany(Paper::class,'author_of_papers')->withPivot('author_type');
