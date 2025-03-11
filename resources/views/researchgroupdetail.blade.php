@@ -500,11 +500,12 @@
                                                         <div class="col-md-9">
                                                             <h4 class="recruitment-title">
                                                                 @if (app()->getLocale() == 'en')
-                                                                    {{ $r->title_en }}
+                                                                    {{ $r->title_en }}, {{ $r->position->name_en }}
                                                                 @elseif (app()->getLocale() == 'th')
-                                                                    {{ $r->title_th }}
+                                                                    {{ $r->title_th }}, {{ $r->position->name_th }}
                                                                 @endif
                                                             </h4>
+
                                                             
                                                             <p class="recruitment-description">
                                                                 @if (app()->getLocale() == 'en')

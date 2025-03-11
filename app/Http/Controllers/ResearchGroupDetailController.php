@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ResearchGroup;
+use App\Models\RecruitmentPosition;
 use App\Models\Recruitment;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -36,9 +37,12 @@ class ResearchGroupDetailController extends Controller
 
         $authorInRG = ResearchGroup::where('id', '=', $id)->first();
         $authors = $authorInRG->author;
-
+    
         $recruitmentInRG = ResearchGroup::where('id', '=', $id)->first();
-        $recruitments = $recruitmentInRG->recruitment;
+        $recruitments = ResearchGroup::with(['recruitment.position:id,name_en,name_th'])
+            ->where('id', $id)
+            ->first()
+            ->recruitment;
 
 
         return view('researchgroupdetail', compact('resgd', 'authors', 'recruitments'));
