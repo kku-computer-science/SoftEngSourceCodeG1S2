@@ -1,3 +1,4 @@
+
 <style>
     .count {
         background-color: #f5f5f5;
@@ -96,12 +97,13 @@
                 </div>
             </div>
             <div class="col">
-                <div class="count" id='wos'>
+                <div class="count" id='orcid'>
 
                 </div>
             </div>
+            
             <div class="col">
-                <div class="count" id='tci'>
+                <div class="count" id='other'>
 
                 </div>
             </div>
@@ -195,9 +197,12 @@
 </script>
 <script>
     var year = <?php echo $year; ?>;
-    var paper_tci = <?php echo $paper_tci; ?>;
     var paper_scopus = <?php echo $paper_scopus; ?>;
-    var paper_wos = <?php echo $paper_wos; ?>;
+    var paper_orcid = <?php echo $paper_orcid; ?>;
+    var academic_other = <?php echo $academic_other; ?>;
+    console.log(academic_other)
+    //var paper_wos 
+    //var paper_tci 
     var areaChartData = {
 
         labels: year,
@@ -214,7 +219,7 @@
                 data: paper_scopus
             },
             {
-                label: 'TCI',
+                label: 'ORCID',
                 backgroundColor: '#83E4B5',
                 borderColor: 'rgba(255, 255, 255, 0.5)',
                 pointRadius: false,
@@ -222,10 +227,10 @@
                 pointStrokeColor: '#3b8bba',
                 pointHighlightFill: '#fff',
                 pointHighlightStroke: '#83E4B5',
-                data: paper_tci
+                data: paper_orcid
             },
             {
-                label: 'WOS',
+                label: 'OTHER',
                 backgroundColor: '#FCC29A',
                 borderColor: 'rgba(0, 0, 255, 1)',
                 pointRadius: false,
@@ -233,7 +238,18 @@
                 pointStrokeColor: '#c1c7d1',
                 pointHighlightFill: '#fff',
                 pointHighlightStroke: '#FCC29A',
-                data: paper_wos
+                data: academic_other
+            },
+            {
+                label: 'Google Scholar',
+                backgroundColor: '#FFD1DC',
+                borderColor: 'rgba(0, 0, 255, 1)',
+                pointRadius: false,
+                pointColor: '#FFD1DC',
+                pointStrokeColor: '#c1c7d1',
+                pointHighlightFill: '#fff',
+                pointHighlightStroke: '#FFD1DC',
+                //data: paper_wos
             },
         ]
     }
@@ -293,17 +309,18 @@
     })
 </script>
 <script>
-    var paper_tci = <?php echo $paper_tci_numall; ?>;
     var paper_scopus = <?php echo $paper_scopus_numall; ?>;
-    var paper_wos = <?php echo $paper_wos_numall; ?>;
-    //console.log(paper_scopus)
-    let sumtci = paper_tci;
+    var paper_orcid = <?php echo $paper_orcid_numall; ?>;
+    var academic_other = <?php echo $academic_other_numall; ?>;
     let sumsco = paper_scopus;
-    let sumwos = paper_wos;
+    let sumor = paper_orcid;
+    let sumother = academic_other;
+    
     (function($) {
         
-        let sum = paper_wos + paper_tci + paper_scopus;
-        //console.log(sum);
+        let sum = Number(paper_scopus) + Number(academic_other) + Number(paper_orcid);
+        // console.log(paper_scopus);
+        console.log(paper_orcid);
         //$("#scopus").append('data-to="100"');
         document.getElementById("all").innerHTML += `
                 <i class="count-icon fa fa-book fa-2x"></i>
@@ -313,15 +330,19 @@
                 <i class="count-icon fa fa-book fa-2x"></i>
                 <h2 class="timer count-title count-number" data-to="${sumsco}" data-speed="1500"></h2>
                 <p class="count-text ">SCOPUS</p>`
-        document.getElementById("wos").innerHTML += `
+        document.getElementById("orcid").innerHTML += `
                 <i class="count-icon fa fa-book fa-2x"></i>
-                <h2 class="timer count-title count-number" data-to="${sumwos}" data-speed="1500"></h2>
-                <p class="count-text ">WOS</p>`
-        document.getElementById("tci").innerHTML += `
+                <h2 class="timer count-title count-number" data-to="${sumor}" data-speed="1500"></h2>
+                <p class="count-text ">ORCID</p>`
+        document.getElementById("other").innerHTML += `
                 <i class="count-icon fa fa-book fa-2x"></i>
-                <h2 class="timer count-title count-number" data-to="${sumtci}" data-speed="1500"></h2>
-                <p class="count-text ">TCI</p>`
-        //document.getElementById("scopus").appendChild('data-to="100"');
+                <h2 class="timer count-title count-number" data-to="${sumother}" data-speed="1500"></h2>
+                <p class="count-text ">Other</p>`
+        // document.getElementById("tci").innerHTML += `
+        //         <i class="count-icon fa fa-book fa-2x"></i>
+        //         <h2 class="timer count-title count-number" data-to="${sumtci}" data-speed="1500"></h2>
+        //         <p class="count-text ">TCI</p>`
+        // document.getElementById("scopus").appendChild('data-to="100"');
         $.fn.countTo = function(options) {
             options = options || {};
 
